@@ -1,0 +1,22 @@
+#idnational {
+    margin-left: 55%;
+    text-align: center;
+}
+#next {
+    margin-left: 75%;
+}
+#sub {
+    width: 30%;
+}
+
+/*تصميم الجوال
+*/
+@media only screen and (max-width: 970px) {
+    #idnational1 {
+        margin-right: 48%;
+    }
+
+    #sub {
+        width: 100%;
+    }
+}
