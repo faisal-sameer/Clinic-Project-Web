@@ -9,14 +9,106 @@
     width: 30%;
 }
 
+#texttab {
+    font-size: 1vw;
+}
+
+table {
+    border: 1px solid rgba(204, 204, 204, 0.301);
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+table caption {
+    font-size: 1.5em;
+    margin: 0.5em 0 0.75em;
+}
+
+table tr {
+    background-color: #f8f8f88f;
+    border: 1px solid rgba(221, 221, 221, 0.555);
+    padding: 0.35em;
+}
+
+table th,
+table td {
+    padding: 0.625em;
+    text-align: center;
+}
+
+table th {
+    font-size: 0.85em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+#adduser {
+    width: 60%;
+}
 /*تصميم الجوال
 */
 @media only screen and (max-width: 970px) {
+    #adduser {
+        width: 80%;
+    }
+
+    #texttab {
+        font-size: 3vw;
+    }
     #idnational1 {
         margin-right: 48%;
     }
 
     #sub {
         width: 100%;
+    }
+    table {
+        border: 0;
+    }
+
+    table caption {
+        font-size: 1.3em;
+    }
+
+    table thead {
+        border: none;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+    }
+
+    table tr {
+        border-bottom: 3px solid rgba(221, 221, 221, 0.603);
+        display: block;
+        margin-bottom: 0.625em;
+    }
+
+    table td {
+        border-bottom: 1px solid rgba(221, 221, 221, 0.589);
+        display: block;
+        font-size: 0.8em;
+        text-align: right;
+        font-weight: bold;
+    }
+    /*
+    table td::before {
+        
+      * aria-label has no advantage, it won't be read inside a table
+      content: attr(aria-label);
+      
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        text-transform: uppercase;
+    }*/
+
+    table td:last-child {
+        border-bottom: 0;
     }
 }

@@ -10,4 +10,9 @@ class GuestController extends Controller
     {
         return view('reservation');
     }
+
+    protected function dashboardUser()
+    {
+        return view('dashboardUser');
+    }
 }

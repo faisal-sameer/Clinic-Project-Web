@@ -25,3 +25,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/reservation', [App\Http\Controllers\GuestController::class, 'reservation'])->name('reservation');
+Route::get('/dashboardUser', [App\Http\Controllers\GuestController::class, 'dashboardUser'])->name('dashboardUser');

@@ -35,9 +35,9 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4" id="next">
-                                <button id="sub" type="submit" class="btn btn-primary">
-                                    {{ __('التالي') }}
-                                </button>
+                                <a  class="btn btn-outline-info" href="/dashboardUser">التالي
+
+                                </a>
 
                             </div>
                         </div>
