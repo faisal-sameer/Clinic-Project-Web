@@ -19,7 +19,8 @@
     <link rel="stylesheet" type="text/css" href="css/templatemo-art-factory.css">
     <link rel="stylesheet" type="text/css" href="css/owl-carousel.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <!-- Styles -->
 </head>
 <body>
@@ -45,7 +46,7 @@
                     <div class="row">
                         <div class="col-12">
                             <nav class="main-nav">
-                                <a href="#" class="logo">اسم العيادة أو اللوقو</a>
+                                <a href="#" class="logo"> اللوقو</a>
                          
                                 <ul class="nav">
                                     <li class="scroll-to-section"><a href="@yield('we')" style="font-size: large;" class="active">الصفحة الرئيسية</a></li>
@@ -115,5 +116,6 @@
     
     <!-- Global Init -->
     <script src="js/custom.js"></script>
+
 </body>
 </html>

@@ -1,12 +1,21 @@
 #idnational {
-    margin-left: 55%;
     text-align: center;
+    position: relative;
+    left: 20%;
+    width: 60%;
 }
+
 #next {
     margin-left: 75%;
 }
 #sub {
     width: 30%;
+}
+#reg {
+    width: 60%;
+}
+#regdiv {
+    margin-left: 60%;
 }
 
 #texttab {
@@ -47,9 +56,18 @@ table th {
 #adduser {
     width: 60%;
 }
+
 /*تصميم الجوال
 */
 @media only screen and (max-width: 970px) {
+    #regdiv {
+        margin-right: 25%;
+    }
+    #idnational {
+        position: relative;
+        right: 50%;
+    }
+
     #adduser {
         width: 80%;
     }
@@ -57,10 +75,6 @@ table th {
     #texttab {
         font-size: 3vw;
     }
-    #idnational1 {
-        margin-right: 48%;
-    }
-
     #sub {
         width: 100%;
     }

@@ -15,4 +15,9 @@ class GuestController extends Controller
     {
         return view('dashboardUser');
     }
+
+    protected function regester()
+    {
+        return view('regester');
+    }
 }

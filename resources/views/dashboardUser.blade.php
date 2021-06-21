@@ -21,7 +21,7 @@
     <div style="margin-right: 75% ; margin-bottom: 3% ; direction: rtl">
       
        
-      <a href="/Primation" id="adduser"  class="btn btn-light">اضافة مستخدم <i class="fa fa-plus-circle" aria-hidden="true"></i>
+      <a href="/regester" id="adduser"  class="btn btn-light">حجز جديد<i class="fa fa-plus-circle" aria-hidden="true"></i>
       </a>    
     </div>
     <table>

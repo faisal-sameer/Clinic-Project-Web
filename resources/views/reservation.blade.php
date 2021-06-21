@@ -23,11 +23,11 @@
 
                         <div class="form-group row">
 
-                            <div class="col-md-6" id="idnational1">
+                            
                                 <input id="idnational" type="text" maxlength="10" minlength="10" class="form-control" placeholder="ادخل رقم هويتك"  required >
 
                            
-                            </div>
+                            
                         </div>
 
                         <br>
