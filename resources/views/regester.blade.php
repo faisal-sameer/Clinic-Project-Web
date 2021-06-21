@@ -43,9 +43,21 @@
     
                                     <select class="form-select" id="idnational" aria-label="Default select example">
                                         <option selected>اختر الخدمة التي تريدها</option>
-                                        <option value="1"></option>
-                                        <option value="2"></option>
-                                        <option value="3"></option>
+                                        <option value="1">كشف عام</option>
+                                        <option value="2">تقويم اسنان</option>
+                                        <option value="3">ازالة جير</option>
+                                        <option value="4">خلع أسنان</option>
+                                        <option value="5">خلع ضرس عقل جراحي</option>
+                                        <option value="6">علاج جذور الاسنان</option>
+                                        <option value="7">تركيب اسنان</option>
+                                        <option value="8">علاج اسنان اطفال</option>
+                                        <option value="9">ابتسامة هوليود</option>
+                                        <option value="10">زراعة اسنان</option>
+                                        <option value="11">تبييض اسنان</option>
+                                        <option value="12">أخرى</option>
+
+
+
                                       </select>
     
                                
