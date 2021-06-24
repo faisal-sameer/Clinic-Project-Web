@@ -22,7 +22,7 @@
             <button class="btn btn-outline-light" type="submit" >المواعيد المستقبلية</button>
 
         </form>
-        <form id="logout-form" action="#" method="POST" >
+        <form id="logout-form" action="dashboardClinic" method="POST" >
           @csrf
           <button class="btn btn-outline-light" >مواعيد اليوم</button>
 
@@ -49,8 +49,8 @@
                           <th colspan="2">الخدمة</th>
                           <th colspan="2" scope="col">الوقت</th>
               
-                          <th colspan="2" scope="col">اليوم</th>
-                          <th colspan="2" scope="col">الإسم</th>
+                          <th colspan="2" scope="col">الاسم</th>
+                          <th colspan="2" scope="col">الهوية</th>
                         
                         </tr>
                       </thead>
@@ -63,16 +63,17 @@
               
                           <td colspan="2" id="texttab" style="text-align: center">{{$user->email}}</td>
               
-                          <td colspan="2" id="texttab" style="text-align: center">{{$user->email}}</td>
+                          <td colspan="2" id="texttab" style="text-align: center">{{$user->name}}</td>
                           <td style="text-align: center" colspan="2" id="texttab" >
-                            {{$user->email}}</td>
+                           1055555555</td>
                     
                         </tr>
+                        @endforeach
                        
                         
                       </tbody>
                     </table>
-                --
+              
                 </div>
     
                 <div id="Paris" class=" city" style="display: none" >
