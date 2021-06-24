@@ -23,7 +23,7 @@
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                         <h1>يكتب اي شي </h1>
                         <p >تهتهيمت</p>
-                        <a href="#about" class="main-button-slider" style="display: flex;  
+                        <a href="/reservation" class="main-button-slider" style="display: flex;  
                         justify-content: center;  
                         align-items: center;  ">احجز موعدك من هنا </a>
                     </div>

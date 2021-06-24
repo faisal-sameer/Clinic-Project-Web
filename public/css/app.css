@@ -57,6 +57,17 @@ table th {
     width: 60%;
 }
 
+#card {
+    width: 100%;
+}
+button {
+    float: right;
+}
+#mess {
+    justify-content: space-between;
+    display: flex;
+}
+
 /*تصميم الجوال
 */
 @media only screen and (max-width: 970px) {

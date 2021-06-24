@@ -19,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="css/templatemo-art-factory.css">
     <link rel="stylesheet" type="text/css" href="css/owl-carousel.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <!-- Styles -->
@@ -49,21 +50,32 @@
                                 <a href="#" class="logo"> اللوقو</a>
                          
                                 <ul class="nav">
-                                    <li class="scroll-to-section"><a href="@yield('we')" style="font-size: large;" class="active">الصفحة الرئيسية</a></li>
-                                    <li class="scroll-to-section"><a href="/reservation"  style="font-size: large;">حجز المواعيد</a></li>
-                                    <li class="scroll-to-section"><a href=@yield('se')  style="font-size: large;">الخدمات المقدمة</a></li>
-                                    
-                                   <li class="scroll-to-section"><a href="{{ route('login') }}" style="font-size: large;">تسجيل الدخول للموظفين</a></li>
-                                <!--    <li class="submenu">
-                                        <a href="javascript:;">Drop Down</a>
-                                        <ul>
-                                            <li><a href="">About Us</a></li>
-                                            <li><a href="">Features</a></li>
-                                            <li><a href="">FAQ's</a></li>
-                                            <li><a href="">Blog</a></li>
-                                        </ul>
-                                    </li>-->
+                           <li class="scroll-to-section"><a href="@yield('we')" style="font-size: large;" class="active">الصفحة الرئيسية</a></li>
+                           <li class="scroll-to-section"><a href="/reservation"  style="font-size: large;">حجز المواعيد</a></li>
+                           <li class="scroll-to-section"><a href=@yield('se')  style="font-size: large;">الخدمات المقدمة</a></li>
+                      
+
+                 
+ 
+
                                     <li class="scroll-to-section"><a href=@yield('con')  style="font-size: large;">تواصل معنا</a></li>
+                                    @if ( Auth::user()  == null )<!-- يظهر عندما لا يوجد حساب -->
+
+                                    <li class="scroll-to-section"><a href="{{ route('login') }}" style="font-size: large;">تسجيل الدخول للموظفين</a></li>
+                                    @endif
+                                    <!--يظهر عند تسجيل الدخول-->
+                                    @if ( Auth::user()  != null )
+
+                                    <li class="scroll-to-section"><a href="{{ route('logout') }}" 
+                                        onclick="event.preventDefault();
+                                                         document.getElementById('logout-form').submit();"
+                                            
+                                        style="font-size: large;"><i class="fas fa-sign-out-alt "></i></a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </li>
+                                    @endif
                                 </ul>
                               <!--المنيو لمن تكون الشاشة صغيرة-->   <a class='menu-trigger'>
                                     <span>Menu</span>
@@ -116,6 +128,48 @@
     
     <!-- Global Init -->
     <script src="js/custom.js"></script>
-
+    
+        
+<script>
+    function myFunction() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
+           
+<script>
+    function myFunction1() {
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput1");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable1");
+      tr = table.getElementsByTagName("tr");
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }       
+      }
+    }
+    </script>
 </body>
 </html>
