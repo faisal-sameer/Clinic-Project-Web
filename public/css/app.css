@@ -67,6 +67,11 @@ button {
     justify-content: space-between;
     display: flex;
 }
+#myInput {
+    width: auto;
+    float: right;
+    text-align: right;
+}
 
 /*تصميم الجوال
 */

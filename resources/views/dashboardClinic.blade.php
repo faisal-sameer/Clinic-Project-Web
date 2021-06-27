@@ -37,11 +37,12 @@
                 
                 <div id="London" class=" city">
                     <br>
-                    <h2>مواعيد اليوم</h2>
+                    <h2 style="text-align: right">مواعيد اليوم</h2>
 
-                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
-                    
-                   
+                    <input id="myInput" type="text" onkeyup="myFunction()" class="form-control" placeholder="ابحث برقم الهوية "  required >
+
+                   <br>
+                   <br>
                     <table id="myTable">
                       <thead>
                         <tr>
