@@ -10,41 +10,32 @@
 @endsection
 
 @section('content')
-<div class="welcome-area" id="welcome">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header" style="text-align: center">{{ __('احجز موعدك') }}</div>
+    <div class="welcome-area" id="welcome">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header" style="text-align: center">{{ __('احجز موعدك') }}</div>
 
-                <div class="card-body">
-                  
+                        <div class="card-body">
 
+                            <form method="POST" action="{{ route('NewReservation') }}">
+                                @csrf
 
-                        <div class="form-group row">
-
-                            
-                                <input id="idnational" type="text" maxlength="10" minlength="10" class="form-control" placeholder="ادخل رقم هويتك"  required >
-
-                           
-                            
+                                <div class="form-group row">
+                                    <input id="idnational" type="text" name="NID" maxlength="12" minlength="10"
+                                        class="form-control" placeholder="ادخل رقم هويتك" required>
+                                    <input type="number" readonly required hidden value="0" name="page">
+                                </div>
+                                <br>
+                                <div class="form-group row mb-0">
+                                    <button class="btn btn-outline-info" type="submit">التالي </button>
+                                </div>
+                            </form>
                         </div>
-
-                        <br>
-                      
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4" id="next">
-                                <a  class="btn btn-outline-info" href="/dashboardUser">التالي
-
-                                </a>
-
-                            </div>
-                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 @endsection
