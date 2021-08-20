@@ -55,9 +55,20 @@ class GuestController extends Controller
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
             ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
-        $CountReservations = Reservation::where('NID', $request->NID)->count();
-        $all['myReservations'] = [$myReservations];
-        $all['CountReservations'] = [$CountReservations];
+        if ($myReservations->count() == 0) {
+            $all = "Nulls";
+        } else {
+            $i = 0;
+            foreach ($myReservations as  $myReservation) {
+                $all[$i] = [
+                    'id' => $myReservation->id, 'Name' => $myReservation->Name,
+                    'Day' =>  date("Y-m-d", strtotime($myReservation->Date)), 'Time' => date("h:i", strtotime($myReservation->Date)), 'Phone' => $myReservation->Phone,
+                    'service' => $myReservation->service->Name,
+                    'Status' => $myReservation->Status
+                ];
+                $i++;
+            }
+        }
 
         return response()->json(['status' => 'success', 'data' =>  $all]);
     }
