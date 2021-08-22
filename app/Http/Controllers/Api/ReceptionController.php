@@ -20,6 +20,10 @@ class ReceptionController extends Controller
         // $profile = User::where('user_id', auth('api')->user()->id)->first();
 
         switch ($request->type) {
+            case 0:
+                $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
+
+                break;
             case 1:
                 $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->get();
 
