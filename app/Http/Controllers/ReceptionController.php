@@ -14,7 +14,7 @@ class ReceptionController extends Controller
     }
     protected function dashboardClinicToday()
     {
-        // return  substr(date('c'), 0, -14);
+        return  substr(date('c'), 0, -14);
         $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->get();
         return view('dashboardClinicToday')->with('Reservations', $Reservations);
     }
