@@ -28,26 +28,34 @@ class ReceptionController extends Controller
                 $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->get();
 
                 break;
+            case 2:
+                $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->get();
+
+                break;
 
             default:
-                $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->get();
+                $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
 
                 break;
         }
         if ($Reservations->count() == 0) {
             $all = "Nulls";
         } else {
+            $i = 0;
             foreach ($Reservations as  $Reservation) {
-                $all[] = [
+                $all[$i++] = [
                     'id' => $Reservation->id, 'NID' => $Reservation->NID, 'Name' => $Reservation->Name,
                     'Day' =>  date("Y-m-d", strtotime($Reservation->Date)), 'Time' => date("h:i", strtotime($Reservation->Date)),
                     'Phone' => $Reservation->Phone, 'services' => $Reservation->service->Name,
-                    'Status' => $Reservation->Status
+                    'Status' => "Hello" . $i
                 ];
             }
         }
 
 
-        return response()->json(['status' => 'success', 'data' =>  $all]);
+        return response()->json(['status' => 'success', [
+            'Content-Type' => 'application/json;charset=UTF-8',
+            'Charset' => 'utf-8'
+        ],  'data' =>  $all]);
     }
 }
