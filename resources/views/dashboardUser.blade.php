@@ -12,25 +12,22 @@
 @section('content')
     <div class="welcome-area" id="welcome">
 
-        <div class="container">
-            <h2 style="text-align: center">
-                لوحة التحكم
-            </h2>
+        <div class="container" >
+           
             <br><br>
-            <hr class="new2">
-            <div style="margin-right: 75% ; margin-bottom: 3% ; direction: rtl">
+            <div id="London" class="city form-inline">
+                <br>
+         <div id="dash">
+             <form method="POST" action="{{ route('Appointment') }}">
+                 @csrf
+                 <input type="text" required readonly hidden name="NID" value="{{ $all['NID'] }}">
+                 <button id="adduser" class="btn btn-light" type="submit">حجز جديد <i class="fa fa-plus-circle"
+                         aria-hidden="true"></i></button>
+             </form>
+         </div>
+            <div class="table-wrapper-scroll-y my-custom-scrollbar">
 
-                <form method="POST" action="{{ route('Appointment') }}">
-                    @csrf
-                    <input type="text" required readonly hidden name="NID" value="{{ $all['NID'] }}">
-
-                    <button id="adduser" class="btn btn-light" type="submit">حجز جديد <i class="fa fa-plus-circle"
-                            aria-hidden="true"></i></button>
-
-                </form>
-            </div>
-
-            <table>
+            <table id="myTable" class="table table-bordered table-striped mb-0">
                 <thead>
                     <tr>
                         <th colspan="1">الحالة</th>
@@ -66,7 +63,7 @@
                                 <tr>
                                     <td colspan="1" id="texttab" style="text-align: center">
 
-                                        <div style=" margin-right: 20%">
+                                        <div id="dailogs" >
 
                                             <input type="number" value="{{ $reservation->id }}" name="id" readonly hidden
                                                 required />
@@ -75,6 +72,7 @@
                                                 class="btn btn-warning">تغير </button>
 
                                         </div>
+                                        <br><br>
                                     </td>
                                     <td colspan="2" id="texttab" style="text-align: center">
                                         @if ($reservation->Status == 1)
@@ -212,26 +210,10 @@
                     </tbody>
                 @endif
             </table>
-            <div class="form-inline">
+        </div>
+    </div>
 
-                @for ($i = 1; $i <= $all['page']; $i++)
-
-                    <form method="POST" action="{{ route('NewReservation') }}">
-                        @csrf
-                        @if ($all['current'] == $i)
-                            <input id="idnational" style="background-color: skyblue" type="submit" name="page"
-                                value="{{ $i }}" required>
-
-                        @else
-                            <input id="idnational" type="submit" name="page" value="{{ $i }}" required>
-
-                        @endif
-                        <input type="text" required readonly hidden name="NID" value="{{ $all['NID'] }}">
-                    </form>
-
-
-                @endfor
-            </div>
+          
 
 
         </div>

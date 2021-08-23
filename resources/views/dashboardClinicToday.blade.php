@@ -10,10 +10,11 @@
 @endsection
 
 @section('content')
+
     <div class="welcome-area" id="welcome">
 
 
-        <div class="container">
+        <div id="ptf" class="container">
             <div id="mess">
 
                 <a href="/FutureAppointments" class="btn btn-outline-light">المواعيد القادمة</a>
@@ -49,7 +50,7 @@
                                 <tr>
                                     <td colspan="2" id="texttab" style="text-align: center">
                                         @if ($Reservation->Status == 1)
-                                            <div style=" margin-right: 20%">
+                                            <div id="dailogs">
 
                                                 <form method="POST" action="{{ route('Coming') }}">
                                                     @csrf
@@ -60,7 +61,9 @@
                                                 </form>
 
                                             </div>
-                                            <div style=" margin-right: 50%">
+                                            <br><br>
+
+                                            <div id="dailogs">
                                                 <form method="POST" action="{{ route('DidCome') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
@@ -68,8 +71,10 @@
                                                     <button type="submit" class="btn btn-warning">لم يحضر</button>
                                                 </form>
                                             </div>
+                                            <br><br>
+
                                         @elseif($Reservation->Status == 2 )
-                                            <div style=" margin-right: 5%">
+                                            <div id="dailogs">
                                                 <form method="POST" action="{{ route('Complete') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
@@ -77,8 +82,10 @@
                                                     <button type="submit" class="btn btn-success">انهاء الجلسة</button>
                                                 </form>
                                             </div>
+                                            <br><br>
+
                                         @elseif( $Reservation->Status == 3)
-                                            <div style=" margin-right: 55%">
+                                            <div id="dailogs">
                                                 <form method="POST" action="{{ route('Leave') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
@@ -88,7 +95,7 @@
                                             </div>
                                         @elseif($Reservation->Status == 4 )
 
-                                            <div style=" margin-right: 5%">
+                                            <div id="dailogs">
                                                 <form method="POST" action="{{ route('NewApp') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
@@ -96,7 +103,9 @@
                                                     <button type="submit" class="btn btn-success">موعد جديد</button>
                                                 </form>
                                             </div>
-                                            <div style=" margin-right: 50%">
+                                            
+
+                                            <div id="dailogs">
                                                 <form method="POST" action="{{ route('WithOutApp') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id"
@@ -104,12 +113,14 @@
                                                     <button type="submit" class="btn btn-secondary">بدون موعد </button>
                                                 </form>
                                             </div>
+                                            <br><br><br><br>
+
 
                                         @endif
                                     </td>
-                                    <td colspan="1" id="texttab">
+                                    <td colspan="1"  id="texttab">
                                         @if ($Reservation->Status == 1)
-                                            محجوز
+                                            <p>محجوز</p>
                                         @elseif($Reservation->Status == 2 )
                                             في صالة الانتظار
                                         @elseif($Reservation->Status == 3 )

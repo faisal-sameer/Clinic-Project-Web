@@ -78,6 +78,10 @@
                                 @endif
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
+                                
+                                <li class="scroll-to-section"><a href="/TodayAppointments" style="font-size: large;">
+                                لوحة التحكم    
+                                </a></li>
 
                                     <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
