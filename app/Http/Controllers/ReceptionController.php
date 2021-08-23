@@ -20,14 +20,14 @@ class ReceptionController extends Controller
 
     protected function dashboardClinicPast()
     {
-        return Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->count();
+        // return Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->count();
         $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
         return view('dashboardClinicPast')->with('Reservations', $Reservations);
     }
 
     protected function dashboardClinicFuture()
     {
-        return Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->count();
+        // return Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->count();
         $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->get();
         return view('dashboardClinicAfter')->with('Reservations', $Reservations);
     }
