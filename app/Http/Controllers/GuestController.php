@@ -40,48 +40,10 @@ class GuestController extends Controller
             return view('reservation');
         } else {
 
-            switch ($request->page) {
+
+            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
 
 
-                case 1:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->take(6)->get();
-
-                    break;
-
-                case 2:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->skip(6)->take(6)->get();
-
-                    break;
-
-                case 3:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->skip(12)->take(6)->get();
-
-                    break;
-
-                case 4:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->skip(18)->take(6)->get();
-
-                    break;
-
-                case 5:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->skip(24)->take(6)->get();
-
-                    break;
-
-                case 6:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->skip(30)->take(6)->get();
-
-                    break;
-                case 7:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->skip(36)->take(6)->get();
-
-                    break;
-
-                default:
-                    $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->take(6)->get();
-
-                    break;
-            }
             $services  = Service::select('id', 'id', 'Name')->get();
 
             $counts = Reservation::where('NID', $request->NID)->count();
@@ -156,7 +118,7 @@ class GuestController extends Controller
             $reservations->services_id = $request->Service;
             $reservations->Status = 1;
             $reservations->save();
-            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->take(6)->get();
+            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
             $counts = Reservation::where('NID', $request->NID)->count();
 
             if ($reservations->count() == 0) {
@@ -183,7 +145,7 @@ class GuestController extends Controller
     protected function ChangeApp(Request $request)
     {
         //   return  $request->Appointment . 'sdsdsdsdsds' .  substr(date('c'), 0, -9);
-        $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->take(6)->get();
+        $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
         $services  = Service::select('id', 'id', 'Name')->get();
 
         $counts = Reservation::where('NID', $request->NID)->count();
@@ -226,7 +188,7 @@ class GuestController extends Controller
                 'services_id' => $request->Service,
                 'Phone' => $request->Phone
             ]);
-            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->take(6)->get();
+            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
             $services  = Service::select('id', 'id', 'Name')->get();
 
             $counts = Reservation::where('NID', $request->NID)->count();
