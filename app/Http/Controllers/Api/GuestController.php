@@ -54,7 +54,7 @@ class GuestController extends Controller
     protected function  dashboardUser(Request $request)
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
-            ->select('id', 'NID', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
+            ->select('id', 'Name', 'NID', 'Date', 'Phone', 'services_id', 'Status')->get();
         if ($myReservations->count() == 0) {
             $all = "Nulls";
         } else {
