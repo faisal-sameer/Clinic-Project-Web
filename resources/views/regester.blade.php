@@ -30,7 +30,7 @@
                                 <div class="form-group row">
 
                                     <label id="idnational">اختر اليوم والوقت</label> <br>
-                                    <input id="idnational" type="datetime-local" name="Appointment" min="2021-06-01T10:00"
+                                    <input id="idnational" value="<?php echo Date('Y-m-d\TH:i',time()) ?>" type="datetime-local" name="Appointment" min="2021-06-01T10:00"
                                         max="2030-07-30T20:00">
 
 
