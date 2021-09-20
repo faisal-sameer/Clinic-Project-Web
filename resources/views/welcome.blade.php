@@ -21,8 +21,7 @@
             <div class="container">
                 <div class="row">
                     <div class="left-text col-lg-6 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                        <h1>يكتب اي شي </h1>
-                        <p >تهتهيمت</p>
+                        <h1 style="text-align: center">أهلا وسهلا بكم</h1>
                         <a href="/reservation" class="main-button-slider" style="display: flex;  
                         justify-content: center;  
                         align-items: center;  ">احجز موعدك من هنا </a>
@@ -50,7 +49,7 @@
                         <h5 >نبذة عن العيادة</h5>
                     </div>
                     <div class="left-text">
-                    <p>{{$text}}</p>
+                    <p style="text-align: right">{{$text}}</p>
                     </div>
                 </div>
             </div>
@@ -72,7 +71,7 @@
                         <div class="icon">
                             <i><img src="images/teeth.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Ahmed Alsir
+                        <h5 class="service-title">Mohammed Allehyani
                         </h5>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
@@ -81,79 +80,79 @@
                         <span class="fa fa-star checked"></span>
 
                         <p>
-                            يعتبر من أفضل مراكز الأسنان بمكة خدمات ممتازة جدا ودكاترة علي مستوى عالي من الخبرات ..د.فهد أسلوبه جميل جدا مع الأطفال وعمل على مستوي الدقة والاتقان... د.ياسر ما شاء الله رائع جدا في سحب العصب والتركيبات
-                            
+                            تقييمي كشخص متعامل مع الدكتور عمرو بخصوص التقويم للاسنان
+                            اكملت سنة ..شخصية محترمة و هادئة تجيب ع كل التساؤلات و ملم بعمله انصح فيه للامانة                            
                         </p>
-                        <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TDZJNjM vMjAyYLRSNagwNE02Mky0TDJISTE0NjOztDKoMLO0TDRLS05KTTK0MDJJTvNyv7HzZteN5TfWA_EqhRvr9RRuNt5sv7Fe4cb2my03doLElgMZm4BiG4GstptdCkDu9hsrIOKLb2y-2QYSBwB7tj7i&q=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.+%D9%81%D9%87%D8%AF+%D8%B7%D9%84%D8%B9%D8%AA+%D8%A7%D9%84%D8%B2%D9%87%D8%B1%D8%A7%D9%86%D9%8A+%D9%84%D8%B7%D8%A8+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86&oq=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.&aqs=chrome.1.69i57j46i175i199i512l4j0i512j46i175i199i512l3.8589j0j7&sourceid=chrome&ie=UTF-8#lrd=0x15c21a9b0dd13669:0x699a6fcbeb1824cf,1,,," class="main-button">المزيد من التعليقات</a>
+                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,," class="main-button">المزيد من التعليقات</a>
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="images/teeth.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Nadiya Kutbi</h5>
+                        <h5 class="service-title">سلمان الحربي</h5>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <p>تجربة رهيبة لطفلي أول مرة كان يروح طبيب اسنان
-                            شجعه وتعامل جداً راقي من الطبيب فهد
-                            خرجنا من عنده انا و لدي مبسوطين طاقة ايجابية
-                            الموقف اللي اثر فيا يتعامل مع المريض باإحساس خلع سن ولدي و بعدين حضنه الله يسعده  شكراً للطبيب الأسنان المتميز و النادر
-                            </p>
-                        <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TDZJNjMvMjAyYLRSNagwNE02Mky0TDJISTE0NjOztDKoMLO0TDRLS05KTTK0MDJJTvNyv7HzZteN5TfWA_EqhRvr9RRuNt5sv7Fe4cb2my03doLElgMZm4BiG4GstptdCkDu9hsrIOKLb2y-2QYSBwB7tj7i&q=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.+%D9%81%D9%87%D8%AF+%D8%B7%D9%84%D8%B9%D8%AA+%D8%A7%D9%84%D8%B2%D9%87%D8%B1%D8%A7%D9%86%D9%8A+%D9%84%D8%B7%D8%A8+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86&oq=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.&aqs=chrome.1.69i57j46i175i199i512l4j0i512j46i175i199i512l3.8589j0j7&sourceid=chrome&ie=UTF-8#lrd=0x15c21a9b0dd13669:0x699a6fcbeb1824cf,1,,," class="main-button"> المزيد من التعليقات</a>
+                        <p>شكرا د/ عفاف مبدعه ويديها خفيفه جدا وقمه في التعامل ومتعاونه مع المرضى
+                        </p>
+                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,," class="main-button">المزيد من التعليقات</a>
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="images/teeth.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Ayah Sulman</h5>
+                        <h5 class="service-title">7moodi Al-zahrani</h5>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <p>يعطيك العافيه دكتور فهد دائماً متميز بشهادتي وشهادة عائلتي الي مايروحو لغيرك ندعمك ودايماً للامام يارب ماشاء الله تبارك الله انت والممرضات والمساعدات ✨✨✨✨✨</p>
-                        <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TDZJNjMvMjAyYLRSNagwNE02Mky0TDJISTE0NjOztDKoMLO0TDRLS05KTTK0MDJJTvNyv7HzZteN5TfWA_EqhRvr9RRuNt5sv7Fe4cb2my03doLElgMZm4BiG4GstptdCkDu9hsrIOKLb2y-2QYSBwB7tj7i&q=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.+%D9%81%D9%87%D8%AF+%D8%B7%D9%84%D8%B9%D8%AA+%D8%A7%D9%84%D8%B2%D9%87%D8%B1%D8%A7%D9%86%D9%8A+%D9%84%D8%B7%D8%A8+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86&oq=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.&aqs=chrome.1.69i57j46i175i199i512l4j0i512j46i175i199i512l3.8589j0j7&sourceid=chrome&ie=UTF-8#lrd=0x15c21a9b0dd13669:0x699a6fcbeb1824cf,1,,," class="main-button"> المزيد من التعليقات</a>
+                        <p>العياده ما شاء الله ممتازة والتعامل ممتاز خصوصا في قسم التقويم الدكتور عمرو الله يسعده على الاسلوب والتعامل 🙏  </p>
+                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,," class="main-button">المزيد من التعليقات</a>
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="images/teeth.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">fatma Al-Ghamdi</h5>
+                        <h5 class="service-title">Ayah ALKENANI</h5>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <p>نفتخر بوجود اطباء سعودين وكل الكادر سعودين وهذا فخر لنا ونشكرهم على إخلاصهم وإتقانهم في العمل وعلى الإنجاز في إيجاز</p>
-                        <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TDZJNjMvMjAyYLRSNagwNE02Mky0TDJISTE0NjOztDKoMLO0TDRLS05KTTK0MDJJTvNyv7HzZteN5TfWA_EqhRvr9RRuNt5sv7Fe4cb2my03doLElgMZm4BiG4GstptdCkDu9hsrIOKLb2y-2QYSBwB7tj7i&q=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.+%D9%81%D9%87%D8%AF+%D8%B7%D9%84%D8%B9%D8%AA+%D8%A7%D9%84%D8%B2%D9%87%D8%B1%D8%A7%D9%86%D9%8A+%D9%84%D8%B7%D8%A8+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86&oq=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.&aqs=chrome.1.69i57j46i175i199i512l4j0i512j46i175i199i512l3.8589j0j7&sourceid=chrome&ie=UTF-8#lrd=0x15c21a9b0dd13669:0x699a6fcbeb1824cf,1,,," class="main-button"> المزيد من التعليقات</a>
+                        <p>دكتور عمرو غازي من افضل الدكاترة الا تعاملت معاهم شغلة جداً ممتاز ماشاءالله تبارك الله</p>
+                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,," class="main-button">المزيد من التعليقات</a>
                     </div>
                     <div class="item service-item">
                         <div class="icon">
                             <i><img src="images/teeth.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">طلال علي</h5>
+                        <h5 class="service-title">Fares Alhamaly</h5>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <p>للأمانة من خلال تعاملي مع الدكتور / ياسر. في عيادة الاسنان، وجدت تعامل رآقي جداً ناهيك عن إحترافية الدكتور ياسر في عمله ومرونة أكثر من رائعة، حقيقي شُكراً لمجمع الدكتور طلعت الزهراني، ويارب تستمروا دائماً على هذا التَميّز والأبداع.</p>
-                        <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TDZJNjMvMjAyYLRSNagwNE02Mky0TDJISTE0NjOztDKoMLO0TDRLS05KTTK0MDJJTvNyv7HzZteN5TfWA_EqhRvr9RRuNt5sv7Fe4cb2my03doLElgMZm4BiG4GstptdCkDu9hsrIOKLb2y-2QYSBwB7tj7i&q=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.+%D9%81%D9%87%D8%AF+%D8%B7%D9%84%D8%B9%D8%AA+%D8%A7%D9%84%D8%B2%D9%87%D8%B1%D8%A7%D9%86%D9%8A+%D9%84%D8%B7%D8%A8+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86&oq=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.&aqs=chrome.1.69i57j46i175i199i512l4j0i512j46i175i199i512l3.8589j0j7&sourceid=chrome&ie=UTF-8#lrd=0x15c21a9b0dd13669:0x699a6fcbeb1824cf,1,,," class="main-button"> المزيد من التعليقات</a>
-                    </div>
+                        <p>عياده الماجد افضل عياده اسنان وافضل دكتور الدكتور حسن مطر
+                            تعامله راقي مع الكبار وخاصه الصغار
+                            اشكر الدكتور حسن على حسن تعامله</p>
+                            <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,," class="main-button">المزيد من التعليقات</a>
+                        </div>
                     <div class="item service-item">
                         <div class="icon">
-                            <i><img src="images/service-icon-03.png" alt=""></i>
+                            <i><img src="images/teeth.png" alt=""></i>
                         </div>
-                        <h5 class="service-title">Perfume Whiff</h5>
+                        <h5 class="service-title">وداد الفهمي</h5>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
                         <span class="fa fa-star checked"></span>
-                        <p>من افضل عيادات الاسنان وبالذات الاطفال الصراحه دكتور فهد تعامله جدددا ممتاز مع اي طفل عنيد يدخل عنده يقدر انه هو يحتويه ويخرج من عنده مبسووط</p>
-                        <a href="https://www.google.com/search?gs_ssp=eJzj4tVP1zc0TDZJNjMvMjAyYLRSNagwNE02Mky0TDJISTE0NjOztDKoMLO0TDRLS05KTTK0MDJJTvNyv7HzZteN5TfWA_EqhRvr9RRuNt5sv7Fe4cb2my03doLElgMZm4BiG4GstptdCkDu9hsrIOKLb2y-2QYSBwB7tj7i&q=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.+%D9%81%D9%87%D8%AF+%D8%B7%D9%84%D8%B9%D8%AA+%D8%A7%D9%84%D8%B2%D9%87%D8%B1%D8%A7%D9%86%D9%8A+%D9%84%D8%B7%D8%A8+%D8%A7%D9%84%D8%A3%D8%B3%D9%86%D8%A7%D9%86&oq=%D8%B9%D9%8A%D8%A7%D8%AF%D8%A7%D8%AA+%D8%AF.&aqs=chrome.1.69i57j46i175i199i512l4j0i512j46i175i199i512l3.8589j0j7&sourceid=chrome&ie=UTF-8#lrd=0x15c21a9b0dd13669:0x699a6fcbeb1824cf,1,,," class="main-button"> المزيد من التعليقات</a>
+                        <p>عملت اسناني عند الدكتور حسن مطر افضل دكتور بالمجمع يده خفيفه وسريع وشغله دقيق مره لايفوتكم  .
+                        </p>
+                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,," class="main-button">المزيد من التعليقات</a>
                     </div>
                 
                 </div>
@@ -413,7 +412,7 @@
                            3. Click "Share" and choose "Embed map" tab
                            4. Copy only URL and paste it within the src="" field below
                     -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59431.44373265082!2d39.90473130882059!3d21.410951127631726!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xee03935880f404af!2z2KfZhNmF2K_Yp9ixINmE2LfYqCDZiNiq2YLZiNmK2YUg2KfZhNij2LPZhtin2YY!5e0!3m2!1sar!2ssa!4v1623239657163!5m2!1sar!2ssa" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14842.793851587834!2d39.7748164!3d21.5586428!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9f0b18c816560873!2z2YXYrNmF2Lkg2KfZhNmF2KfYrNivINin2YTYt9io2Yo!5e0!3m2!1sar!2ssa!4v1632129288950!5m2!1sar!2ssa" width="100%" height="500px" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
                 <!-- ***** Contact Map End ***** -->
@@ -440,7 +439,7 @@
                             </div>
                             <div class="col-lg-12">
                               <fieldset>
-                                <button type="submit" id="form-submit" class="main-button">Send It</button>
+                                <button type="submit" onClick="window.location.reload();" id="form-submit" class="main-button">Send It</button>
                               </fieldset>
                             </div>
                           </div>
