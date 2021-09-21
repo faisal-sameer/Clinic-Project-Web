@@ -32,12 +32,16 @@ class AuthController extends Controller
         //   ]);
 
         //sendGCM("Hello", "AF here", $request->token, "1", "w");
+        //        \Auth::logoutOtherDevices(request('password'));
+
         return response()->json([
             'success' => true,
             'access_token' => $token,
             'type' => auth('api')->user(),
             'userInfo' => auth('api')->user(),
             'expire_in' => auth('api')->factory()->getTTL() * 60,
+
+
         ], 200);
     }
 }

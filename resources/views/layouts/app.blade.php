@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Demo Clinic</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -78,10 +78,11 @@
                                 @endif
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
-                                
-                                <li class="scroll-to-section"><a href="/TodayAppointments" style="font-size: large;">
-                                لوحة التحكم    
-                                </a></li>
+
+                                    <li class="scroll-to-section"><a href="/TodayAppointments"
+                                            style="font-size: large;">
+                                            لوحة التحكم
+                                        </a></li>
 
                                     <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
@@ -108,25 +109,25 @@
 
             @yield('content')
         </main>
-    </div>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7 col-md-12 col-sm-12">
-                    <p class="copyright">Copyright &copy;AAMF
-                
-                . Design: <a rel="nofollow" href="#">Fi9</a></p>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 col-sm-12">
+                        <p class="copyright">Copyright &copy;AAMF
+
+                            . Design: <a rel="nofollow" href="#">Fi9</a></p>
+                    </div>
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-snapchat"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col-lg-5 col-md-12 col-sm-12">
-                    <ul class="social">
-                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                        <li><a href="#"><i class="fab fa-snapchat"></i></a></li>
-                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                    </ul>
-                </div>
-            </div>
         </footer>
 
 
@@ -150,7 +151,7 @@
         <script>
             function myFunction() {
                 var input, filter, table, tr, td, i, txtValue;
-                input = document.getElementById("myInput");
+                input = document.getElementById("myInput0");
                 filter = input.value.toUpperCase();
                 table = document.getElementById("myTable");
                 tr = table.getElementsByTagName("tr");
@@ -174,6 +175,26 @@
                 input = document.getElementById("myInput1");
                 filter = input.value.toUpperCase();
                 table = document.getElementById("myTable1");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[5];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+        </script>
+        <script>
+            function myFunction2() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput2");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable2");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
                     td = tr[i].getElementsByTagName("td")[5];

@@ -28,7 +28,7 @@
                 <br>
                 <h2>مواعيد اليوم</h2>
 
-                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."
+                <input type="text" id="myInput0" onkeyup="myFunction()" placeholder="Search for names.."
                     title="Type in a name">
 
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -48,22 +48,22 @@
                         <tbody>
                             @foreach ($Reservations as $Reservation)
                                 <tr>
-                                    <td colspan="2" id="texttab" style="text-align: center">
+                                    <td colspan="2">
                                         @if ($Reservation->Status == 1)
-                                            <div id="dailogs">
+                                            <div id="dailogs3">
 
                                                 <form method="POST" action="{{ route('Coming') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
                                                         hidden required />
 
-                                                    <button type="submit" class="btn btn-success">حضر</button>
+                                                    <button type="submit" class="btn btn-success">وصول</button>
                                                 </form>
 
                                             </div>
-                                            <br><br>
-
-                                            <div id="dailogs">
+                                            <br>
+                                            <br>
+                                            <div id="dailogs4">
                                                 <form method="POST" action="{{ route('DidCome') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
@@ -72,9 +72,8 @@
                                                 </form>
                                             </div>
                                             <br><br>
-
-                                        @elseif($Reservation->Status == 2 )
-                                            <div id="dailogs">
+                                        @elseif($Reservation->Status == 5 )
+                                            <div style="margin:auto">
                                                 <form method="POST" action="{{ route('Complete') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
@@ -82,69 +81,37 @@
                                                     <button type="submit" class="btn btn-success">انهاء الجلسة</button>
                                                 </form>
                                             </div>
-                                            <br><br>
-
-                                        @elseif( $Reservation->Status == 3)
-                                            <div id="dailogs">
-                                                <form method="POST" action="{{ route('Leave') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
-                                                        hidden required />
-                                                    <button type="submit" class="btn btn-secondary">غادر </button>
-                                                </form>
-                                            </div>
-                                        @elseif($Reservation->Status == 4 )
-
-                                            <div id="dailogs">
-                                                <form method="POST" action="{{ route('NewApp') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
-                                                        hidden required />
-                                                    <button type="submit" class="btn btn-success">موعد جديد</button>
-                                                </form>
-                                            </div>
-                                            
-
-                                            <div id="dailogs">
-                                                <form method="POST" action="{{ route('WithOutApp') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
-                                                        readonly hidden required />
-                                                    <button type="submit" class="btn btn-secondary">بدون موعد </button>
-                                                </form>
-                                            </div>
-                                            <br><br><br><br>
-
+                                            <br>
 
                                         @endif
                                     </td>
-                                    <td colspan="1"  id="texttab">
+                                    <td colspan="1" id="texttab">
+
                                         @if ($Reservation->Status == 1)
-                                            <p>محجوز</p>
+
+                                            في انتظار التاكيد
+
                                         @elseif($Reservation->Status == 2 )
                                             في صالة الانتظار
                                         @elseif($Reservation->Status == 3 )
                                             لم يحظر
                                         @elseif($Reservation->Status == 4 )
-                                            انهاء الجسلة
+                                            انتهت الجلسة
                                         @elseif($Reservation->Status == 5 )
-                                            تم حجز موعد جديد
-                                        @elseif($Reservation->Status == 6 )
-                                            غادر
-                                        @elseif($Reservation->Status == 7 )
-                                            انهاء الجلسة بدون موعد
+                                            تم التاكيد
+
                                         @endif
                                     </td>
 
-                                    <td colspan="2" id="texttab" style="text-align: center">
+                                    <td colspan="2" id="texttab">
                                         {{ $Reservation->service->Name }}</td>
 
-                                    <td colspan="2" id="texttab" style="text-align: center">{{ $Reservation->Date }}
+                                    <td colspan="2" id="texttab">{{ $Reservation->Date }}
                                     </td>
 
-                                    <td colspan="2" id="texttab" style="text-align: center">{{ $Reservation->Name }}
+                                    <td colspan="2" id="texttab">{{ $Reservation->Name }}
                                     </td>
-                                    <td style="text-align: center" colspan="2" id="texttab">
+                                    <td colspan="2" id="texttab">
                                         {{ $Reservation->NID }}</td>
 
                                 </tr>

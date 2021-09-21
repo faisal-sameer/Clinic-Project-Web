@@ -27,8 +27,9 @@ class ReceptionController extends Controller
 
     protected function dashboardClinicFuture()
     {
-        // return Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->count();
-        $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->get();
+        // return  Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 8)->count();
+
+        $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 1)->orWhere('Status', 5)->get();
         return view('dashboardClinicAfter')->with('Reservations', $Reservations);
     }
 
@@ -40,6 +41,17 @@ class ReceptionController extends Controller
         $Reservation =  Reservation::where('id', $request->id)->first();
 
         Alert::success('تم تسجيل حضور للمراجع ', $Reservation->Name . ' ' . $Reservation->NID);
+
+        return back();
+    }
+    protected function Confirm(Request $request)
+    {
+        Reservation::where('id', $request->id)->update([
+            'Status' => 5
+        ]);
+        $Reservation =  Reservation::where('id', $request->id)->first();
+
+        Alert::success('تم تاكيد الحجز  ', $Reservation->Name . ' ' . $Reservation->NID);
 
         return back();
     }
@@ -104,3 +116,44 @@ class ReceptionController extends Controller
         return back();
     }
 }
+
+
+
+
+// today Appointment  More Action 
+/*
+
+
+                                        @elseif( $Reservation->Status == 3)
+                                            <div id="dailogs">
+                                                <form method="POST" action="{{ route('Leave') }}">
+                                                    @csrf
+                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
+                                                        hidden required />
+                                                    <button type="submit" class="btn btn-secondary">غادر </button>
+                                                </form>
+                                            </div>
+                                        @elseif($Reservation->Status == 4 )
+
+                                            <div id="dailogs">
+                                                <form method="POST" action="{{ route('NewApp') }}">
+                                                    @csrf
+                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
+                                                        hidden required />
+                                                    <button type="submit" class="btn btn-success">موعد جديد</button>
+                                                </form>
+                                            </div>
+
+
+                                            <div id="dailogs">
+                                                <form method="POST" action="{{ route('WithOutApp') }}">
+                                                    @csrf
+                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
+                                                        readonly hidden required />
+                                                    <button type="submit" class="btn btn-secondary">بدون موعد </button>
+                                                </form>
+                                            </div>
+                                            <br><br><br><br>
+
+
+*/

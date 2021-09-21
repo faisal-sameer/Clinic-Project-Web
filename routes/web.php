@@ -34,6 +34,7 @@ Route::get('/PastAppointments', [App\Http\Controllers\ReceptionController::class
 Route::get('/FutureAppointments', [App\Http\Controllers\ReceptionController::class, 'dashboardClinicFuture']);
 Route::any('/Coming', [App\Http\Controllers\ReceptionController::class, 'Coming'])->name('Coming');
 Route::any('/DidCome', [App\Http\Controllers\ReceptionController::class, 'DidCome'])->name('DidCome');
+Route::any('/Confirm', [App\Http\Controllers\ReceptionController::class, 'Confirm'])->name('Confirm');
 Route::any('/Complete', [App\Http\Controllers\ReceptionController::class, 'Complete'])->name('Complete');
 Route::any('/Leave', [App\Http\Controllers\ReceptionController::class, 'Leave'])->name('Leave');
 Route::any('/NewApp', [App\Http\Controllers\ReceptionController::class, 'NewAppointment'])->name('NewApp');

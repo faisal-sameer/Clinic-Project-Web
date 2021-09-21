@@ -120,6 +120,7 @@ class GuestController extends Controller
             $reservations->save();
             $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
             $counts = Reservation::where('NID', $request->NID)->count();
+            $services  = Service::select('id', 'id', 'Name')->get();
 
             if ($reservations->count() == 0) {
                 $all = ['NID' => $request->NID];
@@ -127,11 +128,13 @@ class GuestController extends Controller
                 $all['data'] = 0;
                 $all['page'] = null;
                 $all['current'] = 0;
+                $all['services'] = $services;
             } else {
                 $all['NID'] = $request->NID;
                 $all['reservations'] = $reservations;
                 $all['data'] = 1;
                 $all['current'] = $request->page;
+                $all['services'] = $services;
 
                 $all['page'] = round($counts / 6);
             }
@@ -172,7 +175,7 @@ class GuestController extends Controller
 
             return view('dashboardUser')->with('all', $all);
         } else if ($request->Appointment == null || $request->Appointment <  substr(date('c'), 0, -9)) {
-            Alert::info('يجب عليك تحديد موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
+            Alert::info('يجب عليك تحديدhh موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
 
 
             return view('dashboardUser')->with('all', $all);

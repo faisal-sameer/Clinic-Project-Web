@@ -27,6 +27,7 @@
 
 #texttab {
     font-size: 1vw;
+    text-align: center;
 }
 .center-box {
     display: flex;
@@ -100,6 +101,12 @@ button {
 #dailogs2 {
     margin-right: 1%;
 }
+#dailogs3 {
+    margin-right: 37%;
+}
+#dailogs4 {
+    margin-right: 35%;
+}
 #ptf {
     margin-top: 15%;
 }
@@ -107,6 +114,11 @@ button {
 /*تصميم الجوال
 */
 @media only screen and (max-width: 970px) {
+    #mess {
+        justify-content: space-between;
+        display: flex;
+        margin-top: 50%;
+    }
     #ptf {
         margin-top: 30%;
     }
@@ -136,6 +148,7 @@ button {
 
     #texttab {
         font-size: 3vw;
+        text-align: center;
     }
     #sub {
         width: 100%;

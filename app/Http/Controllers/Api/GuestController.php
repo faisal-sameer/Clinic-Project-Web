@@ -51,6 +51,36 @@ class GuestController extends Controller
         }
         return response()->json(['status' => 'success', 'data' =>  "Done"]);
     }
+    protected function UpdatingAppointment(Request $request)
+    {
+        if ($request->NID == null) {
+
+            return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ رقم الهوية او الاقامة"]);
+        } else if ($request->Name == null) {
+
+            return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ اسم المراجع "]);
+        } else if ($request->Phone == null) {
+
+            return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ رقم الجوال  "]);
+        } else if ($request->Day == null /* || $request->Appointment  <  substr(date('c'), 0, -9)*/) {
+
+            return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ موعد الحجز "]);
+        } else if ($request->Service == null) {
+
+            return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم اختيار نوع الخدمة  "]);
+        } else {
+            $ServiceRequest = Service::where('Name', $request->Service)->first();
+
+            $reservations =  Reservation::where('id', $request->id)->update([
+                'name' => $request->Name,
+                'Date' =>  $request->Day . "T" . date("H:i", strtotime($request->Time)),
+                'Phone' =>  $request->Phone,
+                'services_id' => $ServiceRequest->id,
+                'Status' => 1
+            ]);
+        }
+        return response()->json(['status' => 'success', 'data' =>  $reservations]);
+    }
     protected function  dashboardUser(Request $request)
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')

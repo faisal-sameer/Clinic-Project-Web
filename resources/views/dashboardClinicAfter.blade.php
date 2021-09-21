@@ -14,17 +14,13 @@
 
 
 
-        <div  id="ptf" class="container">
+        <div id="ptf" class="container">
             <div id="mess">
 
                 <a href="/FutureAppointments" class="btn btn-outline-light">المواعيد القادمة</a>
 
                 <a href="/TodayAppointments" class="btn btn-outline-light">مواعيد اليوم</a>
                 <a href="/PastAppointments" class="btn btn-outline-light">المواعيد السابقة</a>
-
-
-
-
             </div>
 
             <div id="London" class=" city">
@@ -51,97 +47,42 @@
                         <tbody>
                             @foreach ($Reservations as $Reservation)
                                 <tr>
-                                    <td colspan="2" id="texttab" style="text-align: center">
+                                    <td colspan="2" id="texttab">
                                         @if ($Reservation->Status == 1)
                                             <div id="dailogs1">
 
-                                                <form method="POST" action="{{ route('Coming') }}">
+                                                <form method="POST" action="{{ route('Confirm') }}">
                                                     @csrf
                                                     <input type="number" value="{{ $Reservation->id }}" name="id" readonly
                                                         hidden required />
 
-                                                    <button type="submit" class="btn btn-success">حضر</button>
+                                                    <button type="submit" class="btn btn-success">تاكيد الحجز</button>
                                                 </form>
 
                                             </div>
-                                            <div >
-                                                <form method="POST" action="{{ route('DidCome') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
-                                                        hidden required />
-                                                    <button type="submit" class="btn btn-warning">لم يحضر</button>
-                                                </form>
-                                            </div>
-                                            <br><br>
-                                        @elseif($Reservation->Status == 2 )
-                                            <div id="dailogs">
-                                                <form method="POST" action="{{ route('Complete') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
-                                                        hidden required />
-                                                    <button type="submit" class="btn btn-success">انهاء الجلسة</button>
-                                                </form>
-                                            </div>
-                                            <br><br>
-                                        @elseif( $Reservation->Status == 3)
-                                            <div id="dailogs">
-                                                <form method="POST" action="{{ route('Leave') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
-                                                        hidden required />
-                                                    <button type="submit" class="btn btn-secondary">غادر </button>
-                                                </form>
-                                            </div>
-                                            <br><br>
-                                        @elseif($Reservation->Status == 4 )
 
-                                            <div>
-                                                <form method="POST" action="{{ route('NewApp') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id" readonly
-                                                        hidden required />
-                                                    <button type="submit" class="btn btn-success">موعد جديد</button>
-                                                </form>
-                                            </div>
-                                            <div>
-                                                <form method="POST" action="{{ route('WithOutApp') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
-                                                        readonly hidden required />
-                                                    <button type="submit" class="btn btn-secondary">بدون موعد </button>
-                                                </form>
-                                            </div>
                                             <br><br>
-
                                         @endif
+
                                     </td>
-                                    <td colspan="1" style="text-align: center" id="texttab">
-                                        @if ($Reservation->Status == 1)
-                                            محجوز
-                                        @elseif($Reservation->Status == 2 )
-                                            في صالة الانتظار
-                                        @elseif($Reservation->Status == 3 )
-                                            لم يحظر
-                                        @elseif($Reservation->Status == 4 )
-                                            انهاء الجسلة
-                                        @elseif($Reservation->Status == 5 )
-                                            تم حجز موعد جديد
-                                        @elseif($Reservation->Status == 6 )
-                                            غادر
-                                        @elseif($Reservation->Status == 7 )
-                                            انهاء الجلسة بدون موعد
+                                    <td colspan="1" id="texttab">
+                                        @if ($Reservation->Status == 8)
+                                            تم تاكيد الحجز
+
+                                        @else
+                                            في انتظار التاكيد
                                         @endif
                                     </td>
 
-                                    <td colspan="2" id="texttab" style="text-align: center">
+                                    <td colspan="2" id="texttab">
                                         {{ $Reservation->service->Name }}</td>
 
-                                    <td colspan="2" id="texttab" style="text-align: center">{{ $Reservation->Date }}
+                                    <td colspan="2" id="texttab">{{ $Reservation->Date }}
                                     </td>
 
-                                    <td colspan="2" id="texttab" style="text-align: center">{{ $Reservation->Name }}
+                                    <td colspan="2" id="texttab">{{ $Reservation->Name }}
                                     </td>
-                                    <td style="text-align: center" colspan="2" id="texttab">
+                                    <td colspan="2" id="texttab">
                                         {{ $Reservation->NID }}</td>
 
                                 </tr>
@@ -151,7 +92,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
 
             </div>
 
