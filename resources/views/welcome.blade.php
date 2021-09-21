@@ -35,7 +35,13 @@
         <!-- ***** Header Text End ***** -->
     </div>
     <!-- ***** Welcome Area End ***** -->
-
+    <a id="dds" href="#" class="float">
+        <i  class="fa fa-envelope my-float"></i>
+        </a>
+        <div class="label-container">
+        <div class="label-text">تواصل معنا</div>
+        <i class="fa fa-play label-arrow"></i>
+        </div>
 
     <!-- ***** Features Big Item Start ***** -->
     <section class="section" id="about">
@@ -416,7 +422,7 @@
                     </div>
                 </div>
                 <!-- ***** Contact Map End ***** -->
-
+         
                 <!-- ***** Contact Form Start ***** -->
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="contact-form">
