@@ -109,7 +109,7 @@
 
             @yield('content')
         </main>
-        <<<<<<< HEAD </div>
+      </div>
             <footer>
                 <div class="container">
                     <div class="row">
@@ -127,27 +127,8 @@
                                 <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
                             </ul>
                         </div>
-                        =======
                     </div>
-                    <footer>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-7 col-md-12 col-sm-12">
-                                    <p class="copyright">Copyright &copy;A&F
-
-                                        . Design: <a rel="nofollow" href="#">Fi9</a></p>
-                                </div>
-                                <div class="col-lg-5 col-md-12 col-sm-12">
-                                    <ul class="social">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-snapchat"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                                    </ul>
-                                    >>>>>>> 1e054f8bee0386fa34b109557655737ee3903f1e
-                                </div>
-                    </footer>
+                
 
 
                     <script src="js/jquery-2.1.0.min.js"></script>
