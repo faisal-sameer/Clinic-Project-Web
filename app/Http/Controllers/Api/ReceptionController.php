@@ -15,10 +15,19 @@ class ReceptionController extends Controller
     }
 
 
-    protected function Appointments(Request $request)
+    protected function Appointments()
     {
-        // $profile = User::where('user_id', auth('api')->user()->id)->first();
+        $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->paginate(2);
+        return response()->json([
+            'status' => 'success',
+            [
+                'Content-Type' => 'application/json;charset=UTF-32', 'Charset' => 'utf-32'
+            ],
+            'data' =>  $Reservations, JSON_UNESCAPED_UNICODE
 
+        ]);
+        // $profile = User::where('user_id', auth('api')->user()->id)->first();
+        /*
         switch ($request->type) {
             case 0:
                 $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
@@ -61,7 +70,7 @@ class ReceptionController extends Controller
             ],
             'data' =>  $all, JSON_UNESCAPED_UNICODE
 
-        ]);
+        ]);*/
     }
 
     protected function Coming(Request $request)
