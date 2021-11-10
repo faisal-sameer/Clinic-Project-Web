@@ -124,7 +124,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-7 col-md-12 col-sm-12">
-                        <p class="copyright">Copyright &copy;AAMF
+                        <p class="copyright"> {{ __('app.Copyright') }} &copy;AF
 
                             . Design: <a rel="nofollow" href="#">Fi9</a></p>
                     </div>
@@ -141,21 +141,21 @@
 
 
 
-                <script src="js/jquery-2.1.0.min.js"></script>
+                <script src="../js/jquery-2.1.0.min.js"></script>
 
                 <!-- Bootstrap -->
-                <script src="js/popper.js"></script>
-                <script src="js/bootstrap.min.js"></script>
+                <script src="../js/popper.js"></script>
+                <script src="../js/bootstrap.min.js"></script>
 
                 <!-- Plugins -->
-                <script src="js/owl-carousel.js"></script>
-                <script src="js/scrollreveal.min.js"></script>
-                <script src="js/waypoints.min.js"></script>
-                <script src="js/jquery.counterup.min.js"></script>
-                <script src="js/imgfix.min.js"></script>
+                <script src="../js/owl-carousel.js"></script>
+                <script src="../js/scrollreveal.min.js"></script>
+                <script src="../js/waypoints.min.js"></script>
+                <script src="../js/jquery.counterup.min.js"></script>
+                <script src="../js/imgfix.min.js"></script>
 
                 <!-- Global Init -->
-                <script src="js/custom.js"></script>
+                <script src="../js/custom.js"></script>
 
 
                 <script>

@@ -14,7 +14,11 @@ class GuestController extends Controller
 {
     protected function reservation()
     {
-        Alert::info('لحجز و عرض مواعيدك ', 'رجاء ادخل رقم الهوية ');
+        if (app()->getLocale() == 'ar') {
+            Alert::info('لحجز و عرض مواعيدك ', 'رجاء ادخل رقم الهوية ');
+        } else {
+            Alert::info('For Show or Reservation appointment ', 'Please  Enter your National ID ');
+        }
 
         return view('reservation');
     }
@@ -27,16 +31,18 @@ class GuestController extends Controller
     {
 
 
+
         $isNumber = is_numeric($request->NID);
         if ($isNumber == null) {
-            Alert::warning('لا توجد بيانات ', 'قم بادخال رقم الهوية ');
+            app()->getLocale() == 'ar' ? Alert::warning('لا توجد بيانات ', 'قم بادخال رقم الهوية ') :
+                Alert::warning('Nothing Entry ', 'Please  Enter your National ID');
 
             return view('reservation');
         }
         $validator = strlen($request->NID);
         if ($validator < 10) {
-            Alert::warning('الرقم اقل من الحد المسموح', 'تاكد من كتابة رقم الهوية بشكل صحيح ');
-
+            app()->getLocale() == 'ar' ?  Alert::warning('الرقم اقل من الحد المسموح', 'تاكد من كتابة رقم الهوية بشكل صحيح ') :
+                Alert::warning('Your Entry less then 10', 'Please  Enter your National ID 10 Numbers');
             return view('reservation');
         } else {
 
@@ -63,7 +69,8 @@ class GuestController extends Controller
                 $all['page'] = ceil($counts / 6);
                 $all['services'] = $services;
             }
-            Alert::success('اهلا بك ', '' . $request->NID);
+            app()->getLocale() == 'ar' ?  Alert::success('اهلا بك ', '' . $request->NID) :
+                Alert::success('Welcome  ', '' . $request->NID);
 
             return view('dashboardUser')->with('all', $all);
         }

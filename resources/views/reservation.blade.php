@@ -15,7 +15,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header" style="text-align: center">{{ __('احجز موعدك') }}</div>
+                        <div class="card-header" style="text-align: center"> {{ __('reservation.title') }}</div>
 
                         <div class="card-body">
 
@@ -24,12 +24,13 @@
 
                                 <div class="form-group row">
                                     <input id="idnational" type="text" name="NID" maxlength="12" minlength="10"
-                                        class="form-control" placeholder="ادخل رقم هويتك" required>
+                                        class="form-control" placeholder=" {{ __('reservation.NID') }} " required>
                                     <input type="number" readonly required hidden value="0" name="page">
                                 </div>
                                 <br>
                                 <div class="form-group row mb-0">
-                                    <button class="btn btn-outline-info" type="submit">التالي </button>
+                                    <button class="btn btn-outline-info" type="submit">
+                                        {{ __('reservation.Next') }}</button>
                                 </div>
                             </form>
                         </div>

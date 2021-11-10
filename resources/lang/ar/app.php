@@ -8,6 +8,7 @@ return [
     'reservation' => 'حجز المواعيد',
     'services' => 'الخدمات المقدمة',
     'contactUs' => 'تواصل معنا',
+    'Copyright' => 'الحقوق محفوظة لدى ',
     'LoginStaff' => 'تسجيل الدخول للموظفين',
     'DashBoard' => 'لوحة التحكم',
     'Welcome' => 'أهلا وسهلا بكم',
@@ -18,6 +19,8 @@ return [
     'Offers' => 'الخصومات والعروض المقدمة',
     'OffersTopic, :NameAR' => 'العرض :ar',
     'OffersTopicExplain' => 'شرح للعرض',
-    '' => '',
-    '' => '',
+    'FeedbackName' => 'الاسم ....',
+    'FeedbackEmail' => ' البريد الالكتروني .....',
+    'FeedbackMessage' => 'الاقتراح او الملاحظة ....  ',
+    'FeedbackSent' => 'ارسال',
 ];
