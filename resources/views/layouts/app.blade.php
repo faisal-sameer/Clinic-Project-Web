@@ -79,11 +79,16 @@
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
 
-                                    <li class="scroll-to-section"><a href="/TodayAppointments"
-                                            style="font-size: large;">
-                                            لوحة التحكم
-                                        </a></li>
-
+                                    
+                                        <li class="scroll-to-section nav-item dropdown" >
+                                            <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                لوحة التحكم
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
+                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
+                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">تعديل على المحتوى</a>
+                                            </div>
+                                          </li>
                                     <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
                                             style="font-size: large;"><i class="fas fa-sign-out-alt "></i></a>
