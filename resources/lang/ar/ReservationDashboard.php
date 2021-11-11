@@ -1,23 +1,27 @@
 <?php
-// {{ date('D', strtotime($reservation->Date)) }} Show time
 
 return [
 
     'NewApp' => 'حجز جديد',
-    'action' => 'Action ',
+    'action' => 'action ',
     'EditB' => 'تغير',
     'StatusT' => 'الحالة',
     'service' => 'الخدمة',
-    'Shift' => 'الفترة',
-    'Date' => 'اليوم',
+    'ShiftDate' => 'الوقت و الفترة',
     'Name' => 'اسم المراجع',
+    'NID' => 'رقم الهوية ',
     'NoData' => 'لا توجد مواعيد مسجلة',
     'Status, :lang' => ':ar',
-    'OffersTopic, :NameAR' => 'Offer :en',
     'EditApp' => 'تعديل على موعد',
     'AppDate' => 'اختر اليوم والوقت',
     'AppName' => 'الاسم',
     'AppPhone' => 'رقم الجوال',
     'AppUpdate' => 'تحديث',
     'AppClose' => 'اغلاق',
+    'Future' => 'المواعيد القادمة',
+    'Today' => 'مواعيد اليوم',
+    'Past' => 'المواعيد السابقة',
+    '' => '',
+    '' => '',
+    '' => '',
 ];

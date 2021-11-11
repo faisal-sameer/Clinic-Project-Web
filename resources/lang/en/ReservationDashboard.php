@@ -1,22 +1,27 @@
 <?php
-// {{ date('D', strtotime($reservation->Date)) }} Show time
 
 return [
 
-    'NewApp' => 'New Appointment',
+    'NewApp' => 'New Appointment ',
     'action' => 'action ',
     'EditB' => 'Edit',
     'StatusT' => 'Status',
     'service' => 'Service',
-    'Shift' => 'Shift',
-    'Date' => 'Date',
+    'ShiftDate' => 'Date ',
     'Name' => 'Name',
+    'NID' => 'National ID',
     'NoData' => 'No Appointments Found ! ',
     'Status, :lang' => ':en',
     'EditApp' => 'Update Appointment ',
-    'AppDate' => 'Choose Date  ',
+    'AppDate' => 'Choice Date  ',
     'AppName' => 'Name',
     'AppPhone' => 'Phone',
     'AppUpdate' => 'Update',
     'AppClose' => 'Close ',
+    'Future' => 'Future Appointment ',
+    'Today' => 'Today Appointment',
+    'Past' => 'Past Appointment',
+    '' => '',
+    '' => '',
+    '' => '',
 ];

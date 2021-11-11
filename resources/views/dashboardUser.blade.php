@@ -30,7 +30,7 @@
                     <table id="myTable" class="table table-bordered table-striped mb-0">
                         <thead>
                             <tr>
-                                <th colspan="1"> {{ __('UserDashboard.Edit') }}</th>
+                                <th colspan="1"> {{ __('UserDashboard.action') }}</th>
                                 <th colspan="2"> {{ __('UserDashboard.StatusT') }}</th>
                                 <th colspan="2"> {{ __('UserDashboard.service') }}</th>
                                 <th colspan="2" scope="col"> {{ __('UserDashboard.Shift') }}</th>
@@ -79,7 +79,7 @@
                                                 @elseif($reservation->Status == 2 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'في صالة الانتظار ', 'en' => 'Waiting Room']) }}
                                                 @elseif($reservation->Status == 3 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'لم تحظر', 'en' => 'Did not come ']) }}
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'لم تحضر', 'en' => 'Did not come ']) }}
                                                 @elseif($reservation->Status == 4 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'انهيت الجسلة', 'en' => 'finished']) }}
                                                 @elseif($reservation->Status == 5 )
