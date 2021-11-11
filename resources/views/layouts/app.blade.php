@@ -4,22 +4,22 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Demo Clinic</title>
+    <title>{{ __('app.Title') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="../js/app.js" defer></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
 
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-    <link rel="stylesheet" type="text/css" href="css/templatemo-art-factory.css">
-    <link rel="stylesheet" type="text/css" href="css/owl-carousel.css">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="../css/templatemo-art-factory.css">
+    <link rel="stylesheet" type="text/css" href="../css/owl-carousel.css">
+    <link href="../css/app.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
         integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -58,23 +58,33 @@
 
                             <ul class="nav">
                                 <li class="scroll-to-section"><a href="@yield('we')" style="font-size: large;"
-                                        class="active">الصفحة الرئيسية</a></li>
-                                <li class="scroll-to-section"><a href="/reservation" style="font-size: large;">حجز
-                                        المواعيد</a></li>
-                                <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">الخدمات
-                                        المقدمة</a></li>
+                                        class="active"> {{ __('app.HomePage') }}</a></li>
+                                <li class="scroll-to-section"><a
+                                        href="{{ \LaravelLocalization::localizeURL('/reservation') }}"
+                                        style="font-size: large;"> {{ __('app.reservation') }}</a></li>
+                                <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
+                                        {{ __('app.services') }}</a></li>
+                                <ul>
+                                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                        <li>
+                                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                                {{ $properties['native'] }}
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
 
 
 
 
-
-                                <li class="scroll-to-section"><a href=@yield('con') style="font-size: large;">تواصل
-                                        معنا</a></li>
+                                <li class="scroll-to-section"><a href=@yield('con') style="font-size: large;">
+                                        {{ __('app.contactUs') }}</a></li>
                                 @if (Auth::user() == null)
                                     <!-- يظهر عندما لا يوجد حساب -->
 
                                     <li class="scroll-to-section"><a href="{{ route('login') }}"
-                                            style="font-size: large;">تسجيل الدخول للموظفين</a></li>
+                                            style="font-size: large;"> {{ __('app.LoginStaff') }}</a></li>
                                 @endif
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
@@ -82,7 +92,7 @@
                                     
                                         <li class="scroll-to-section nav-item dropdown" >
                                             <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                لوحة التحكم
+                                                {{ __('app.DashBoard') }}
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
                                               <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
@@ -114,107 +124,110 @@
 
             @yield('content')
         </main>
-      </div>
-            <footer>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-7 col-md-12 col-sm-12">
-                            <p class="copyright">Copyright &copy;AAMF
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12 col-sm-12">
+                        <p class="copyright"> {{ __('app.Copyright') }} &copy;AF
 
-                                . Design: <a rel="nofollow" href="#">Fi9</a></p>
-                        </div>
-                        <div class="col-lg-5 col-md-12 col-sm-12">
-                            <ul class="social">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-snapchat"></i></a></li>
-                                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
+                            . Design: <a rel="nofollow" href="#">Fi9</a></p>
                     </div>
-                
+                    <div class="col-lg-5 col-md-12 col-sm-12">
+                        <ul class="social">
+                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fab fa-snapchat"></i></a></li>
+                            <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
 
 
-                    <script src="js/jquery-2.1.0.min.js"></script>
 
-                    <!-- Bootstrap -->
-                    <script src="js/popper.js"></script>
-                    <script src="js/bootstrap.min.js"></script>
+                <script src="../js/jquery-2.1.0.min.js"></script>
 
-                    <!-- Plugins -->
-                    <script src="js/owl-carousel.js"></script>
-                    <script src="js/scrollreveal.min.js"></script>
-                    <script src="js/waypoints.min.js"></script>
-                    <script src="js/jquery.counterup.min.js"></script>
-                    <script src="js/imgfix.min.js"></script>
+                <!-- Bootstrap -->
+                <script src="../js/popper.js"></script>
+                <script src="../js/bootstrap.min.js"></script>
 
-                    <!-- Global Init -->
-                    <script src="js/custom.js"></script>
+                <!-- Plugins -->
+                <script src="../js/owl-carousel.js"></script>
+                <script src="../js/scrollreveal.min.js"></script>
+                <script src="../js/waypoints.min.js"></script>
+                <script src="../js/jquery.counterup.min.js"></script>
+                <script src="../js/imgfix.min.js"></script>
+
+                <!-- Global Init -->
+                <script src="../js/custom.js"></script>
 
 
-                    <script>
-                        function myFunction() {
-                            var input, filter, table, tr, td, i, txtValue;
-                            input = document.getElementById("myInput0");
-                            filter = input.value.toUpperCase();
-                            table = document.getElementById("myTable");
-                            tr = table.getElementsByTagName("tr");
-                            for (i = 0; i < tr.length; i++) {
-                                td = tr[i].getElementsByTagName("td")[5];
-                                if (td) {
-                                    txtValue = td.textContent || td.innerText;
-                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                        tr[i].style.display = "";
-                                    } else {
-                                        tr[i].style.display = "none";
-                                    }
+                <script>
+                    function myFunction() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("myInput0");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("myTable");
+                        tr = table.getElementsByTagName("tr");
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[5];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
                                 }
                             }
                         }
-                    </script>
+                    }
+                    }
+                    }
+                    }
+                </script>
 
-                    <script>
-                        function myFunction1() {
-                            var input, filter, table, tr, td, i, txtValue;
-                            input = document.getElementById("myInput1");
-                            filter = input.value.toUpperCase();
-                            table = document.getElementById("myTable1");
-                            tr = table.getElementsByTagName("tr");
-                            for (i = 0; i < tr.length; i++) {
-                                td = tr[i].getElementsByTagName("td")[5];
-                                if (td) {
-                                    txtValue = td.textContent || td.innerText;
-                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                        tr[i].style.display = "";
-                                    } else {
-                                        tr[i].style.display = "none";
-                                    }
+                <script>
+                    function myFunction1() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("myInput1");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("myTable1");
+                        tr = table.getElementsByTagName("tr");
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[5];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
                                 }
                             }
                         }
-                    </script>
-                    <script>
-                        function myFunction2() {
-                            var input, filter, table, tr, td, i, txtValue;
-                            input = document.getElementById("myInput2");
-                            filter = input.value.toUpperCase();
-                            table = document.getElementById("myTable2");
-                            tr = table.getElementsByTagName("tr");
-                            for (i = 0; i < tr.length; i++) {
-                                td = tr[i].getElementsByTagName("td")[5];
-                                if (td) {
-                                    txtValue = td.textContent || td.innerText;
-                                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                                        tr[i].style.display = "";
-                                    } else {
-                                        tr[i].style.display = "none";
-                                    }
+                    }
+                </script>
+                <script>
+                    function myFunction2() {
+                        var input, filter, table, tr, td, i, txtValue;
+                        input = document.getElementById("myInput2");
+                        filter = input.value.toUpperCase();
+                        table = document.getElementById("myTable2");
+                        tr = table.getElementsByTagName("tr");
+                        for (i = 0; i < tr.length; i++) {
+                            td = tr[i].getElementsByTagName("td")[5];
+                            if (td) {
+                                txtValue = td.textContent || td.innerText;
+                                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                                    tr[i].style.display = "";
+                                } else {
+                                    tr[i].style.display = "none";
                                 }
                             }
                         }
-                    </script>
-                    @yield('script')
+                    }
+                </script>
+                @yield('script')
     </body>
 
 </html>

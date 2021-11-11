@@ -20,9 +20,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $all = ClinicDetails::get();
+        $arr = ClinicDetails::get();
         // need to send all data 
-        $arr = array('text' => $all[0]->text);
         return view('welcome',  $arr);
     }
 }

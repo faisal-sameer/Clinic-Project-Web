@@ -12,6 +12,7 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
+        "mcamara/laravel-localization": "^1.6",
         "realrashid/sweet-alert": "^4.0",
         "tymon/jwt-auth": "^1.0"
     },

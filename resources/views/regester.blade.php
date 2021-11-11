@@ -15,7 +15,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
-                        <div class="card-header" style="text-align: center">{{ __('احجز موعد جديد') }}</div>
+                        <div class="card-header" style="text-align: center">
+                            {{ __('AppReservation.title') }} </div>
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('NewAppointment') }}">
@@ -24,14 +25,14 @@
 
                                 <div class="form-group row">
 
-                                    <input id="idnational" type="text" name="Name" class="form-control" placeholder="الاسم"
-                                        required>
+                                    <input id="idnational" type="text" name="Name" class="form-control"
+                                        placeholder="{{ __('AppReservation.name') }}" required>
                                 </div>
                                 <div class="form-group row">
 
-                                    <label id="idnational">اختر اليوم والوقت</label> <br>
-                                    <input id="idnational" value="<?php echo Date('Y-m-d\TH:i',time()) ?>" type="datetime-local" name="Appointment" min="2021-06-01T10:00"
-                                        max="2030-07-30T20:00">
+                                    <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
+                                    <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
+                                        name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00">
 
 
                                 </div>
@@ -56,7 +57,7 @@
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Phone" class="form-control"
-                                        placeholder="رقم الجوال" required>
+                                        placeholder="  {{ __('AppReservation.phone') }}" required>
 
 
                                 </div>
@@ -68,7 +69,8 @@
 
                                 <div class="form-group row mb-0">
 
-                                    <button type="submit" class="btn btn-outline-info" id="idnational">احجز
+                                    <button type="submit" class="btn btn-outline-info" id="idnational">
+                                        {{ __('AppReservation.submit') }}
 
                                     </button>
 
