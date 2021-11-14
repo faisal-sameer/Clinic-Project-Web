@@ -12,13 +12,11 @@
 @section('content')
     <div class="welcome-area" id="welcome">
         <div class="container">
-          <div class="row col-4" style="margin-left: 35% ; margin-bottom: 5% ; margin-top: 15%">
             
     <input class="btn btn-success" type="button" id="Update"   value="تحديث"/>
     <input class="btn btn-info" type="button" id="New"  value="جديد "/>
     <input class="btn btn-danger" type="button" id="delete"  value="حذف"/>
 
-          </div>
           <div id="updateform">
            
             <div id="mangrow" class="row"> 
@@ -58,6 +56,10 @@
           <textarea placeholder=" ... كلمة مدير المستشفى " class="shadow-drop-2-center-hidden"   name="Edit" id="managertextarea" cols="100" rows="10"></textarea>
           
           </div>
+          <div id="mangrow2"   class="row">
+            <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+    
+        </div>
 
           </div>
          

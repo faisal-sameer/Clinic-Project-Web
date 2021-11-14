@@ -6,6 +6,9 @@
     direction: unset;
     text-align: right;
 }
+#managertextarea {
+    width: 60%;
+}
 
 .my-custom-scrollbar {
     position: relative;
