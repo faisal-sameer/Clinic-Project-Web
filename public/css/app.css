@@ -140,6 +140,13 @@ button {
     border-radius: 3px;
 }
 
+.rowif > * {
+    flex-shrink: 0;
+
+    padding-right: calc(var(--bs-gutter-x) / 2);
+    padding-left: calc(var(--bs-gutter-x) / 2);
+    margin-top: var(--bs-gutter-y);
+}
 .label-arrow {
     display: table-cell;
     vertical-align: middle;
@@ -179,7 +186,6 @@ a.float:hover + div.label-container {
     color: gray;
 }
 .select-box {
-    margin-left: 50%;
     position: relative;
     display: block;
     width: 50%;
@@ -228,7 +234,7 @@ a.float:hover + div.label-container {
     display: none;
     width: 100%;
     margin: 0;
-    padding: 15px;
+    padding: 10px;
     background-color: #fff;
 }
 .select-box__list {
@@ -256,7 +262,7 @@ a.float:hover + div.label-container {
 }
 .select-box__option {
     display: block;
-    padding: 15px;
+    padding: 10px;
     background-color: #fff;
 }
 .select-box__option:hover,
