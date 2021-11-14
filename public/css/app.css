@@ -176,6 +176,7 @@ a.float:hover + div.label-container {
     color: gray;
 }
 .select-box {
+    margin-left: 50%;
     position: relative;
     display: block;
     width: 50%;

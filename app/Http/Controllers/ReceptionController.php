@@ -27,8 +27,8 @@ class ReceptionController extends Controller
 
     protected function dashboardContent()
     {
-
-        return view('dashboardContent');
+        $content = ['about' => "about Your M", 'doctor' => "doctor", 'discount' => "discount", 'service' => "service"];
+        return view('dashboardContent')->with('content', $content);
     }
 
     protected function dashboardClinicFuture()

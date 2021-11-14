@@ -64,15 +64,25 @@
                                         style="font-size: large;"> {{ __('app.reservation') }}</a></li>
                                 <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
                                         {{ __('app.services') }}</a></li>
-                                <ul>
+                                <ul>  
+                                    <li class="scroll-to-section nav-item dropdown">
+                                        <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{ __('app.lang') }}
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
+
                                     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                        <li>
-                                            <a rel="alternate" hreflang="{{ $localeCode }}"
+                                      
+                                       
+
+                                            <a style="text-align: center" rel="alternate" hreflang="{{ $localeCode }}"
                                                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                                 {{ $properties['native'] }}
                                             </a>
-                                        </li>
+
                                     @endforeach
+                                </div>
+                            </li>
                                 </ul>
 
 
