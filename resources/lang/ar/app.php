@@ -23,4 +23,5 @@ return [
     'FeedbackEmail' => ' البريد الالكتروني .....',
     'FeedbackMessage' => 'الاقتراح او الملاحظة ....  ',
     'FeedbackSent' => 'ارسال',
+    'lang' => 'اللغة',
 ];

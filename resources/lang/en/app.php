@@ -23,5 +23,7 @@ return [
     'FeedbackEmail' => ' Email .....',
     'FeedbackMessage' => 'Your Feedback ....  ',
     'FeedbackSent' => 'sent',
+    'lang' => 'language',
+
 
 ];

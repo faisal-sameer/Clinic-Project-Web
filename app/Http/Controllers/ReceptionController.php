@@ -25,6 +25,12 @@ class ReceptionController extends Controller
         return view('dashboardClinicPast')->with('Reservations', $Reservations);
     }
 
+    protected function dashboardContent()
+    {
+        $content = ['about' => "about Your M", 'doctor' => "doctor", 'discount' => "discount", 'service' => "service"];
+        return view('dashboardContent')->with('content', $content);
+    }
+
     protected function dashboardClinicFuture()
     {
         // return  Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 8)->count();
