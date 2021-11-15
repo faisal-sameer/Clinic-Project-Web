@@ -92,7 +92,7 @@
 
           </div>
           <br><br>
-          <div id="filerow"  style="margin-left:40%; class="row" > 
+          <div id="filerow"  style="margin-left:20%;" > 
     <input type="file" class="foo"  id="fileInput"  onchange="readURL(this);">
     <img id="blah" src="#" alt="your image" />
     </div>
