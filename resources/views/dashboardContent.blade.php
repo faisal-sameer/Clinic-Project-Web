@@ -87,9 +87,16 @@
             
             
         <div  id="mangrow3" class="row"> 
-          <textarea placeholder=" ... كلمة مدير المستشفى " class="shadow-drop-2-center-hidden"   name="Edit" id="managertextarea" cols="100" rows="10"></textarea>
-          
+          <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... كلمة مدير المستشفى " class="shadow-drop-2-center-hidden"   name="Edit" id="managertextarea" cols="100" rows="5"></textarea>
+          <textarea placeholder="التسعيرة " class="shadow-drop-2-center-hidden" style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%"  name="Edit" id="managertextarea1" cols="1" rows="1"></textarea>
+
           </div>
+          <br><br>
+          <div id="filerow"  style="margin-left:40%; class="row" > 
+    <input type="file" class="foo"  id="fileInput"  onchange="readURL(this);">
+    <img id="blah" src="#" alt="your image" />
+    </div>
+          <br><br>
           <div id="mangrow2"   class="row">
             <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
     
@@ -116,6 +123,9 @@
     document.getElementById("Update").addEventListener("click", myFunctionUpdate);//زر التحديث
     document.getElementById("New").addEventListener("click", myFunctionNew);
     document.getElementById("managertextarea").style.display = "none";  //hide
+    document.getElementById("managertextarea1").style.display = "none";  //hide
+    document.getElementById("filerow").style.display = "none";  //hide
+
     document.getElementById("updateform").style.display = "none";  //hide
     document.getElementById("newform").style.display = "none";  //hide
     document.getElementById("updateB").style.display = "none";  //hide
@@ -138,9 +148,12 @@
  }
  function myFunctionSubDiscount() {//العروض
   var contents = @json($content);
-  document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
+  document.getElementById("welcome").setAttribute('style', 'height: 400%; !important;');
 
 	document.getElementById("managertextarea").style.display = "block"; //show
+  document.getElementById("managertextarea1").style.display = "block"; //show
+  document.getElementById("filerow").style.display = "none";  //hide
+
    document.getElementById("managertextarea").innerText = contents.discount;
    document.getElementById("updateB").style.display = "block";  //hide
 
@@ -153,6 +166,9 @@
   var contents = @json($content);
   document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
    document.getElementById("managertextarea").style.display = "block"; //show
+   document.getElementById("managertextarea1").style.display = "block"; //hide
+   document.getElementById("filerow").style.display = "none";  //hide
+
    document.getElementById("managertextarea").innerText   = contents.service;
    document.getElementById("updateB").style.display = "block";  //hide
 
@@ -167,6 +183,9 @@
   var contents = @json($content);
   document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
 	document.getElementById("managertextarea").style.display = "block"; //show
+  document.getElementById("managertextarea1").style.display = "block"; //hide
+  document.getElementById("filerow").style.display = "block";  //hide
+
   document.getElementById("managertextarea").innerText  = contents.doctor;
 
   document.getElementById("updateB").style.display = "block";  //hide
