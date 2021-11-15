@@ -20,8 +20,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $arr = ClinicDetails::get();
+        $all['imageBig'] = ClinicDetails::where('type', 2)->select('path')->first();
         // need to send all data 
-        return view('welcome',  $arr);
+        return view('welcome')->with('all', $all);
     }
 }

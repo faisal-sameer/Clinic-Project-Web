@@ -27,7 +27,7 @@
 
             <div id="London" class=" city">
                 <br>
-                <h2> {{ __('ReservationDashboard.Today') }}</h2>
+                <h2> {{ __('ReservationDashboard.Today') }} </h2>
 
                 <input type="text" id="myInput0" onkeyup="myFunction()" placeholder="Search for names.."
                     title="Type in a name">

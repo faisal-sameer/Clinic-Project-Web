@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClinicDetailsTable extends Migration
+class CreateClinicsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateClinicDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clinic_details', function (Blueprint $table) {
+        Schema::create('clinics', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->integer('employee_id')->unsigned()->index()->nullable();
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
-            $table->integer('type')->nullable();
             $table->string('text')->nullable();
             $table->string('path')->nullable();
-            $table->integer('order')->nullable();
             $table->tinyInteger('Status');
             $table->timestamps();
         });
@@ -34,6 +32,6 @@ class CreateClinicDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clinic_details');
+        Schema::dropIfExists('clinics');
     }
 }
