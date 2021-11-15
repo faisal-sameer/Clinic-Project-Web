@@ -64,12 +64,11 @@
                                         style="font-size: large;"> {{ __('app.reservation') }}</a></li>
                                 <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
                                         {{ __('app.services') }}</a></li>
-                                <ul>  
-                                    <li class="scroll-to-section nav-item dropdown">
+                                    <li class="scroll-to-section nav-item dropdown" >
                                         <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             {{ __('app.lang') }}
                                         </a>
-                                        <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
+                                        <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%;padding-left: 0%" aria-labelledby="navbarDropdownBlog">
 
                                     @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
                                       
@@ -83,7 +82,6 @@
                                     @endforeach
                                 </div>
                             </li>
-                                </ul>
 
 
 
@@ -196,6 +194,24 @@
                     }
                     }
                 </script>
+
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(200)
+                    .height(200);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+  </script>
 
                 <script>
                     function myFunction1() {
