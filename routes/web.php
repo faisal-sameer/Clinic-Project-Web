@@ -28,6 +28,7 @@ Route::group(
         Auth::routes();
 
         Route::get('/dashboardContent', [App\Http\Controllers\ReceptionController::class, 'dashboardContent']);
+        Route::post('/dashboardContent', [App\Http\Controllers\ReceptionController::class, 'dashboardContentUpdate'])->name('Update');
 
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

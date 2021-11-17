@@ -21,6 +21,10 @@ class CreateServicesTable extends Migration
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('clinic_id')->unsigned()->index()->nullable();
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
+            $table->string('Price')->nullable();
+            $table->string('info')->nullable();
+            $table->string('path')->nullable();
+            $table->string('type')->nullable();
             $table->integer('Status');
             $table->timestamps();
         });

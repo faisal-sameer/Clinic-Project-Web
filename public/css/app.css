@@ -139,6 +139,7 @@ button {
     padding: 10px;
     border-radius: 3px;
 }
+
 .rowif > * {
     flex-shrink: 0;
 
@@ -233,14 +234,14 @@ a.float:hover + div.label-container {
     display: none;
     width: 100%;
     margin: 0;
-    /*  padding: 10px;*/
+    padding: 10px;
     background-color: #fff;
 }
 .select-box__list {
     width: 100%;
     display: block;
     margin: 0;
-    max-height: 100px; /*The important part*/
+    max-height: 150px; /*The important part*/
     overflow-y: auto; /*Also...*/
     overflow-x: hidden;
     z-index: 9999;

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClinicDetails;
+use App\Models\Discount;
+use App\Models\Doctor;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
+use App\Models\Service;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ReceptionController extends Controller
@@ -27,10 +31,37 @@ class ReceptionController extends Controller
 
     protected function dashboardContent()
     {
-        $content = ['about' => "about Your M", 'doctor' => "doctor", 'discount' => "discount", 'service' => "service"];
+        $Detail = ClinicDetails::get();
+        $Service = Service::where('Status', 1)->get();
+        $Discount = Discount::get();
+        $Doctor = Doctor::get();
+        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service];
+        // return $Doctor;
         return view('dashboardContent')->with('content', $content);
     }
+    protected function dashboardContentUpdate(Request $request)
+    {
+        switch ($request->type) {
+            case 1:
+                return null;
+                break;
+            case 2:
+                Service::where('id', $request->id)->update([
+                    'Name' => $request->name,
+                    'Price' => $request->price
+                ]);
+                break;
+            case 3:
+                return null;
+                break;
+            default:
+                return null;
+                break;
+        }
+        return back();
 
+        return $request->all();
+    }
     protected function dashboardClinicFuture()
     {
         // return  Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 8)->count();

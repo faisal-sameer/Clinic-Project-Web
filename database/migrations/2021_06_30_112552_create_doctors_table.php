@@ -18,7 +18,9 @@ class CreateDoctorsTable extends Migration
             $table->increments('id');
             $table->integer('doctor_id')->unsigned()->index();
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
-
+            $table->string('info')->nullable();
+            $table->string('path')->nullable();
+            $table->tinyInteger('Status');
             $table->timestamps();
         });
     }
