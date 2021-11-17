@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('permission_id')->unsigned()->index()->nullable();
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
-
+            $table->tinyInteger('Status');
             $table->rememberToken();
             $table->timestamps();
         });
