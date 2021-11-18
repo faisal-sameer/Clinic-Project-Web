@@ -17,7 +17,7 @@
             <input class="btn btn-info" type="button" id="New" value="جديد " />
             <input class="btn btn-danger" type="button" id="delete" value="حذف" />
 
-            <div id="updateform">
+            <div id="updateForm">
 
                 <div id="mangrow" class="form-inline">
 
@@ -25,16 +25,16 @@
                     <div class="select-box" id="select1" style="width: 40%; margin-right: 20%">
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
-                                <input class="select-box__input" type="radio" id="discount" value="1" name="Ben"
+                                <input class="select-box__input" value="121" type="radio" id="discounts" name="Ben"
                                     checked="checked" />
                                 <p class="select-box__input-text">العروض</p>
                             </div>
                             <div class="select-box__value">
-                                <input class="select-box__input" type="radio" id="services" value="2" name="Ben" />
+                                <input class="select-box__input" type="radio" id="servicess" name="Ben" />
                                 <p class="select-box__input-text">الخدمات</p>
                             </div>
                             <div class="select-box__value">
-                                <input class="select-box__input" type="radio" id="doctors" value="3" name="Ben" />
+                                <input class="select-box__input" type="radio" id="doctorss" name="Ben" />
                                 <p class="select-box__input-text">الاطباء</p>
                             </div>
 
@@ -162,48 +162,70 @@
                 </div>
 
             </div>
+            <div class="row" id="formEditServices">
+                <form method="POST" id="formTag" action="{{ route('Update') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div id="UpdateinfoDiscount" class="row">
 
-            <form method="POST" action="{{ route('Update') }}">
-                @csrf
-                <div id="mangrow3" class="row">
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;"
+                            placeholder=" ... كلمة مدير المستشفى " class="shadow-drop-2-center" name="disName" cols="100"
+                            rows="5"></textarea>
+                        <div id="filerow" style="margin-left:40%; " class="row">
 
-                    <textarea placeholder="id" class="shadow-drop-2-center-hidden"
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="id" id="id" cols="1"
-                        rows="1"></textarea>
-                    <textarea placeholder="type" class="shadow-drop-2-center-hidden"
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="type" id="typeText"
-                        cols="1" rows="1"></textarea>
-                    <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... كلمة مدير المستشفى "
-                        class="shadow-drop-2-center-hidden" name="name" id="managertextarea" cols="100" rows="5"></textarea>
-                    <textarea placeholder="التسعيرة " class="shadow-drop-2-center-hidden"
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="price"
-                        id="managertextarea1" cols="1" rows="1"></textarea>
+                            <input type="file" class="foo" name="disImg" onchange="readURL(this);">
+                            <img id="blah" src="#" alt="your image" />
+                        </div>
+                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
 
-                </div>
-                <br><br>
-                <div id="filerow" style="margin-left:40%; " class="row">
+                    </div>
 
-                    <input type="file" class="foo" id="fileInput" onchange="readURL(this);">
-                    <img id="blah" src="#" alt="your image" />
-                </div>
-                <br><br>
-                <div id="mangrow2" class="row">
-                    <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+                    <div id="UpdateinfoServie">
+                        <div class="row">
 
-                </div>
-            </form>
+                            <textarea placeholder="id" class="shadow-drop-2-center"
+                                style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="id" id="id"
+                                cols="1" rows="1"></textarea>
+                            <textarea placeholder="type" class="shadow-drop-2-center"
+                                style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="type" id="typeText"
+                                cols="1" rows="1"></textarea>
+                            <textarea style="margin-left:5%;text-align: right ;height: 30%;"
+                                placeholder=" ... كلمة مدير المستشفى " class="shadow-drop-2-center" name="name"
+                                id="managertextarea" cols="100" rows="5"></textarea>
+                            <textarea placeholder="التسعيرة " class="shadow-drop-2-center"
+                                style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="price"
+                                id="managertextarea1" cols="1" rows="1"></textarea>
+
+                        </div>
+                        <br><br>
+                        <div id="filerow" style="margin-left:40%; " class="row">
+
+                            <input type="file" class="foo" id="fileInput" onchange="readURL(this);">
+                            <img id="blah" src="#" alt="your image" />
+                        </div>
+                        <br><br>
+                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+
+                    </div>
+                    <div id="UpdateinfoDoctor">
+                        Doctor
+                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+
+                    </div>
+
+                </form>
+            </div>
         </div>
     </div>
 
-
-
-    </div>
-    </div>
 @endsection
 @section('script')
 
     <script>
-        document.getElementById("discount").addEventListener("click", myFunctionDiscount); //ليبل العروض
+        document.getElementById("discount").addEventListener("click", function() {
+            const val = document.getElementById("discount").value;
+
+            myFunctionDiscount(val);
+        }); //ليبل العروض
         document.getElementById("Service").addEventListener("click", myFunctionService); //ليبل الخدمات
         document.getElementById("doctor").addEventListener("click", myFunctiondoctor); //ليبل الاطباء
 
@@ -225,58 +247,95 @@
             myFunctionSubdoctor({{ $doctor->id }});
             });
         @endforeach
-        //ليبل الخدمات
-        //   document.getElementById("Subdoctor").addEventListener("click", myFunctionSubdoctor); //ليبل الخدمات
+
 
         document.getElementById("Update").addEventListener("click", myFunctionUpdate); //زر التحديث
         document.getElementById("New").addEventListener("click", myFunctionNew);
-        document.getElementById("managertextarea").style.display = "none"; //hide
-        document.getElementById("managertextarea1").style.display = "none"; //hide
-        document.getElementById("filerow").style.display = "none"; //hide
 
-        document.getElementById("updateform").style.display = "none"; //hide
-        document.getElementById("newform").style.display = "none"; //hide
-        document.getElementById("updateB").style.display = "none"; //hide
+        document.getElementById("formEditServices").style.display = "none"; //hide
+        document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
+        document.getElementById("UpdateinfoServie").style.display = "none"; //hide
+        document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
+
+        document.getElementById("updateForm").style.display = "none"; //hide
+
 
         function myFunctionUpdate() {
+            var frm = document.getElementById('formTag') || null;
+            if (frm) {
+                frm.action = '{{ route('Update') }}'
+            }
+            var num = document.getElementById("discount").value = 2;
+
+            document.getElementById("formEditServices").style.display = "none"; //hide
+            document.getElementById("selectDiscount").style.display = "none"; //hide
+            document.getElementById("selectService").style.display = "none"; //hide
+            document.getElementById("selectDoctor").style.display = "none"; //hide
+
+            document.getElementById("container").setAttribute('style', 'margin-top:10% !important;');
+            document.getElementById("updateForm").style.display = "block"; //hide
+
+        }
+
+        function myFunctionNew() {
+            var frm = document.getElementById('formTag') || null;
+            if (frm) {
+                frm.action = '{{ route('New') }}'
+            }
+            var num = document.getElementById("discount").value = 1;
 
             document.getElementById("selectDiscount").style.display = "none"; //hide
             document.getElementById("selectService").style.display = "none"; //hide
             document.getElementById("selectDoctor").style.display = "none"; //hide
 
             document.getElementById("container").setAttribute('style', 'margin-top:10% !important;');
-            document.getElementById("updateform").style.display = "block"; //hide
-            document.getElementById("newform").style.display = "none"; //hide
+            document.getElementById("updateForm").style.display = "block"; //hide
+
+            /*  document.getElementById("updateB").style.display = "none"; //hide
+
+              document.getElementById("update").style.display = "none"; //hide
+              */
         }
 
-        function myFunctionNew() {
-            document.getElementById("updateB").style.display = "none"; //hide
+        function myFunctionDiscount($type) { //العروض
 
-            document.getElementById("updateform").style.display = "none"; //hide
-            document.getElementById("newform").style.display = "block"; //hide
-        }
+            if ($type == 1) {
+                document.getElementById("typeText").innerText = 1;
 
-        function myFunctionDiscount() { //العروض
+                document.getElementById("formEditServices").style.display = "block"; //hide
+                document.getElementById("UpdateinfoDiscount").style.display = "block"; //hide
 
-            document.getElementById("managertextarea").style.display = "none"; //show
-            document.getElementById("managertextarea1").style.display = "none"; //show
-            document.getElementById("filerow").style.display = "none"; //hide
+            } else {
+                var frm = document.getElementById('formTag') || null;
+                if (frm) {
+                    frm.action = '{{ route('New') }}'
+                }
+                document.getElementById("formEditServices").style.display = "none"; //hide
 
-            document.getElementById("selectService").style.display = "none"; //hide
-            document.getElementById("selectDoctor").style.display = "none"; //hide
-            document.getElementById("selectDiscount").style.display = "block"; //hide
+                document.getElementById("selectService").style.display = "none"; //hide
+                document.getElementById("selectDoctor").style.display = "none"; //hide
+                document.getElementById("selectDiscount").style.display = "block"; //hide
+            }
         }
 
         function myFunctionSubDiscount() { //العروض
             var contents = @json($content);
+            // document.getElementById("formEditServices").style.display = "block"; //hide
+
+
 
             document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
 
             document.getElementById("typeText").innerText = 1;
+            document.getElementById("formEditServices").style.display = "block"; //hide
 
-            document.getElementById("managertextarea").style.display = "block"; //show
-            document.getElementById("managertextarea1").style.display = "block"; //show
-            document.getElementById("filerow").style.display = "none"; //hide
+            document.getElementById("UpdateinfoDiscount").style.display = "block"; //hide
+            document.getElementById("UpdateinfoServie").style.display = "none"; //hide
+            document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
+
+            // document.getElementById("managertextarea").style.display = "block"; //show
+            // document.getElementById("managertextarea1").style.display = "block"; //show
+            // document.getElementById("filerow").style.display = "none"; //hide
 
             document.getElementById("managertextarea").innerText = contents.Discount[1];
             document.getElementById("updateB").style.display = "block"; //hide
@@ -284,9 +343,8 @@
         }
 
         function myFunctionService() { //الخدمات
-            document.getElementById("managertextarea").style.display = "none"; //show
-            document.getElementById("managertextarea1").style.display = "none"; //show
-            document.getElementById("filerow").style.display = "none"; //hide
+
+            document.getElementById("formEditServices").style.display = "none"; //hide
 
             document.getElementById("selectDiscount").style.display = "none"; //hide
             document.getElementById("selectDoctor").style.display = "none"; //hide
@@ -294,26 +352,33 @@
         }
 
         function myFunctionSubService($id) { //الخدمات
+            var frm = document.getElementById('formTag') || null;
+            if (frm) {
+                frm.action = '{{ route('Update') }}'
+            }
             var contents = @json($content);
             document.getElementById("id").innerText = $id;
             document.getElementById("typeText").innerText = 2;
 
             document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
-            document.getElementById("managertextarea").style.display = "block"; //show
-            document.getElementById("managertextarea1").style.display = "block"; //hide
-            document.getElementById("filerow").style.display = "none"; //hide
+            // document.getElementById("managertextarea").style.display = "block"; //show
+            // document.getElementById("managertextarea1").style.display = "block"; //hide
+            // document.getElementById("filerow").style.display = "none"; //hide
+            document.getElementById("formEditServices").style.display = "block"; //hide
+            document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
+            document.getElementById("UpdateinfoServie").style.display = "block"; //hide
+            document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
 
             document.getElementById("managertextarea").innerText = contents.service[$id - 1].Name;
             document.getElementById("managertextarea1").innerText = contents.service[$id - 1].Price;
-            document.getElementById("updateB").style.display = "block"; //hide
+            //document.getElementById("updateB").style.display = "block"; //hide
 
         }
 
         function myFunctiondoctor() { //الاطباء
 
-            document.getElementById("managertextarea").style.display = "none"; //show
-            document.getElementById("managertextarea1").style.display = "none"; //show
-            document.getElementById("filerow").style.display = "none"; //hide
+
+            document.getElementById("formEditServices").style.display = "none"; //hide
 
             document.getElementById("selectDiscount").style.display = "none"; //hide
             document.getElementById("selectService").style.display = "none";
@@ -323,18 +388,26 @@
         }
 
         function myFunctionSubdoctor($id) { //الاطباء
-            var contents = @json($content);
-            document.getElementById("typeText").innerText = 3;
+            document.getElementById("formEditServices").style.display = "block"; //hide
 
-            document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
-            document.getElementById("managertextarea").style.display = "block"; //show
-            document.getElementById("managertextarea1").style.display = "block"; //hide
-            document.getElementById("filerow").style.display = "block"; //hide
+            document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
+            document.getElementById("UpdateinfoServie").style.display = "none"; //hide
+            document.getElementById("UpdateinfoDoctor").style.display = "block"; //hide
 
-            document.getElementById("managertextarea1").innerText = contents.doctor[$id - 1].user.name;
-            document.getElementById("managertextarea").innerText = contents.doctor[$id - 1].info;
-            document.getElementById('blah').src = "../" + contents.doctor[$id - 1].path;
+            //document.getElementById("formEditServices").style.display = "block"; //hid
+            //var contents = @json($content);
+            //document.getElementById("typeText").innerText = 3;
+            //
+            //document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
+            //document.getElementById("managertextarea").style.display = "block"; //show
+            //document.getElementById("managertextarea1").style.display = "block"; //hide
+            //document.getElementById("filerow").style.display = "block"; //hide
+            //
+            //document.getElementById("managertextarea1").innerText = contents.doctor[$id - 1].user.name;
+            //document.getElementById("managertextarea").innerText = contents.doctor[$id - 1].info;
+            //document.getElementById('blah').src = "../" + contents.doctor[$id - 1].path;
             document.getElementById("updateB").style.display = "block"; //hide
+
         }
     </script>
 @endsection

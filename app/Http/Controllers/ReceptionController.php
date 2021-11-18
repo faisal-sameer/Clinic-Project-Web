@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\clinic;
 use App\Models\ClinicDetails;
 use App\Models\Discount;
 use App\Models\Doctor;
@@ -9,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Service;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Str;
 
 class ReceptionController extends Controller
 {
@@ -35,12 +37,53 @@ class ReceptionController extends Controller
         $Service = Service::where('Status', 1)->get();
         $Discount = Discount::get();
         $Doctor = Doctor::get();
-        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service];
+        $clinic = clinic::get();
+        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinic' => $clinic];
         // return $Doctor;
         return view('dashboardContent')->with('content', $content);
     }
+    protected function dashboardContentNew(Request $request)
+    {
+        // return $request->all();
+        $code = Str::random(4);
+
+        switch ($request->type) {
+            case 1:
+                $file1 = $request->disImg;
+                $extension = $file1->getClientOriginalExtension();
+                $destination_path1 = 'files' . '/';
+                $file_name1 =  $code . 'Code' . $request->NID . '.' . $extension;
+                $file1->move($destination_path1, $file_name1);
+                $Discount = new Discount();
+                $Discount->text = $request->disName;
+                $Discount->path = $file_name1;
+                $Discount->Status = 1;
+                $Discount->save();
+                break;
+            case 2:
+                $file1 = $request->disImg;
+                $extension = $file1->getClientOriginalExtension();
+                $destination_path1 = 'files' . '/';
+                $file_name1 =  $code . 'Code' . $request->NID . '.' . $extension;
+                $file1->move($destination_path1, $file_name1);
+
+                $Service = new Service();
+
+                break;
+            case 3:
+                return null;
+                break;
+            default:
+                return null;
+                break;
+        }
+
+        return back();
+    }
     protected function dashboardContentUpdate(Request $request)
     {
+        return "Update ";
+
         switch ($request->type) {
             case 1:
                 return null;
