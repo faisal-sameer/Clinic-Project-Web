@@ -122,6 +122,13 @@ button {
 .checked {
     color: orange;
 }
+#managertextarea {
+    border-radius: 30px;
+}
+
+#managertextarea1 {
+    border-radius: 30px;
+}
 
 .label-container {
     position: fixed;
