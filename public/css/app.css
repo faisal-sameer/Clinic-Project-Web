@@ -125,7 +125,10 @@ button {
 #managertextarea {
     border-radius: 30px;
 }
-
+.textAF {
+    width: 60%;
+    border-radius: 30px;
+}
 #managertextarea1 {
     border-radius: 30px;
 }

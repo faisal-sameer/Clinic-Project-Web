@@ -9,8 +9,10 @@ use App\Models\Doctor;
 use Illuminate\Http\Request;
 use App\Models\Reservation;
 use App\Models\Service;
+use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
 
 class ReceptionController extends Controller
 {
@@ -44,37 +46,55 @@ class ReceptionController extends Controller
     }
     protected function dashboardContentNew(Request $request)
     {
-        // return $request->all();
+        //return $request->all();
         $code = Str::random(4);
 
         switch ($request->type) {
             case 1:
-                $file1 = $request->disImg;
-                $extension = $file1->getClientOriginalExtension();
-                $destination_path1 = 'files' . '/';
-                $file_name1 =  $code . 'Code' . $request->NID . '.' . $extension;
-                $file1->move($destination_path1, $file_name1);
+                $oldDiscount = Discount::latest()->first();;
                 $Discount = new Discount();
-                $Discount->text = $request->disName;
-                $Discount->path = $file_name1;
+                $Discount->title  = $request->DisTitle;
+                $Discount->employee_id = auth()->user()->id;
+                $Discount->clinic_id = 1;
+                $Discount->text = $request->DisText == null ?  null : $request->DisText;
+                $Discount->Price = $request->DisPrice == null ? null : $request->DisPrice;
+                $Discount->order = $oldDiscount == null ? 1 : $oldDiscount->order  + 1;
                 $Discount->Status = 1;
                 $Discount->save();
                 break;
             case 2:
-                $file1 = $request->disImg;
+                $Service = new Service();
+                $Service->Name = $request->name;
+                $Service->Price = $request->price;
+                $Service->clinic_id = 1;
+                $Service->Status = 1;
+                $Service->save();
+
+                break;
+            case 3:
+
+                $file1 = $request->DoctorImg;
                 $extension = $file1->getClientOriginalExtension();
                 $destination_path1 = 'files' . '/';
                 $file_name1 =  $code . 'Code' . $request->NID . '.' . $extension;
                 $file1->move($destination_path1, $file_name1);
 
-                $Service = new Service();
+                $user = new User();
+                $user->name = $request->DoctorName;
+                $user->email = $request->DoctorEmail;
+                $user->password = Hash::make($request->DoctorPassword);
+                $user->permission_id = 2;
+                $user->Status = 1;
+                $user->save();
 
-                break;
-            case 3:
-                return null;
+                $doctor = new Doctor();
+                $doctor->doctor_id = $user->id;
+                $doctor->info = $request->DoctorInfo;
+                $doctor->path = $destination_path1 .  $file_name1;
+                $doctor->Status = 1;
+                $doctor->save();
                 break;
             default:
-                return null;
                 break;
         }
 
@@ -82,20 +102,46 @@ class ReceptionController extends Controller
     }
     protected function dashboardContentUpdate(Request $request)
     {
-        return "Update ";
+        // return $request->all();
+        $code = Str::random(4);
+        Alert::success('تم تسجيل حضور للمراجع ', '');
 
         switch ($request->type) {
             case 1:
-                return null;
+                $oldDiscount = Discount::where('id', $request->id)->first();
+                Discount::where('id', $request->id)->update([
+                    'title' => $request->DisTitle == null ? $oldDiscount->title : $request->DisTitle,
+                    'text' => $request->DisText == null ? $oldDiscount->text : $request->DisText,
+                    'Price' => $request->DisPrice == null ? $oldDiscount->Price : $request->DisPrice,
+                ]);
                 break;
             case 2:
+                $oldService = Service::where('id', $request->id)->first();
                 Service::where('id', $request->id)->update([
-                    'Name' => $request->name,
-                    'Price' => $request->price
+                    'Name' => $request->name == null ? $oldService->Name : $request->name,
+                    'Price' => $request->price == null ? $oldService->Price : $request->price
                 ]);
                 break;
             case 3:
-                return null;
+                if ($request->DoctorImg != null) {
+                    $file1 = $request->DoctorImg;
+                    $extension = $file1->getClientOriginalExtension();
+                    $destination_path1 = 'files' . '/';
+                    $file_name1 =  $code . 'Code' . $request->NID . '.' . $extension;
+                    $file1->move($destination_path1, $file_name1);
+                }
+
+                $oldDoctor = Doctor::where('id', $request->id)->first();
+                $oldUser = User::where('id', $oldDoctor->doctor_id)->first();
+                User::where('id', $oldDoctor->doctor_id)->update([
+                    'name' => $request->DoctorName == null ? $oldUser->name : $request->DoctorName,
+                    'email' => $request->DoctorEmail == null ? $oldUser->email : $request->DoctorEmail,
+                    'password' => $request->DoctorPassword == null ? $oldUser->password :  Hash::make($request->DoctorPassword),
+                ]);
+                Doctor::where('id', $request->id)->update([
+                    'info' => $request->DoctorInfo == null ? $oldDoctor->Info : $request->DoctorInfo,
+                    'path' => $request->DoctorImg == null ? $oldDoctor->path : $destination_path1 .  $file_name1
+                ]);
                 break;
             default:
                 return null;

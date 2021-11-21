@@ -64,24 +64,26 @@
                                         style="font-size: large;"> {{ __('app.reservation') }}</a></li>
                                 <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
                                         {{ __('app.services') }}</a></li>
-                                    <li class="scroll-to-section nav-item dropdown" >
-                                        <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            {{ __('app.lang') }}
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%;padding-left: 0%" aria-labelledby="navbarDropdownBlog">
+                                <li class="scroll-to-section nav-item dropdown">
+                                    <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false">
+                                        {{ __('app.lang') }}
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right"
+                                        style="margin-bottom: 5%;padding-left: 0%" aria-labelledby="navbarDropdownBlog">
 
-                                    @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
-                                      
-                                       
+                                        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+
 
                                             <a style="text-align: center" rel="alternate" hreflang="{{ $localeCode }}"
                                                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                                 {{ $properties['native'] }}
                                             </a>
 
-                                    @endforeach
-                                </div>
-                            </li>
+                                        @endforeach
+                                    </div>
+                                </li>
 
 
 
@@ -97,16 +99,20 @@
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
 
-                                    
-                                        <li class="scroll-to-section nav-item dropdown" >
-                                            <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {{ __('app.DashBoard') }}
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
-                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">تعديل على المحتوى</a>
-                                            </div>
-                                          </li>
+
+                                    <li class="scroll-to-section nav-item dropdown">
+                                        <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            {{ __('app.DashBoard') }}
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" style="margin-bottom: 5%"
+                                            aria-labelledby="navbarDropdownBlog">
+                                            <a class="dropdown-item" style="color: black;text-align: right"
+                                                href="/TodayAppointments">لوحة المواعيد</a>
+                                            <a class="dropdown-item" style="color: black;text-align: right"
+                                                href="dashboardContent">تعديل على المحتوى</a>
+                                        </div>
+                                    </li>
                                     <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
                                             style="font-size: large;"><i class="fas fa-sign-out-alt "></i></a>
@@ -190,28 +196,43 @@
                             }
                         }
                     }
-                    }
-                    }
+                </script>
+
+
+                <script>
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+
+                            reader.onload = function(e) {
+                                $('#blah')
+                                    .attr('src', e.target.result)
+                                    .width(200)
+                                    .height(200);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
                     }
                 </script>
 
 
-<script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+                <script>
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
 
-            reader.onload = function (e) {
-                $('#blah')
-                    .attr('src', e.target.result)
-                    .width(200)
-                    .height(200);
-            };
+                            reader.onload = function(e) {
+                                $('#blahDoctor')
+                                    .attr('src', e.target.result)
+                                    .width(200)
+                                    .height(200);
+                            };
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-  </script>
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                </script>
 
                 <script>
                     function myFunction1() {
@@ -252,6 +273,16 @@
                             }
                         }
                     }
+                </script>
+                <script>
+                    /*   document.addEventListener('contextmenu', function(e) {
+                                        e.preventDefault();
+                                    });
+                                    document.onkeydown = function(e) {
+                                        if (event.keyCode == 123) { //F12 keycode is 123
+                                            return false;
+                                        }
+                                    }*/
                 </script>
                 @yield('script')
     </body>
