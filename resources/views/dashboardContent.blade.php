@@ -210,8 +210,8 @@
                             style="text-align: right ;  width: 20%  ;height: 5%" name="DoctorName" id="DoctorName" cols="1"
                             rows="1"></textarea>
                         <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF"
-                            style="text-align: right ;  width: 20%  ;height: 5%" name="DoctorEmail" id="DoctorEmail"
-                            cols="1" rows="1"></textarea>
+                            style="text-align: right ;  width: 20%  ;height: 5%" name="email" id="email" cols="1"
+                            rows="1"></textarea>
                         <input placeholder="كلمة المرور " type="password" class="shadow-drop-2-center textAF"
                             style="text-align: right ;  width: 20%  ;height: 5% ;" name="DoctorPassword"
                             id="DoctorPassword">
@@ -440,7 +440,7 @@
             document.getElementById("typeText").innerText = 3;
             alert(contents.doctor[$id - 1].path);
             document.getElementById("DoctorName").innerText = contents.doctor[$id - 1].user.name;
-            document.getElementById("DoctorEmail").innerText = contents.doctor[$id - 1].user.email;
+            document.getElementById("email").innerText = contents.doctor[$id - 1].user.email;
             document.getElementById("DoctorInfo").innerText = contents.doctor[$id - 1].info;
             document.getElementById('blahDoctor').src = "../" + contents.doctor[$id - 1].path;
 

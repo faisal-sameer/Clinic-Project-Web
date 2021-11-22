@@ -13,6 +13,7 @@ use App\Models\User;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class ReceptionController extends Controller
 {
@@ -47,10 +48,88 @@ class ReceptionController extends Controller
     protected function dashboardContentNew(Request $request)
     {
         //return $request->all();
+        $messages = [
+            // Discount waring text
+            'DisTitle.required' => 'لابد من وجود اسم ',   // Required
+            'DisText.required' => 'لابد من وجود وصف  ',   // Required
+            'DisPrice.required' => 'لابد من وجود سعر  ',   // Required
+
+
+            'DisTitle.string' => 'احرف',   // string
+            'DisText.string' => 'لابد من وجود وصف  ',   // string
+            'DisPrice.string' => 'لابد من وجود سعر  ',   // string
+
+            'DisTitle.min' => 'اقل من الحد ',   // min
+            'DisText.min' => 'اقل من الحد ',   // min
+            'DisPrice.min' => 'اقل من الحد ',   // min
+
+
+            'DisTitle.max' => 'اكثر  من الحد ',   // max
+            'DisText.max' => 'اكثر  من الحد ',   // max
+            'DisPrice.max' => 'اكثر  من الحد ',   // max
+
+            // Service  waring text
+
+            'name.required' => 'لابد من وجود اسم ',   // Required
+            'price.required' => 'لابد من وجود سعر  ',   // Required
+
+
+            'name.string' => 'احرف',   // string
+            'price.string' => 'احرف ',   // string
+
+            'name.min' => 'اقل من الحد ',   // min
+            'price.min' => 'اقل من الحد ',   // min
+
+
+            'name.max' => 'اكثر  من الحد ',   // max
+            'price.max' => 'اكثر  من الحد ',   // max
+
+            // Doctor waring text
+
+
+            'DoctorName.required' => 'لابد من وجود اسم ',   // Required
+            'email.required' => 'لابد من وجود سعر  ',   // Required
+            'DoctorImg.required' => 'لابد من وجود اسم ',   // Required
+            'DoctorPassword.required' => 'لابد من وجود سعر  ',   // Required
+            'DoctorInfo.required' => 'لابد من وجود اسم ',   // Required
+
+
+
+            'DoctorName.string' => 'احرف',   // string
+            'DoctorInfo.string' => 'احرف',   // string
+
+            'DoctorName.min' => 'اقل من الحد ',   // min
+            'DoctorInfo.min' => 'اقل من الحد ',   // min
+
+
+            'DoctorName.max' => 'اكثر  من الحد ',   // max
+            'email.max' => 'اكثر  من الحد ',   // max
+            'DoctorInfo.max' => 'اكثر  من الحد ',   // max
+
+            'email.unique'     => 'الايميل مستخدم ',   // Unique Email 
+            'email.email'     => 'الرجاء إدخال الايميل بالشكل الصحيح ',   //  Email 
+
+
+
+        ];
+
         $code = Str::random(4);
 
         switch ($request->type) {
             case 1:
+                $validator = Validator::make($request->all(), [
+                    // discount inputs
+                    'DisTitle' => 'required|string | min:3  | max:100',
+                    'DisText' => 'required|string | min:3  | max:250',
+                    'DisPrice' => 'required|string | min:3  | max:25',
+
+
+                ], $messages);
+
+                if ($validator->fails()) {
+                    Alert::error('خطاء ', $validator->messages()->all());
+                    return back();
+                }
                 $oldDiscount = Discount::latest()->first();;
                 $Discount = new Discount();
                 $Discount->title  = $request->DisTitle;
@@ -63,6 +142,21 @@ class ReceptionController extends Controller
                 $Discount->save();
                 break;
             case 2:
+                $validator = Validator::make($request->all(), [
+
+                    // service inputs 
+                    'name' => 'required|string | min:3  | max:25',
+                    'price' => 'required|string | min:3  | max:25',
+
+
+
+                ], $messages);
+
+                if ($validator->fails()) {
+                    Alert::error('خطاء ', $validator->messages()->all());
+                    //   Alert::error('خطأ', $validator->messages()->all());
+                    return back();
+                }
                 $Service = new Service();
                 $Service->Name = $request->name;
                 $Service->Price = $request->price;
@@ -72,7 +166,22 @@ class ReceptionController extends Controller
 
                 break;
             case 3:
+                $validator = Validator::make($request->all(), [
 
+                    // Doctor inputs
+                    'DoctorImg' => 'required',
+                    'DoctorName'     => 'required|string  | min:3   | max:255',
+                    'email'     => 'required | email | max:255 | unique:users',
+                    'DoctorPassword'     => 'required ',
+                    'DoctorInfo'  => 'required| min:8',
+
+                ], $messages);
+
+                if ($validator->fails()) {
+                    Alert::error('خطاء ', $validator->messages()->all());
+                    //   Alert::error('خطأ', $validator->messages()->all());
+                    return back();
+                }
                 $file1 = $request->DoctorImg;
                 $extension = $file1->getClientOriginalExtension();
                 $destination_path1 = 'files' . '/';
@@ -81,7 +190,7 @@ class ReceptionController extends Controller
 
                 $user = new User();
                 $user->name = $request->DoctorName;
-                $user->email = $request->DoctorEmail;
+                $user->email = $request->email;
                 $user->password = Hash::make($request->DoctorPassword);
                 $user->permission_id = 2;
                 $user->Status = 1;
@@ -102,6 +211,8 @@ class ReceptionController extends Controller
     }
     protected function dashboardContentUpdate(Request $request)
     {
+
+
         // return $request->all();
         $code = Str::random(4);
         Alert::success('تم تسجيل حضور للمراجع ', '');
@@ -135,7 +246,7 @@ class ReceptionController extends Controller
                 $oldUser = User::where('id', $oldDoctor->doctor_id)->first();
                 User::where('id', $oldDoctor->doctor_id)->update([
                     'name' => $request->DoctorName == null ? $oldUser->name : $request->DoctorName,
-                    'email' => $request->DoctorEmail == null ? $oldUser->email : $request->DoctorEmail,
+                    'email' => $request->email == null ? $oldUser->email : $request->email,
                     'password' => $request->DoctorPassword == null ? $oldUser->password :  Hash::make($request->DoctorPassword),
                 ]);
                 Doctor::where('id', $request->id)->update([
