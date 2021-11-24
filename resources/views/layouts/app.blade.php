@@ -233,7 +233,33 @@
                         }
                     }
                 </script>
+                <script>
+                    function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
 
+                            reader.onload = function(e) {
+                                $('#blahAbout')
+                                    .attr('src', e.target.result)
+                                    .width(200)
+                                    .height(200);
+                            };
+
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                </script>
+                <script>
+                    $(document).on("change", ".file_multi_video", function(evt) {
+
+                        var $source = $('#video_here');
+
+                        $source[0].src = URL.createObjectURL(this.files[0]);
+
+                        $source.parent()[0].load();
+
+                    });
+                </script>
                 <script>
                     function myFunction1() {
                         var input, filter, table, tr, td, i, txtValue;
@@ -274,15 +300,16 @@
                         }
                     }
                 </script>
+
                 <script>
                     /*   document.addEventListener('contextmenu', function(e) {
-                                        e.preventDefault();
-                                    });
-                                    document.onkeydown = function(e) {
-                                        if (event.keyCode == 123) { //F12 keycode is 123
-                                            return false;
-                                        }
-                                    }*/
+                                                                        e.preventDefault();
+                                                                    });
+                                                                    document.onkeydown = function(e) {
+                                                                        if (event.keyCode == 123) { //F12 keycode is 123
+                                                                            return false;
+                                                                        }
+                                                                    }*/
                 </script>
                 @yield('script')
     </body>

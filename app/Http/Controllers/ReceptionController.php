@@ -212,8 +212,7 @@ class ReceptionController extends Controller
     protected function dashboardContentUpdate(Request $request)
     {
 
-
-        // return $request->all();
+        //return $request->all();
         $code = Str::random(4);
         Alert::success('تم تسجيل حضور للمراجع ', '');
 
@@ -253,6 +252,20 @@ class ReceptionController extends Controller
                     'info' => $request->DoctorInfo == null ? $oldDoctor->Info : $request->DoctorInfo,
                     'path' => $request->DoctorImg == null ? $oldDoctor->path : $destination_path1 .  $file_name1
                 ]);
+                break;
+            case 4:
+                if ($request->AboutImg != null) {
+                    $file1 = $request->AboutImg;
+                    $extension = $file1->getClientOriginalExtension();
+                    $destination_path1 = 'files' . '/';
+                    $file_name1 =  $code . 'Code' . $request->NID . '.' . $extension;
+                    $file1->move($destination_path1, $file_name1);
+                }
+                ClinicDetails::where('id', $request->id)->update([
+                    'text' => $request->AboutText,
+                    'path' =>   $destination_path1 .  $file_name1
+                ]);
+
                 break;
             default:
                 return null;

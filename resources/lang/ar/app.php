@@ -14,6 +14,7 @@ return [
     'Welcome' => 'أهلا وسهلا بكم',
     'reservationHome' => 'احجز موعدك من هنا',
     'AboutUs' => 'نبذة عن العيادة',
+    'AboutText, :Lang' => ':text',
     'Comments' => 'بعض من تعليقات المراجعين',
     'MoreComments' => 'المزيد من التعليقات',
     'Offers' => 'الخصومات والعروض المقدمة',

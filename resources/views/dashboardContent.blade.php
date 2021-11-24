@@ -25,8 +25,15 @@
                     <div class="select-box" id="select1" style="width: 40%; margin-right: 20%">
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
-                                <input class="select-box__input" value="121" type="radio" id="discount" name="Ben"
-                                    checked="checked" />
+                                <input class="select-box__input" type="radio" name="Ben" checked="checked" />
+                                <p class="select-box__input-text"> اختار </p>
+                            </div>
+                            <div class="select-box__value">
+                                <input class="select-box__input" type="radio" id="aboutClinic" name="Ben" />
+                                <p class="select-box__input-text" id="aboutClinic"> العيادة </p>
+                            </div>
+                            <div class="select-box__value">
+                                <input class="select-box__input" type="radio" id="discount" name="Ben" />
                                 <p class="select-box__input-text">العروض</p>
                             </div>
                             <div class="select-box__value">
@@ -42,6 +49,14 @@
                                 alt="Arrow Icon" aria-hidden="true" />
                         </div>
                         <ul class="select-box__list">
+                            <li>
+                                <label class="select-box__option" aria-hidden="aria-hidden">
+                                    اختار </label>
+                            </li>
+                            <li>
+                                <label class="select-box__option" for="aboutClinic" id="aboutClinics"
+                                    aria-hidden="aria-hidden"> العيادة </label>
+                            </li>
                             <li>
                                 <label class="select-box__option" for="discount" id="discount"
                                     aria-hidden="aria-hidden">العروض</label>
@@ -171,6 +186,25 @@
                     <textarea placeholder="type" class="shadow-drop-2-center" readonly
                         style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="type" id="typeText"
                         cols="1" rows="1"></textarea>
+
+                    <div id="UpdateinfoAbout" class="row">
+
+
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة "
+                            class="shadow-drop-2-center textAF" id="AboutText" name="AboutText" cols="100"
+                            rows="5"></textarea>
+
+
+                        <div id="filerow" style="margin-left:40%; " class="row">
+                            <input type="file" class="foo" name="AboutImg" id="fileInputAbout"
+                                onchange="readURL(this);">
+                            <img id="blahAbout" style="height: 25%; width: 25%" src="#" alt="your image" />
+                        </div>
+
+                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+
+                    </div>
+
                     <div id="UpdateinfoDiscount" class="row">
 
                         <textarea placeholder="العنوان" class="shadow-drop-2-center textAF"
@@ -241,6 +275,12 @@
             //  document.getElementById("typeText").innerText = 3;
 
         });
+        document.getElementById("aboutClinic").addEventListener("click", function() {
+            const val = document.getElementById("aboutClinic").value;
+
+            myFunctionAboutClinic(val);
+        }); //ليبل التفاصيل 
+
         document.getElementById("discount").addEventListener("click", function() {
             const val = document.getElementById("discount").value;
 
@@ -255,6 +295,7 @@
             const val = document.getElementById('doctor').value;
             myFunctiondoctor(val);
         }); //ليبل الاطباء
+        // البيانات 
 
         @foreach ($content['discount'] as $discount)
             document.getElementById("Subdiscount{{ $discount->id }}").addEventListener("click",
@@ -291,6 +332,11 @@
             if (frm) {
                 frm.action = '{{ route('Update') }}'
             }
+
+            document.getElementById("aboutClinics").hidden = false;
+
+
+            var num = document.getElementById("aboutClinic").value = 2;
             var num = document.getElementById("discount").value = 2;
             var num = document.getElementById("service").value = 2;
             var num = document.getElementById("doctor").value = 2;
@@ -310,6 +356,10 @@
             if (frm) {
                 frm.action = '{{ route('New') }}'
             }
+            document.getElementById("aboutClinics").hidden = true;
+
+
+            var num = document.getElementById("aboutClinic").value = 1;
             var num = document.getElementById("discount").value = 1;
             var num = document.getElementById("service").value = 1;
             var num = document.getElementById("doctor").value = 1;
@@ -324,19 +374,38 @@
 
         }
 
+        function myFunctionAboutClinic($type) {
+            var contents = @json($content);
+
+
+            document.getElementById("formEditServices").style.display = "block"; //hide
+            document.getElementById("UpdateinfoAbout").style.display = "block"; //hide
+            document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
+            document.getElementById("UpdateinfoServie").style.display = "none"; //hide
+            document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
+
+            document.getElementById("id").innerText = 1;
+            document.getElementById("typeText").innerText = 4;
+            document.getElementById("AboutText").innerText = contents.about[1].text;
+            document.getElementById('blahAbout').src = "../" + contents.about[1].path;
+
+        }
+
+
         function myFunctionDiscount($type) { //العروض
 
             if ($type == 1) {
                 document.getElementById("typeText").innerText = 1;
 
                 document.getElementById("formEditServices").style.display = "block"; //hide
-
+                document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
                 document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
                 document.getElementById("UpdateinfoServie").style.display = "none"; //hide
                 document.getElementById("UpdateinfoDiscount").style.display = "block"; //hide
             } else {
 
                 document.getElementById("formEditServices").style.display = "none"; //hide
+                document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
 
                 document.getElementById("selectService").style.display = "none"; //hide
                 document.getElementById("selectDoctor").style.display = "none"; //hide
@@ -351,6 +420,7 @@
             document.getElementById("typeText").innerText = 1;
             document.getElementById("formEditServices").style.display = "block"; //hide
 
+            document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
             document.getElementById("UpdateinfoDiscount").style.display = "block"; //hide
             document.getElementById("UpdateinfoServie").style.display = "none"; //hide
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
@@ -372,6 +442,7 @@
 
                 document.getElementById("formEditServices").style.display = "block"; //hide
 
+                document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
                 document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
                 document.getElementById("UpdateinfoServie").style.display = "block"; //hide
                 document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
@@ -380,6 +451,7 @@
             } else {
 
                 document.getElementById("formEditServices").style.display = "none"; //hide
+                document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
                 document.getElementById("selectDiscount").style.display = "none"; //hide
                 document.getElementById("selectDoctor").style.display = "none"; //hide
                 document.getElementById("selectService").style.display = "block"; //hide
@@ -394,6 +466,7 @@
 
             document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
             document.getElementById("formEditServices").style.display = "block"; //hide
+            document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
             document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
             document.getElementById("UpdateinfoServie").style.display = "block"; //hide
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
@@ -408,7 +481,7 @@
             if ($type == 1) {
                 document.getElementById("typeText").innerText = 3;
                 document.getElementById("formEditServices").style.display = "block"; //hide
-
+                document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
                 document.getElementById("UpdateinfoDoctor").style.display = "block"; //hide
                 document.getElementById("UpdateinfoServie").style.display = "none"; //hide
                 document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
@@ -417,7 +490,7 @@
             } else {
 
                 document.getElementById("formEditServices").style.display = "none"; //hide
-
+                document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
                 document.getElementById("selectDiscount").style.display = "none"; //hide
                 document.getElementById("selectService").style.display = "none";
                 document.getElementById("selectDoctor").style.display = "block"; //hide
@@ -427,7 +500,7 @@
 
         function myFunctionSubdoctor($id) { //الاطباء
             document.getElementById("formEditServices").style.display = "block"; //hide
-
+            document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
             document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
             document.getElementById("UpdateinfoServie").style.display = "none"; //hide
             document.getElementById("UpdateinfoDoctor").style.display = "block"; //hide
