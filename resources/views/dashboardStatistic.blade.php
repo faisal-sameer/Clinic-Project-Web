@@ -12,32 +12,16 @@
 @section('content')
     <div class="welcome-area" id="welcome">
         <div class="container" id="container">
-
-
-            <div class="row " style="margin-top: 15%" >
-            
-                  <div class="card bounce-in-top " id="cards">
-                  
-                      
-          
-                      <div id="Paris" class="w3-container city" >
+          <div class="row " style="margin-top: 15%" >
+            <div class="card bounce-in-top " id="cards">
+                   <div id="Paris" class="w3-container city" >
                         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-
-                            
-                               </div>
-          
-                   
-                    
+                      </div>
                   </div>
-            
-          
-                     </p>
+                       </p>
                         </div>       
                      </div>
     </div>
-
-
-
 @endsection
 @section('script')
 <script>
@@ -73,8 +57,6 @@
         }]
     });
     chart.render();
-    
     }
     </script>
-    
-@endsection
+    @endsection
