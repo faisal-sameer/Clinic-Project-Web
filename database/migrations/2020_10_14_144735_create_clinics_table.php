@@ -18,7 +18,8 @@ class CreateClinicsTable extends Migration
             $table->increments('id');
             $table->integer('employee_id')->unsigned()->index()->nullable();
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('text')->nullable();
+            $table->string('text_ar')->nullable();
+            $table->string('text_en')->nullable();
             $table->string('path')->nullable();
             $table->tinyInteger('Status');
             $table->timestamps();

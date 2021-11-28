@@ -20,15 +20,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->segment(1) == 'ar') {
 
-            $aboutUs = ClinicDetails::where('id', 1)->select('text', 'path')->first();
-            $all = ['aboutUs' => $aboutUs];
-        } else {
+        $aboutUs = ClinicDetails::where('id', 1)->select('text_ar', 'text_en', 'path')->first();
+        $all = ['aboutUs' => $aboutUs];
 
-            $aboutUs = ClinicDetails::where('id', 2)->select('text', 'path')->first();
-            $all = ['aboutUs' => $aboutUs];
-        }
         // need to send all data 
         return view('welcome')->with('all', $all);
     }

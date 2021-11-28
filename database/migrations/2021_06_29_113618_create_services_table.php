@@ -16,13 +16,15 @@ class CreateServicesTable extends Migration
         Schema::create('services', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->increments('id');
-            $table->string('Name');
+            $table->string('Name_ar');
+            $table->string('Name_en');
             $table->integer('employee_id')->unsigned()->index()->nullable();
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('clinic_id')->unsigned()->index()->nullable();
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->string('Price')->nullable();
-            $table->string('info')->nullable();
+            $table->string('info_ar')->nullable();
+            $table->string('info_en')->nullable();
             $table->string('path')->nullable();
             $table->string('type')->nullable();
             $table->integer('Status');

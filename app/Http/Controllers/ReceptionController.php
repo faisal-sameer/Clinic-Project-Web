@@ -14,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\SendNoificationFCM;
 
 class ReceptionController extends Controller
 {
@@ -36,13 +37,17 @@ class ReceptionController extends Controller
 
     protected function dashboardContent()
     {
+
         $Detail = ClinicDetails::get();
         $Service = Service::where('Status', 1)->get();
         $Discount = Discount::get();
         $Doctor = Doctor::get();
         $clinic = clinic::get();
         $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinic' => $clinic];
-        // return $Doctor;
+        //$test = new SendNoificationFCM();
+
+        // $test->sendGCM('AF Head', 'FA Body', "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
+
         return view('dashboardContent')->with('content', $content);
     }
     protected function dashboardContentNew(Request $request)
@@ -140,6 +145,13 @@ class ReceptionController extends Controller
                 $Discount->order = $oldDiscount == null ? 1 : $oldDiscount->order  + 1;
                 $Discount->Status = 1;
                 $Discount->save();
+
+                $test = new SendNoificationFCM();
+
+                $test->sendGCM($request->DisTitle, $request->DisText, "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
+                // cZ5OzPeISdKBzcSicPDrzc:APA91bHTU37xE-tVGiVREXPdGhmNjd7GIV0tMJzRH7_fEXm0XFEPgu1Qi5h2aIuWRrk9W-HNzmqsar11hy6CchY7oYWcfwz5byfk9Kwxd_arngyAGbkIkcJhrQRraLFNCCkSM02TLaoL
+                // Galaxy 
+
                 break;
             case 2:
                 $validator = Validator::make($request->all(), [
