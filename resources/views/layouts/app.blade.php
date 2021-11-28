@@ -12,6 +12,8 @@
 
     <!-- Scripts -->
     <script src="../js/app.js" defer></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
 
@@ -105,6 +107,8 @@
                                             <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
                                               <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
                                               <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">تعديل على المحتوى</a>
+                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardStatistic">الاحصائيات</a>
+
                                             </div>
                                           </li>
                                     <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();

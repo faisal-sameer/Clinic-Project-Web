@@ -29,6 +29,11 @@ class ReceptionController extends Controller
         return view('dashboardClinicPast')->with('Reservations', $Reservations);
     }
 
+
+    protected function dashboardStatistic()
+    {
+        return view('dashboardStatistic');
+    }
     protected function dashboardContent()
     {
         $Detail = ClinicDetails::get();
