@@ -117,7 +117,7 @@
                                 <div class="select-box__value">
                                     <input class="select-box__input" type="radio" id="{{ $service->id }}" value="4"
                                         name="service" />
-                                    <p class="select-box__input-text">{{ $service->Name }}</p>
+                                    <p class="select-box__input-text">{{ $service->Name_ar }}</p>
                                 </div>
                             @endforeach
 
@@ -132,7 +132,7 @@
                                 <li>
                                     <label class="select-box__option" for="{{ $service->id }}"
                                         id="Subservice{{ $service->id }}"
-                                        aria-hidden="aria-hidden">{{ $service->Name }}</label>
+                                        aria-hidden="aria-hidden">{{ $service->Name_ar }}</label>
                                 </li>
                             @endforeach
 
@@ -181,13 +181,13 @@
                 <form method="POST" id="formTag" action="{{ route('Update') }}" enctype="multipart/form-data">
                     @csrf
                     <textarea placeholder="id" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="id" id="id" cols="1"
-                        rows="1"></textarea>
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5% ;display: none;" name="id" id="id" cols="1"
+                        rows="1"></textarea><!--لاظهار الاي دي-->
                     <textarea placeholder="type" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="type" id="typeText"
-                        cols="1" rows="1"></textarea>
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; display: none;" name="type" id="typeText"
+                        cols="1" rows="1"></textarea><!--لاظهار نوع اللست سواء طبيب أو عروض أو الخ-->
 
-                    <div id="UpdateinfoAbout" class="row">
+                    <div id="UpdateinfoAbout" class="row"><!--تحديث معلومات العيادة-->
 
 
                         <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة "
@@ -205,7 +205,7 @@
 
                     </div>
 
-                    <div id="UpdateinfoDiscount" class="row">
+                    <div id="UpdateinfoDiscount" class="row"><!--تحديث معلومات العروض-->
 
                         <textarea placeholder="العنوان" class="shadow-drop-2-center textAF"
                             style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="DisTitle" id="DisTitle"
@@ -221,7 +221,7 @@
 
                     </div>
 
-                    <div id="UpdateinfoServie">
+                    <div id="UpdateinfoServie"><!--تحديث معلومات الخدمات-->
                         <div class="row">
 
 
@@ -235,19 +235,21 @@
                         </div>
                         <br><br>
 
-                        <br><br>
-                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+                       
+                        <button id="updateB" type="submit" style="width: 100%" class="btn btn-info">تحديث</button>
 
                     </div>
-                    <div id="UpdateinfoDoctor" class="row">
+                    <div id="UpdateinfoDoctor" class="row"> <!--تحديث معلومات الاطباء-->
+                        <div id="doctor-update-content">
                         <textarea placeholder="الاسم الكامل  " class="shadow-drop-2-center textAF"
-                            style="text-align: right ;  width: 20%  ;height: 5%" name="DoctorName" id="DoctorName" cols="1"
+                            name="DoctorName" id="DoctorName" cols="1"
                             rows="1"></textarea>
                         <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF"
-                            style="text-align: right ;  width: 20%  ;height: 5%" name="email" id="email" cols="1"
+                            name="email" id="email" cols="1"
                             rows="1"></textarea>
+                        </div>
                         <input placeholder="كلمة المرور " type="password" class="shadow-drop-2-center textAF"
-                            style="text-align: right ;  width: 20%  ;height: 5% ;" name="DoctorPassword"
+                            style="text-align: right ;  width: 20%  ;height: 5% ;display:none" name="DoctorPassword"
                             id="DoctorPassword">
 
                         <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة عن الطبيب  "
@@ -256,7 +258,7 @@
                         <div id="filerow" style="margin-left:40%; " class="row">
                             <input type="file" class="foo" name="DoctorImg" id="fileInput"
                                 onchange="readURL(this);">
-                            <img id="blahDoctor" src="#" alt="your image" />
+                            <img id="blahDoctor"  style="height: 25%; width: 25%" src="#" alt="your image" />
                         </div>
                         <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
 
@@ -471,7 +473,7 @@
             document.getElementById("UpdateinfoServie").style.display = "block"; //hide
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
 
-            document.getElementById("managertextarea").innerText = contents.service[$id - 1].Name;
+            document.getElementById("managertextarea").innerText = contents.service[$id - 1].Name_ar;
             document.getElementById("managertextarea1").innerText = contents.service[$id - 1].Price;
             //document.getElementById("updateB").style.display = "block"; //hide
 
@@ -514,7 +516,7 @@
             alert(contents.doctor[$id - 1].path);
             document.getElementById("DoctorName").innerText = contents.doctor[$id - 1].user.name;
             document.getElementById("email").innerText = contents.doctor[$id - 1].user.email;
-            document.getElementById("DoctorInfo").innerText = contents.doctor[$id - 1].info;
+            document.getElementById("DoctorInfo").innerText = contents.doctor[$id - 1].info_ar;
             document.getElementById('blahDoctor').src = "../" + contents.doctor[$id - 1].path;
 
         }

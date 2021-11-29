@@ -9,6 +9,20 @@
 #managertextarea {
     width: 60%;
 }
+#doctor-update-content {
+    margin-left: 60%;
+    justify-content: space-between;
+}
+#email {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
+#DoctorName {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
 
 .my-custom-scrollbar {
     position: relative;

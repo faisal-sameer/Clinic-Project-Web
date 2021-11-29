@@ -108,13 +108,13 @@ class ReceptionController extends Controller
             'DoctorName.string' => 'احرف',   // string
             'DoctorInfo.string' => 'احرف',   // string
 
-            'DoctorName.min' => 'اقل من الحد ',   // min
-            'DoctorInfo.min' => 'اقل من الحد ',   // min
+            'DoctorName.min' => 'الاسم أقل الحد ',   // min
+            'DoctorInfo.min' => 'معلومات الطبيب أقل من الحد',   // min
 
 
-            'DoctorName.max' => 'اكثر  من الحد ',   // max
+            'DoctorName.max' => 'الاسم أكثر من الحد',   // max
             'email.max' => 'اكثر  من الحد ',   // max
-            'DoctorInfo.max' => 'اكثر  من الحد ',   // max
+            'DoctorInfo.max' => 'معلومات الطبيب أكثر من الحد ',   // max
 
             'email.unique'     => 'الايميل مستخدم ',   // Unique Email 
             'email.email'     => 'الرجاء إدخال الايميل بالشكل الصحيح ',   //  Email 
@@ -137,7 +137,7 @@ class ReceptionController extends Controller
                 ], $messages);
 
                 if ($validator->fails()) {
-                    Alert::error('خطاء ', $validator->messages()->all());
+                    Alert::error('خطأ ', $validator->messages()->all());
                     return back();
                 }
                 $oldDiscount = Discount::latest()->first();;
@@ -153,7 +153,7 @@ class ReceptionController extends Controller
 
                 $test = new SendNoificationFCM();
 
-                $test->sendGCM($request->DisTitle, $request->DisText, "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
+                // $test->sendGCM($request->DisTitle, $request->DisText, "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
                 // cZ5OzPeISdKBzcSicPDrzc:APA91bHTU37xE-tVGiVREXPdGhmNjd7GIV0tMJzRH7_fEXm0XFEPgu1Qi5h2aIuWRrk9W-HNzmqsar11hy6CchY7oYWcfwz5byfk9Kwxd_arngyAGbkIkcJhrQRraLFNCCkSM02TLaoL
                 // Galaxy 
 
@@ -170,12 +170,13 @@ class ReceptionController extends Controller
                 ], $messages);
 
                 if ($validator->fails()) {
-                    Alert::error('خطاء ', $validator->messages()->all());
+                    Alert::error('خطأ ', $validator->messages()->all());
                     //   Alert::error('خطأ', $validator->messages()->all());
                     return back();
                 }
                 $Service = new Service();
-                $Service->Name = $request->name;
+                $Service->Name_ar = $request->name;
+                $Service->Name_en = '';
                 $Service->Price = $request->price;
                 $Service->clinic_id = 1;
                 $Service->Status = 1;
@@ -195,7 +196,7 @@ class ReceptionController extends Controller
                 ], $messages);
 
                 if ($validator->fails()) {
-                    Alert::error('خطاء ', $validator->messages()->all());
+                    Alert::error('خطأ ', $validator->messages()->all());
                     //   Alert::error('خطأ', $validator->messages()->all());
                     return back();
                 }
@@ -215,7 +216,7 @@ class ReceptionController extends Controller
 
                 $doctor = new Doctor();
                 $doctor->doctor_id = $user->id;
-                $doctor->info = $request->DoctorInfo;
+                $doctor->info_ar = $request->DoctorInfo;
                 $doctor->path = $destination_path1 .  $file_name1;
                 $doctor->Status = 1;
                 $doctor->save();
@@ -245,7 +246,8 @@ class ReceptionController extends Controller
             case 2:
                 $oldService = Service::where('id', $request->id)->first();
                 Service::where('id', $request->id)->update([
-                    'Name' => $request->name == null ? $oldService->Name : $request->name,
+                    'Name_ar' => $request->name == null ? $oldService->Name_ar : $request->name,
+                    'Name_en' => $request->name == null ? $oldService->Name_en : $request->name,
                     'Price' => $request->price == null ? $oldService->Price : $request->price
                 ]);
                 break;
@@ -266,7 +268,7 @@ class ReceptionController extends Controller
                     'password' => $request->DoctorPassword == null ? $oldUser->password :  Hash::make($request->DoctorPassword),
                 ]);
                 Doctor::where('id', $request->id)->update([
-                    'info' => $request->DoctorInfo == null ? $oldDoctor->Info : $request->DoctorInfo,
+                    'info_ar' => $request->DoctorInfo == null ? $oldDoctor->Info_ar : $request->DoctorInfo,
                     'path' => $request->DoctorImg == null ? $oldDoctor->path : $destination_path1 .  $file_name1
                 ]);
                 break;
