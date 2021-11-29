@@ -99,7 +99,7 @@
                                 <li>
                                     <label class="select-box__option" for="{{ $discount->id }}"
                                         id="Subdiscount{{ $discount->id }}"
-                                        aria-hidden="aria-hidden">{{ $discount->title }}</label>
+                                        aria-hidden="aria-hidden">{{ $discount->title_ar }}</label>
                                 </li>
                             @endforeach
 
@@ -428,8 +428,8 @@
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
 
 
-            document.getElementById("DisTitle").innerText = contents.discount[$id - 1].title;
-            document.getElementById("DisText").innerText = contents.discount[$id - 1].text;
+            document.getElementById("DisTitle").innerText = contents.discount[$id - 1].title_ar;
+            document.getElementById("DisText").innerText = contents.discount[$id - 1].text_ar;
             document.getElementById("DisPrice").innerText = contents.discount[$id - 1].Price;
 
             document.getElementById("id").innerText = $id;

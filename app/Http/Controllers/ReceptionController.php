@@ -142,10 +142,13 @@ class ReceptionController extends Controller
                 }
                 $oldDiscount = Discount::latest()->first();;
                 $Discount = new Discount();
-                $Discount->title  = $request->DisTitle;
+                $Discount->title_ar  = $request->DisTitle;
+                $Discount->title_en  = " ";
                 $Discount->employee_id = auth()->user()->id;
                 $Discount->clinic_id = 1;
-                $Discount->text = $request->DisText == null ?  null : $request->DisText;
+                $Discount->text_ar = $request->DisText == null ?  null : $request->DisText;
+                $Discount->text_en = " ";
+
                 $Discount->Price = $request->DisPrice == null ? null : $request->DisPrice;
                 $Discount->order = $oldDiscount == null ? 1 : $oldDiscount->order  + 1;
                 $Discount->Status = 1;
@@ -238,8 +241,12 @@ class ReceptionController extends Controller
             case 1:
                 $oldDiscount = Discount::where('id', $request->id)->first();
                 Discount::where('id', $request->id)->update([
-                    'title' => $request->DisTitle == null ? $oldDiscount->title : $request->DisTitle,
-                    'text' => $request->DisText == null ? $oldDiscount->text : $request->DisText,
+                    'title_ar' => $request->DisTitle == null ? $oldDiscount->title_ar : $request->DisTitle,
+                    'title_en' => $request->DisTitle == null ? $oldDiscount->title_en : $request->DisTitle,
+
+                    'text_ar' => $request->DisText == null ? $oldDiscount->text_ar : $request->DisText,
+                    'text_en' => $request->DisText == null ? $oldDiscount->text_en : $request->DisText,
+
                     'Price' => $request->DisPrice == null ? $oldDiscount->Price : $request->DisPrice,
                 ]);
                 break;
