@@ -14,6 +14,7 @@ return [
     'Welcome' => 'Welcome',
     'reservationHome' => 'Reservation Now',
     'AboutUs' => 'About Clinic',
+    'AboutText, :Lang' => ':en',
     'Comments' => 'Comments ',
     'MoreComments' => 'More Comments',
     'Offers' => 'Discounts and offers offered',

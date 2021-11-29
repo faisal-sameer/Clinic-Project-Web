@@ -19,7 +19,8 @@ class CreateClinicDetailsTable extends Migration
             $table->integer('employee_id')->unsigned()->index()->nullable();
             $table->foreign('employee_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('type')->nullable();
-            $table->string('text')->nullable();
+            $table->string('text_ar')->nullable();
+            $table->string('text_en')->nullable();
             $table->string('path')->nullable();
             $table->integer('order')->nullable();
             $table->tinyInteger('Status');

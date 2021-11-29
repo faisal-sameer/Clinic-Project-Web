@@ -21,9 +21,11 @@ class CreateDiscountsTable extends Migration
 
             $table->integer('clinic_id')->unsigned()->index()->nullable();
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
-            $table->integer('type')->nullable();
-            $table->string('text')->nullable();
-            $table->string('path')->nullable();
+            $table->string('title_ar');
+            $table->string('title_en');
+            $table->string('text_ar')->nullable();
+            $table->string('text_en')->nullable();
+            $table->string('Price')->nullable();
             $table->integer('order')->nullable();
             $table->tinyInteger('Status');
             $table->timestamps();

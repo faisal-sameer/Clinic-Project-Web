@@ -18,9 +18,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $all['imageBig'] = ClinicDetails::where('type', 2)->select('path')->first();
+
+        $aboutUs = ClinicDetails::where('id', 1)->select('text_ar', 'text_en', 'path')->first();
+        $all = ['aboutUs' => $aboutUs];
+
         // need to send all data 
         return view('welcome')->with('all', $all);
     }
