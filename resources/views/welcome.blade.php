@@ -108,39 +108,24 @@
                     </div>
                     <!--    <p>Proin justo sapien, posuere suscipit tortor in, fermentum mattis elit. Aenean in feugiat purus.</p>-->
                     <ul>
+                        @foreach ($all['discounts'] as $discount)
+
                         <li>
                             <img width="10%" src="images/discount.png" alt="">
                             <div class="text">
                                 <h6>
-                                    {{ __('app.OffersTopic, :NameAR', ['ar' => 'الاول', 'en' => 'first']) }}
+                                    {{ $discount->title_ar}}
 
                                 </h6>
-                                <p> {{ __('app.OffersTopicExplain') }}
+                                <p>     {{ $discount->Price}}={{ $discount->text_ar}}
                                 </p>
+                            
+                             
                             </div>
                         </li>
-                        <li>
-                            <img width="10%" src="images/discount.png" alt="">
-                            <div class="text">
-                                <h6>
-                                    {{ __('app.OffersTopic, :NameAR', ['name' => 'الثاني', 'en' => 'Second']) }}
+                  
+                        @endforeach
 
-                                </h6>
-                                <p> {{ __('app.OffersTopicExplain') }}
-                                </p>
-                            </div>
-                        </li>
-                        <li>
-                            <img width="10%" src="images/discount.png" alt="">
-                            <div class="text">
-                                <h6>
-                                    {{ __('app.OffersTopic, :NameAR', ['name' => 'الثالث', 'en' => 'thired']) }}
-
-                                </h6>
-                                <p> {{ __('app.OffersTopicExplain') }}
-                                </p>
-                            </div>
-                        </li>
                     </ul>
                 </div>
                 <div class="right-image col-lg-7 col-md-12 col-sm-12 mobile-bottom-fix-big"

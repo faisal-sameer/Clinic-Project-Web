@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ClinicDetails;
 use App\Models\Service;
+use App\Models\Discount;
+
 
 class HomeController extends Controller
 {
@@ -24,8 +26,11 @@ class HomeController extends Controller
 
         $aboutUs = ClinicDetails::where('id', 1)->select('text_ar', 'text_en', 'path')->first();
         $services = Service::select('id', 'Name_ar')->get();
-        $all['Name_ar'] = $services;
-        $all = ['aboutUs' => $aboutUs, 'services' => $services];
+
+        $discounts = Discount::select('id', 'title_ar', 'text_ar', 'Price')->get();
+
+
+        $all = ['aboutUs' => $aboutUs, 'services' => $services, 'discounts' => $discounts];
 
         // need to send all data 
         return view('welcome')->with('all', $all);
