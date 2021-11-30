@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\SendNoificationFCM;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ReceptionController extends Controller
 {
@@ -38,7 +40,27 @@ class ReceptionController extends Controller
 
     protected function dashboardStatistic()
     {
-        return view('dashboardStatistic');
+        //$app = Reservation::groupBy('services_id', 'Date')->select('services_id', DB::raw('count(*) as total'), 'Date')->get();
+        $app = Reservation::select(
+            DB::raw('count(*) as total'),
+            DB::raw("DATE_FORMAT(Date, '%Y-%m') as new_date")
+        )
+            ->groupBy('new_date')->orderBy('new_date')->get();
+
+        $data = [];
+        foreach ($app as $key =>  $item) {
+            //$newDate = date('Y-m-d', strtotime($item->Date));
+            //$monthName = date("F", strtotime($newDate));
+            $time = \Carbon\Carbon::parse($item->new_date)->format('F');
+            // $mount = MONTHNAME($item->Date);
+            $data[] = ['label' => $time, 'y' => $item->total];
+        }
+        $result = [];
+
+
+        $all[] = ['data' => $data, 'Name' => "AF"];
+        //return $data;
+        return view('dashboardStatistic')->with('all', $all);
     }
     protected function dashboardContent()
     {
