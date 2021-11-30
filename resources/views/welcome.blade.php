@@ -79,108 +79,25 @@
 
     <section class="section" id="services">
         <div class="container">
-            <h2 id="tit"> {{ __('app.Comments') }}</h2>
+            <h2 id="tit">خدماتنا</h2>
+
             <div class="row">
                 <div class="owl-carousel owl-theme">
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Mohammed Allehyani
-                        </h5>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
+                    @foreach ($all['services'] as $service)
 
-                        <p>
-                            تقييمي كشخص متعامل مع الدكتور عمرو بخصوص التقويم للاسنان
-                            اكملت سنة ..شخصية محترمة و هادئة تجيب ع كل التساؤلات و ملم بعمله انصح فيه للامانة
-                        </p>
-                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,,"
-                            class="main-button"> {{ __('app.MoreComments') }}</a>
-                    </div>
                     <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">سلمان الحربي</h5>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <p>شكرا د/ عفاف مبدعه ويديها خفيفه جدا وقمه في التعامل ومتعاونه مع المرضى
-                        </p>
-                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,,"
-                            class="main-button"> {{ __('app.MoreComments') }}</a>
+                      
+                        <h2 id="title-header">{{ $service->Name_ar}}</h2>
+                  
                     </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">7moodi Al-zahrani</h5>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <p>العياده ما شاء الله ممتازة والتعامل ممتاز خصوصا في قسم التقويم الدكتور عمرو الله يسعده على
-                            الاسلوب والتعامل 🙏 </p>
-                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,,"
-                            class="main-button"> {{ __('app.MoreComments') }}</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Ayah ALKENANI</h5>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <p>دكتور عمرو غازي من افضل الدكاترة الا تعاملت معاهم شغلة جداً ممتاز ماشاءالله تبارك الله</p>
-                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,,"
-                            class="main-button"> {{ __('app.MoreComments') }}</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Fares Alhamaly</h5>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <p>عياده الماجد افضل عياده اسنان وافضل دكتور الدكتور حسن مطر
-                            تعامله راقي مع الكبار وخاصه الصغار
-                            اشكر الدكتور حسن على حسن تعامله</p>
-                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,,"
-                            class="main-button"> {{ __('app.MoreComments') }}</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">وداد الفهمي</h5>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star checked"></span>
-                        <p>عملت اسناني عند الدكتور حسن مطر افضل دكتور بالمجمع يده خفيفه وسريع وشغله دقيق مره لايفوتكم .
-                        </p>
-                        <a href="https://www.google.com/search?q=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A&oq=%D9%85%D8%AC%D9%85%D8%B9+%D8%A7%D9%84%D9%85%D8%A7%D8%AC%D8%AF+%D8%A7%D9%84%D8%B7%D8%A8%D9%8A+&aqs=chrome.0.69i59j46i175i199i512l2j0i22i30l2.1033j0j9&sourceid=chrome&ie=UTF-8#lrd=0x15c1f64d264db10d:0x9f0b18c816560873,1,,,"
-                            class="main-button"> {{ __('app.MoreComments') }}</a>
-                    </div>
+                   
+                    @endforeach
 
                 </div>
             </div>
         </div>
     </section>
+
     <!-- ***** Features Big Item Start ***** -->
     <section class="section" id="about2">
         <div class="container">

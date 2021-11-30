@@ -247,7 +247,7 @@
                             name="DoctorName" id="DoctorName" cols="1"
                             rows="1"></textarea>
                         <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF"
-                            name="email" id="email" cols="1"
+                            name="email" id="email-content" cols="1"
                             rows="1"></textarea>
                         </div>
                         <input placeholder="كلمة المرور " type="password" class="shadow-drop-2-center textAF"
@@ -517,7 +517,7 @@
             document.getElementById("typeText").innerText = 3;
             alert(contents.doctor[$id - 1].path);
             document.getElementById("DoctorName").innerText = contents.doctor[$id - 1].user.name;
-            document.getElementById("email").innerText = contents.doctor[$id - 1].user.email;
+            document.getElementById("email-content").innerText = contents.doctor[$id - 1].user.email;
             document.getElementById("DoctorInfo").innerText = contents.doctor[$id - 1].info_ar;
             document.getElementById('blahDoctor').src = "../" + contents.doctor[$id - 1].path;
 
