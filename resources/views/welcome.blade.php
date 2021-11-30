@@ -24,10 +24,8 @@
                         data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
                         <h1 style="text-align: center">{{ __('app.Welcome') }}</h1>
                         <a href="/reservation" class="main-button-slider"
-                            style="display: flex;  
-                                                                                                                                                    justify-content: center;  
-                                                                                                                                                    align-items: center;  ">
-                            {{ __('app.reservationHome') }}
+                            style="display: flex;justify-content: center;align-items: center;  ">
+    {{ __('app.reservationHome') }}
                         </a>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"
@@ -97,8 +95,7 @@
             </div>
         </div>
     </section>
-
-    <!-- ***** Features Big Item Start ***** -->
+   <!-- ***** Features Big Item Start ***** -->
     <section class="section" id="about2">
         <div class="container">
             <div class="row">
@@ -115,17 +112,13 @@
                             <div class="text">
                                 <h6>
                                     {{ $discount->title_ar}}
-
-                                </h6>
-                                <p>     {{ $discount->Price}}={{ $discount->text_ar}}
-                                </p>
-                            
-                             
-                            </div>
+                       </h6>
+                                <p> 
+         {{ $discount->text_ar}} = {{ $discount->Price}} ريال
+                            </p>
+                           </div>
                         </li>
-                  
-                        @endforeach
-
+                     @endforeach 
                     </ul>
                 </div>
                 <div class="right-image col-lg-7 col-md-12 col-sm-12 mobile-bottom-fix-big"
@@ -136,8 +129,6 @@
         </div>
     </section>
     <!-- ***** Features Big Item End ***** -->
-
-
     <!-- ***** Features Small Start ***** -->
     <section class="section" id="services">
         <div class="container">
@@ -156,7 +147,6 @@
                             أهمل جير الأسنان ولم يعالج يحدث أرتخاء للأسنان وفي النهاية يكون أقتلاعها محتوما. و قد تظهر الجير
                             على شكلين: فوق خطّ اللثة حيث يكون الجير مرئيا تحت خطّ اللثة حيث يتشكّل في الجيوب بين الأسنان
                             واللثة.
-
                         </p>
                         <a href="#" class="main-button">Read More</a>
                     </div>
