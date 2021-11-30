@@ -139,7 +139,7 @@ button {
     margin-top: 15%;
 }
 #tit {
-    margin-left: 35%;
+    margin-left: 45%;
     margin-bottom: 5%;
     color: white;
 }
@@ -331,7 +331,7 @@ a.float:hover + div.label-container {
 */
 @media only screen and (max-width: 970px) {
     #tit {
-        margin-left: 10%;
+        margin-left: 39%;
         margin-bottom: 5%;
     }
     #ptf {
