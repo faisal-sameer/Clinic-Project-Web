@@ -13,6 +13,16 @@
     margin-left: 60%;
     justify-content: space-between;
 }
+#DisTitle {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
+#DisPrice {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
 #email {
     text-align: right;
     width: 20%;

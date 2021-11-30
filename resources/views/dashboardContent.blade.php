@@ -84,7 +84,7 @@
                                 <div class="select-box__value">
                                     <input class="select-box__input" type="radio" id="{{ $discount->id }}" value="4"
                                         name="discount" />
-                                    <p class="select-box__input-text">{{ $discount->title }}</p>
+                                    <p class="select-box__input-text">{{ $discount->title_ar }}</p>
                                 </div>
                             @endforeach
 
@@ -206,17 +206,19 @@
                     </div>
 
                     <div id="UpdateinfoDiscount" class="row"><!--تحديث معلومات العروض-->
-
+                        <div id="doctor-update-content">
                         <textarea placeholder="العنوان" class="shadow-drop-2-center textAF"
-                            style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="DisTitle" id="DisTitle"
+                            name="DisTitle" id="DisTitle"
                             cols="1" rows="1"></textarea>
+                            <textarea placeholder="السعر " class="shadow-drop-2-center textAF"
+                            name="DisPrice" id="DisPrice"
+                              cols="1" rows="1"></textarea>
+                        </div>
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... وصف العرض "
+                        <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" ... وصف العرض "
                             class="shadow-drop-2-center textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
 
-                        <textarea placeholder="السعر " class="shadow-drop-2-center textAF"
-                            style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="DisPrice" id="DisPrice"
-                            cols="1" rows="1"></textarea>
+                       
                         <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
 
                     </div>
