@@ -9,6 +9,30 @@
 #managertextarea {
     width: 60%;
 }
+#doctor-update-content {
+    margin-left: 60%;
+    justify-content: space-between;
+}
+#DisTitle {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
+#DisPrice {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
+#email-content {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
+#DoctorName {
+    text-align: right;
+    width: 20%;
+    height: 5%;
+}
 
 .my-custom-scrollbar {
     position: relative;
@@ -115,7 +139,7 @@ button {
     margin-top: 15%;
 }
 #tit {
-    margin-left: 35%;
+    margin-left: 45%;
     margin-bottom: 5%;
     color: white;
 }
@@ -307,7 +331,7 @@ a.float:hover + div.label-container {
 */
 @media only screen and (max-width: 970px) {
     #tit {
-        margin-left: 10%;
+        margin-left: 39%;
         margin-bottom: 5%;
     }
     #ptf {
