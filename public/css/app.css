@@ -326,7 +326,15 @@ a.float:hover + div.label-container {
         transform: scaleY(0);
     }
 }
-
+.update-content {
+    background-color: #29cc80;
+}
+.new-content {
+    background-color: rgb(105, 222, 243);
+}
+.delete-content {
+    background-color: rgb(253, 67, 67);
+}
 /*تصميم الجوال
 */
 @media only screen and (max-width: 970px) {

@@ -13,6 +13,10 @@
     <div class="welcome-area" id="welcome">
         <div class="container" id="container">
             <div class="row " style="margin-top: 15%">
+                <div class="text-center  " style="background-color: rgb(189, 189, 189)">
+                    <p id="Months">احصائيات المراجعين بالاشهر </p>
+                    <p id="Services">احصائيات المراجعين بالخدمات</p>
+                </div>
                 <div class="card bounce-in-top " id="cards">
 
 
@@ -27,9 +31,12 @@
 @endsection
 @section('script')
     <script>
-        window.onload = function() {
-            var all = @json($all[0]);
+        var Months = @json($all[0]['Months']);
+        window.onload = myFunctionNew(Months);
 
+        function myFunctionNew(data) {
+
+            var num = 1;
 
 
             var chart = new CanvasJS.Chart("chartContainer", {
@@ -46,11 +53,26 @@
                     showInLegend: true,
                     legendMarkerColor: "grey",
                     legendText: "MMbbl = one million barrels",
-                    dataPoints: all.data
+                    dataPoints:
+
+                        data
 
                 }]
             });
             chart.render();
         }
+    </script>
+
+    <script>
+        document.getElementById("Services").addEventListener("click", function() {
+            var Service = @json($all[0]['Service']);
+
+            myFunctionNew(Service);
+        });
+    </script>
+    <script>
+        document.getElementById("Months").addEventListener("click", function() {
+            myFunctionNew(Months);
+        });
     </script>
 @endsection

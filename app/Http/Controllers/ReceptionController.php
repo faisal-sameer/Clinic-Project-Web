@@ -44,22 +44,20 @@ class ReceptionController extends Controller
         $app = Reservation::select(
             DB::raw('count(*) as total'),
             DB::raw("DATE_FORMAT(Date, '%Y-%m') as new_date")
-        )
-            ->groupBy('new_date')->orderBy('new_date')->get();
+        )->groupBy('new_date')->orderBy('new_date')->get();
+        $services  =  Reservation::groupBy('services_id')->select('services_id', DB::raw('count(*) as total'))->get();
 
-        $data = [];
-        foreach ($app as $key =>  $item) {
-            //$newDate = date('Y-m-d', strtotime($item->Date));
-            //$monthName = date("F", strtotime($newDate));
+        foreach ($app as   $item) {
+
             $time = \Carbon\Carbon::parse($item->new_date)->format('F');
-            // $mount = MONTHNAME($item->Date);
-            $data[] = ['label' => $time, 'y' => $item->total];
+            $Months[] = ['label' => $time, 'y' => $item->total];
         }
-        $result = [];
+        foreach ($services as $item) {
+            $Service[] = ['label' => $item->service->Name_ar, 'y' => $item->total];
+        }
 
-
-        $all[] = ['data' => $data, 'Name' => "AF"];
-        //return $data;
+        $all[] = ['Months' => $Months, 'Service' => $Service, 'Name' => "AF"];
+        //return $Service;
         return view('dashboardStatistic')->with('all', $all);
     }
     protected function dashboardContent()
@@ -67,8 +65,8 @@ class ReceptionController extends Controller
 
         $Detail = ClinicDetails::get();
         $Service = Service::where('Status', 1)->get();
-        $Discount = Discount::get();
-        $Doctor = Doctor::get();
+        $Discount = Discount::where('Status', 1)->get();
+        $Doctor = Doctor::where('Status', 1)->get();
         $clinic = clinic::get();
         $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinic' => $clinic];
         //$test = new SendNoificationFCM();
@@ -76,6 +74,30 @@ class ReceptionController extends Controller
         // $test->sendGCM('AF Head', 'FA Body', "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
 
         return view('dashboardContent')->with('content', $content);
+    }
+    protected function dashboardContentDelete(Request $request)
+    {
+        switch ($request->type) {
+            case 1:
+                Discount::where('id', $request->id)->update([
+                    'Status' => 2
+                ]);
+                break;
+            case 2:
+                Service::where('id', $request->id)->update([
+                    'Status' => 2
+                ]);
+                break;
+            case 3:
+                Doctor::where('id', $request->id)->update([
+                    'Status' => 2
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        return back();
     }
     protected function dashboardContentNew(Request $request)
     {
@@ -215,7 +237,7 @@ class ReceptionController extends Controller
                     'DoctorImg' => 'required',
                     'DoctorName'     => 'required|string  | min:3   | max:255',
                     'email'     => 'required | email | max:255 | unique:users',
-                    'DoctorPassword'     => 'required ',
+                    // 'DoctorPassword'     => 'required ',
                     'DoctorInfo'  => 'required| min:8',
 
                 ], $messages);
@@ -234,7 +256,7 @@ class ReceptionController extends Controller
                 $user = new User();
                 $user->name = $request->DoctorName;
                 $user->email = $request->email;
-                $user->password = Hash::make($request->DoctorPassword);
+                $user->password = Hash::make("123456789");
                 $user->permission_id = 2;
                 $user->Status = 1;
                 $user->save();

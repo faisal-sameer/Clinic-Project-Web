@@ -24,6 +24,8 @@ Route::group(
 
 
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+        Route::post('/SendEmail', [App\Http\Controllers\HomeController::class, 'SendEmail'])->name('SendEmail');
+
 
         Auth::routes();
 
@@ -32,6 +34,7 @@ Route::group(
 
         Route::post('/dashboardContentUpdate', [App\Http\Controllers\ReceptionController::class, 'dashboardContentUpdate'])->name('Update');
         Route::post('/dashboardContentNew', [App\Http\Controllers\ReceptionController::class, 'dashboardContentNew'])->name('New');
+        Route::post('/dashboardContentDelete', [App\Http\Controllers\ReceptionController::class, 'dashboardContentDelete'])->name('Delete');
 
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

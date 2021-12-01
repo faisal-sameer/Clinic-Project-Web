@@ -22,11 +22,11 @@
                 <div id="mangrow" class="form-inline">
 
 
-                    <div class="select-box" id="select1" style="width: 40%; margin-right: 20%">
+                    <div class="select-box  " id="select1" style="width: 40%;  margin-right: 20%">
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
-                                <input class="select-box__input" type="radio" name="Ben" checked="checked" />
-                                <p class="select-box__input-text"> اختار </p>
+                                <input class="select-box__input " type="radio" name="Ben" checked="checked" />
+                                <p class="select-box__input-text " id="choiceFirst"> اختار </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="aboutClinic" name="Ben" />
@@ -50,7 +50,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" aria-hidden="aria-hidden">
+                                <label class="select-box__option" id="choiceFirst" aria-hidden="aria-hidden">
                                     اختار </label>
                             </li>
                             <li>
@@ -181,13 +181,16 @@
                 <form method="POST" id="formTag" action="{{ route('Update') }}" enctype="multipart/form-data">
                     @csrf
                     <textarea placeholder="id" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5% ;display: none;" name="id" id="id" cols="1"
-                        rows="1"></textarea><!--لاظهار الاي دي-->
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5% ;" name="id" id="id" cols="1"
+                        rows="1"></textarea>
+                    <!--لاظهار الاي دي    display: none;  -->
                     <textarea placeholder="type" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; display: none;" name="type" id="typeText"
-                        cols="1" rows="1"></textarea><!--لاظهار نوع اللست سواء طبيب أو عروض أو الخ-->
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; " name="type" id="typeText"
+                        cols="1" rows="1"></textarea>
+                    <!--لاظهار نوع اللست سواء طبيب أو عروض أو الخ-->
 
-                    <div id="UpdateinfoAbout" class="row"><!--تحديث معلومات العيادة-->
+                    <div id="UpdateinfoAbout" class="row">
+                        <!--تحديث معلومات العيادة-->
 
 
                         <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة "
@@ -201,29 +204,29 @@
                             <img id="blahAbout" style="height: 25%; width: 25%" src="#" alt="your image" />
                         </div>
 
-                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+                        <button id="updateBAbout" type="submit" class="btn btn-info"></button>
 
                     </div>
 
-                    <div id="UpdateinfoDiscount" class="row"><!--تحديث معلومات العروض-->
+                    <div id="UpdateinfoDiscount" class="row">
+                        <!--تحديث معلومات العروض-->
                         <div id="doctor-update-content">
-                        <textarea placeholder="العنوان" class="shadow-drop-2-center textAF"
-                            name="DisTitle" id="DisTitle"
-                            cols="1" rows="1"></textarea>
-                            <textarea placeholder="السعر " class="shadow-drop-2-center textAF"
-                            name="DisPrice" id="DisPrice"
-                              cols="1" rows="1"></textarea>
+                            <textarea placeholder="العنوان" class="shadow-drop-2-center textAF" name="DisTitle"
+                                id="DisTitle" cols="1" rows="1"></textarea>
+                            <textarea placeholder="السعر " class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice"
+                                cols="1" rows="1"></textarea>
                         </div>
 
                         <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" ... وصف العرض "
                             class="shadow-drop-2-center textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
 
-                       
-                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+
+                        <button id="updateBDiscount" type="submit" class="btn btn-info"></button>
 
                     </div>
 
-                    <div id="UpdateinfoServie"><!--تحديث معلومات الخدمات-->
+                    <div id="UpdateinfoServie">
+                        <!--تحديث معلومات الخدمات-->
                         <div class="row">
 
 
@@ -237,18 +240,17 @@
                         </div>
                         <br><br>
 
-                       
-                        <button id="updateB" type="submit" style="width: 100%" class="btn btn-info">تحديث</button>
+
+                        <button id="updateBService" type="submit" style="width: 100%" class="btn btn-info"></button>
 
                     </div>
-                    <div id="UpdateinfoDoctor" class="row"> <!--تحديث معلومات الاطباء-->
+                    <div id="UpdateinfoDoctor" class="row">
+                        <!--تحديث معلومات الاطباء-->
                         <div id="doctor-update-content">
-                        <textarea placeholder="الاسم الكامل  " class="shadow-drop-2-center textAF"
-                            name="DoctorName" id="DoctorName" cols="1"
-                            rows="1"></textarea>
-                        <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF"
-                            name="email" id="email-content" cols="1"
-                            rows="1"></textarea>
+                            <textarea placeholder="الاسم الكامل  " class="shadow-drop-2-center textAF" name="DoctorName"
+                                id="DoctorName" cols="1" rows="1"></textarea>
+                            <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF" name="email"
+                                id="email-content" cols="1" rows="1"></textarea>
                         </div>
                         <input placeholder="كلمة المرور " type="password" class="shadow-drop-2-center textAF"
                             style="text-align: right ;  width: 20%  ;height: 5% ;display:none" name="DoctorPassword"
@@ -260,9 +262,9 @@
                         <div id="filerow" style="margin-left:40%; " class="row">
                             <input type="file" class="foo" name="DoctorImg" id="fileInput"
                                 onchange="readURL(this);">
-                            <img id="blahDoctor"  style="height: 25%; width: 25%" src="#" alt="your image" />
+                            <img id="blahDoctor" style="height: 25%; width: 25%" src="#" alt="your image" />
                         </div>
-                        <button id="updateB" type="submit" class="btn btn-info">تحديث</button>
+                        <button id="updateBDoctor" type="submit" class="btn btn-info">تحديث</button>
 
                     </div>
 
@@ -275,7 +277,7 @@
 @section('script')
 
     <script>
-        document.getElementById("updateB").addEventListener("click", function() {
+        document.getElementById("updateBAbout").addEventListener("click", function() {
             //  document.getElementById("typeText").innerText = 3;
 
         });
@@ -322,6 +324,7 @@
 
         document.getElementById("Update").addEventListener("click", myFunctionUpdate); //زر التحديث
         document.getElementById("New").addEventListener("click", myFunctionNew);
+        document.getElementById("delete").addEventListener("click", myFunctionDelete);
 
         document.getElementById("formEditServices").style.display = "none"; //hide
         document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
@@ -336,7 +339,11 @@
             if (frm) {
                 frm.action = '{{ route('Update') }}'
             }
+            $('#choiceFirst').removeClass('new-content');
+            $('#choiceFirst').removeClass('delete-content');
 
+            var f = document.getElementById("choiceFirst");
+            f.className += " update-content";
             document.getElementById("aboutClinics").hidden = false;
 
 
@@ -348,7 +355,10 @@
             document.getElementById("selectDiscount").style.display = "none"; //hide
             document.getElementById("selectService").style.display = "none"; //hide
             document.getElementById("selectDoctor").style.display = "none"; //hide
-            document.getElementById("updateB").innerText = "تحديث";
+            document.getElementById("updateBAbout").innerText = "تحديث";
+            document.getElementById("updateBDiscount").innerText = "تحديث";
+            document.getElementById("updateBService").innerText = "تحديث";
+            document.getElementById("updateBDoctor").innerText = "تحديث";
 
             document.getElementById("container").setAttribute('style', 'margin-top:10% !important;');
             document.getElementById("updateForm").style.display = "block"; //hide
@@ -361,14 +371,52 @@
                 frm.action = '{{ route('New') }}'
             }
             document.getElementById("aboutClinics").hidden = true;
+            $('#choiceFirst').removeClass('update-content');
+            $('#choiceFirst').removeClass('delete-content');
 
-
+            var f = document.getElementById("choiceFirst");
+            f.className += " new-content";
             var num = document.getElementById("aboutClinic").value = 1;
             var num = document.getElementById("discount").value = 1;
             var num = document.getElementById("service").value = 1;
             var num = document.getElementById("doctor").value = 1;
-            document.getElementById("updateB").innerText = "انشاء";
 
+            document.getElementById("updateBAbout").innerText = "انشاء";
+            document.getElementById("updateBDiscount").innerText = "انشاء";
+            document.getElementById("updateBService").innerText = "انشاء";
+            document.getElementById("updateBDoctor").innerText = "انشاء";
+
+            document.getElementById("selectDiscount").style.display = "none"; //hide
+            document.getElementById("selectService").style.display = "none"; //hide
+            document.getElementById("selectDoctor").style.display = "none"; //hide
+
+            document.getElementById("container").setAttribute('style', 'margin-top:10% !important;');
+            document.getElementById("updateForm").style.display = "block"; //hide
+
+        }
+
+        function myFunctionDelete() {
+            var frm = document.getElementById('formTag') || null;
+            if (frm) {
+                frm.action = '{{ route('Delete') }}'
+            }
+            document.getElementById("aboutClinics").hidden = true;
+
+
+            $('#choiceFirst').removeClass('update-content');
+            $('#choiceFirst').removeClass('new-content');
+
+            var f = document.getElementById("choiceFirst");
+            f.className += " delete-content";
+            var num = document.getElementById("aboutClinic").value = 3;
+            var num = document.getElementById("discount").value = 3;
+            var num = document.getElementById("service").value = 3;
+            var num = document.getElementById("doctor").value = 3;
+
+            document.getElementById("updateBAbout").innerText = "حذف";
+            document.getElementById("updateBDiscount").innerText = "حذف";
+            document.getElementById("updateBService").innerText = "حذف";
+            document.getElementById("updateBDoctor").innerText = "حذف";
             document.getElementById("selectDiscount").style.display = "none"; //hide
             document.getElementById("selectService").style.display = "none"; //hide
             document.getElementById("selectDoctor").style.display = "none"; //hide
@@ -515,7 +563,6 @@
 
             document.getElementById("id").innerText = $id;
             document.getElementById("typeText").innerText = 3;
-            alert(contents.doctor[$id - 1].path);
             document.getElementById("DoctorName").innerText = contents.doctor[$id - 1].user.name;
             document.getElementById("email-content").innerText = contents.doctor[$id - 1].user.email;
             document.getElementById("DoctorInfo").innerText = contents.doctor[$id - 1].info_ar;
