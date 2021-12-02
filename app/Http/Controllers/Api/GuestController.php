@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\DevicesInfo;
 
 class GuestController extends Controller
 {
@@ -18,6 +19,21 @@ class GuestController extends Controller
         }
 
         return response()->json(['status' => 'success', 'data' => $d]);
+    }
+    protected function SaveDeviceInfo(Request $request)
+    {
+        $info = new DevicesInfo();
+        $info->ID_device_single = $request->single;
+        $info->Boot_Loader = $request->bootloader;
+        $info->Host = $request->Host;
+        $info->Model = $request->Model;
+        $info->ID_device = $request->ID;
+        $info->Token = $request->Token;
+        $info->last_active = now();
+        $info->Status = 1;
+        $info->save();
+
+        return response()->json(['status' => 'success', 'data' => "Done !!"]);
     }
     protected function AppointmentNew(Request $request)
     {
