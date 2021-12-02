@@ -22,16 +22,23 @@ class GuestController extends Controller
     }
     protected function SaveDeviceInfo(Request $request)
     {
-        $info = new DevicesInfo();
-        $info->ID_device_single = $request->single;
-        $info->Boot_Loader = $request->bootloader;
-        $info->Host = $request->Host;
-        $info->Model = $request->Model;
-        $info->ID_device = $request->ID;
-        $info->Token = $request->Token;
-        $info->last_active = now();
-        $info->Status = 1;
-        $info->save();
+        //// return response()->json(['status' => 'success', 'data' => $request->all()]);
+        if ($request->OurID == null) {
+            $info = new DevicesInfo();
+            $info->ID_device_single = $request->single;
+            $info->Boot_Loader = $request->bootloader;
+            $info->Host = $request->Host;
+            $info->Model = $request->Model;
+            $info->ID_device = $request->ID;
+            $info->Token = $request->Token;
+            $info->last_active = now();
+            $info->Status = 1;
+            $info->save();
+            return response()->json(['status' => 'success', 'data' => $info->id]);
+        } else {
+            return response()->json(['status' => 'success', 'data' => "Done"]);
+        }
+
 
         return response()->json(['status' => 'success', 'data' => "Done !!"]);
     }
