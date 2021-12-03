@@ -16,6 +16,7 @@
                 <div class="text-center  " style="background-color: rgb(189, 189, 189)">
                     <p id="Months">احصائيات المراجعين بالاشهر </p>
                     <p id="Services">احصائيات المراجعين بالخدمات</p>
+                    <p id="Discounts">احصائيات المراجعين بالعروض</p>
                 </div>
                 <div class="card bounce-in-top " id="cards">
 
@@ -51,8 +52,7 @@
                 data: [{
                     type: "column",
                     showInLegend: true,
-                    legendMarkerColor: "grey",
-                    legendText: "MMbbl = one million barrels",
+                    legendMarkerColor: "لامعث",
                     dataPoints:
 
                         data
@@ -75,4 +75,12 @@
             myFunctionNew(Months);
         });
     </script>
+    <script>
+        document.getElementById("Discounts").addEventListener("click", function() {
+            var Discounts = @json($all[0]['Discount']);
+
+            myFunctionNew(Discounts);
+        });
+    </script>
+
 @endsection

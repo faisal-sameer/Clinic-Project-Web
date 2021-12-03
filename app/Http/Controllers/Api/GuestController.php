@@ -61,7 +61,7 @@ class GuestController extends Controller
 
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم اختيار نوع الخدمة  "]);
         } else {
-            $ServiceRequest = Service::where('Name', $request->Service)->first();
+            $ServiceRequest = Service::where('Name_ar', $request->Service)->first();
 
             $reservations = new Reservation();
             $reservations->NID = $request->NID;
@@ -107,7 +107,7 @@ class GuestController extends Controller
     protected function  dashboardUser(Request $request)
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
-            ->select('id', 'Name', 'NID', 'Date', 'Phone', 'services_id', 'Status')->get();
+            ->select('id', 'Name_ar', 'NID', 'Date', 'Phone', 'services_id', 'Status')->get();
         if ($myReservations->count() == 0) {
             $all = "Nulls";
         } else {
@@ -116,7 +116,7 @@ class GuestController extends Controller
                 $all[$i] = [
                     'id' => $myReservation->id, 'Name' => $myReservation->Name, 'NID' => $myReservation->NID,
                     'Day' =>  date("Y-m-d", strtotime($myReservation->Date)), 'Time' => date("h:i", strtotime($myReservation->Date)), 'Phone' => $myReservation->Phone,
-                    'service' => $myReservation->service->Name,
+                    'service' => $myReservation->service->Name_ar,
                     'Status' => $myReservation->Status
                 ];
                 $i++;

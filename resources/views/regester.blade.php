@@ -41,10 +41,18 @@
 
                                     <select class="form-select" id="idnational" name="Service"
                                         aria-label="Default select example">
+                                        <option selected disabled>Discount</option>
+
+                                        @foreach ($all['discount'] as $discount)
+
+                                            <option value="D{{ $discount->id }}">{{ $discount->title_ar }}</option>
+
+                                        @endforeach
+                                        <option disabled>Service</option>
 
                                         @foreach ($all['services'] as $service)
 
-                                            <option value="{{ $service->id }}">{{ $service->Name }}</option>
+                                            <option value="S{{ $service->id }}">{{ $service->Name_ar }}</option>
 
                                         @endforeach
 

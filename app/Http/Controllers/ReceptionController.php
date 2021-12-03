@@ -45,18 +45,32 @@ class ReceptionController extends Controller
             DB::raw('count(*) as total'),
             DB::raw("DATE_FORMAT(Date, '%Y-%m') as new_date")
         )->groupBy('new_date')->orderBy('new_date')->get();
-        $services  =  Reservation::groupBy('services_id')->select('services_id', DB::raw('count(*) as total'))->get();
+        $services  =  Reservation::where('services_id', '!=', null)->groupBy('services_id')->select('services_id', DB::raw('count(*) as total'))->get();
+        $discount  =  Reservation::where('discount_id', '!=', null)->groupBy('discount_id')->select('discount_id', DB::raw('count(*) as total'))->get();
+        if ($app->count() == null) {
+            $Months = "Nulls";
+        } else {
+            foreach ($app as   $item) {
 
-        foreach ($app as   $item) {
-
-            $time = \Carbon\Carbon::parse($item->new_date)->format('F');
-            $Months[] = ['label' => $time, 'y' => $item->total];
+                $time = \Carbon\Carbon::parse($item->new_date)->format('F');
+                $Months[] = ['label' => $time, 'y' => $item->total];
+            }
         }
-        foreach ($services as $item) {
-            $Service[] = ['label' => $item->service->Name_ar, 'y' => $item->total];
+        if ($services->count() == null) {
+            $Service = "Nulls";
+        } else {
+            foreach ($services as $item) {
+                $Service[] = ['label' => $item->service->Name_ar, 'y' => $item->total];
+            }
         }
-
-        $all[] = ['Months' => $Months, 'Service' => $Service, 'Name' => "AF"];
+        if ($discount->count() == null) {
+            $Discounts = "Nulls";
+        } else {
+            foreach ($discount as $item) {
+                $Discounts[] = ['label' => $item->discount->title_ar, 'y' => $item->total];
+            }
+        }
+        $all[] = ['Months' => $Months, 'Service' => $Service, 'Discount' => $Discounts];
         //return $Service;
         return view('dashboardStatistic')->with('all', $all);
     }

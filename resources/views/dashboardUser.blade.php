@@ -92,11 +92,11 @@
                                             </td>
 
                                             <td colspan="2" id="texttab" style="text-align: center">
-                                                {{ $reservation->service->Name }}
+                                                {{ $reservation->service == null ? $reservation->discount->title_ar : $reservation->service->Name_ar }}
                                             </td>
 
                                             <td colspan="2" id="texttab" style="text-align: center">
-                                                {{ $reservation->service->Shift }} Shift
+                                                {{ $reservation->service['id'] }} Shift
 
 
                                             </td>
@@ -157,10 +157,10 @@
 
                                                                         @if ($service->id == $reservation->services_id)
                                                                             <option selected value="{{ $service->id }}">
-                                                                                {{ $service->Name }}</option>
+                                                                                {{ $service->Name_ar }}</option>
                                                                         @else
                                                                             <option value="{{ $service->id }}">
-                                                                                {{ $service->Name }}</option>
+                                                                                {{ $service->Name_ar }}</option>
                                                                         @endif
 
 

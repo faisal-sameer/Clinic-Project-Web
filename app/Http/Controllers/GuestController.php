@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Reservation;
@@ -47,10 +48,11 @@ class GuestController extends Controller
         } else {
 
 
-            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
+            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+                ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
 
 
-            $services  = Service::select('id', 'id', 'Name')->get();
+            $services  = Service::select('id', 'Name_ar')->get();
 
             $counts = Reservation::where('NID', $request->NID)->count();
 
@@ -83,10 +85,12 @@ class GuestController extends Controller
         if ($request->NID == null) {
             return back();
         }
-        $services  = Service::select('id', 'id', 'Name')->get();
+        $services  = Service::where('Status', 1)->select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
 
         $all['NID'] = $request->NID;
         $all['services'] = $services;
+        $all['discount'] = $discount;
         // return $all;
         return view('regester')->with('all', $all);
     }
@@ -94,6 +98,7 @@ class GuestController extends Controller
     protected function AppointmentNew(Request $request)
     {
 
+        //return substr($request->Service, 1);
 
         if ($request->NID == null) {
             Alert::info('لا يمكن حجز موعد بدون رقم هوية  ');
@@ -111,7 +116,7 @@ class GuestController extends Controller
             Alert::info('يجب عليك تحديد موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
 
             return back();
-        } else if ($request->Service == null) {
+        } else if ($request->Service == null || (substr($request->Service, 0, 1) != 'D' && substr($request->Service, 0, 1) != 'S')) {
             Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
 
             return back();
@@ -122,12 +127,14 @@ class GuestController extends Controller
             $reservations->Name = $request->Name;
             $reservations->Date = $request->Appointment;
             $reservations->Phone = $request->Phone;
-            $reservations->services_id = $request->Service;
+            $reservations->services_id =  substr($request->Service, 0, 1) == 'S' ?  substr($request->Service, 1) : null;
+            $reservations->discount_id = substr($request->Service, 0, 1) == 'D' ?  substr($request->Service, 1) : null;
             $reservations->Status = 1;
             $reservations->save();
-            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')->select('id', 'Name', 'Date', 'Phone', 'services_id', 'Status')->get();
+            $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+                ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
             $counts = Reservation::where('NID', $request->NID)->count();
-            $services  = Service::select('id', 'id', 'Name')->get();
+            $services  = Service::select('id',  'Name_ar')->get();
 
             if ($reservations->count() == 0) {
                 $all = ['NID' => $request->NID];
