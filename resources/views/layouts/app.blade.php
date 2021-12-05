@@ -32,16 +32,9 @@
     </script>
     <!-- Styles -->
 </head>
-
 <body>
-
-
-    <body class="main-layout">
-
-
-
-
-        <!-- ***** Preloader Start ***** -->
+<body class="main-layout">
+<!-- ***** Preloader Start ***** -->
         <div id="preloader">
             <div class="jumper">
                 <div></div>
@@ -49,8 +42,6 @@
                 <div></div>
             </div>
         </div>
-
-
         <header class="header-area header-sticky">
             <div class="container">
                 <div class="row">
