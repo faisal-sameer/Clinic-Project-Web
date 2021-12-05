@@ -72,9 +72,11 @@
                                                 {{ __('app.DashBoard') }}
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
-                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">تعديل على المحتوى</a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardStatistic">الاحصائيات</a>
+                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">
+                                                {{ __('app.appointmentBoard') }}
+                                              </a>
+                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">  {{ __('app.EditContent') }}</a>
+                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardStatistic">  {{ __('app.statistics') }}</a>
 
                                             </div>
                                           </li>
