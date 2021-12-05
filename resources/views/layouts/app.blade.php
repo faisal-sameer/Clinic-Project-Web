@@ -59,11 +59,26 @@
                             <a href="#" class="logo"> اللوقو</a>
 
                             <ul class="nav">
+                            
                                 <li class="scroll-to-section"><a href="@yield('we')" style="font-size: large;"
                                         class="active"> {{ __('app.HomePage') }}</a></li>
                                 <li class="scroll-to-section"><a
                                         href="{{ \LaravelLocalization::localizeURL('/reservation') }}"
                                         style="font-size: large;"> {{ __('app.reservation') }}</a></li>
+                                        @if (Auth::user() != null)
+
+                                        <li class="scroll-to-section nav-item dropdown"  id="scroool">
+                                            <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                {{ __('app.DashBoard') }}
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
+                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
+                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">تعديل على المحتوى</a>
+                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardStatistic">الاحصائيات</a>
+
+                                            </div>
+                                          </li>
+                                        @endif
                                 <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
                                         {{ __('app.services') }}</a></li>
                                 <li class="scroll-to-section nav-item dropdown">
@@ -88,6 +103,8 @@
                                 </li>
 
 
+                                
+
 
 
                                 <li class="scroll-to-section"><a href=@yield('con') style="font-size: large;">
@@ -102,17 +119,7 @@
                                 @if (Auth::user() != null)
 
                                     
-                                        <li class="scroll-to-section nav-item dropdown" >
-                                            <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {{ __('app.DashBoard') }}
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
-                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">لوحة المواعيد</a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">تعديل على المحتوى</a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardStatistic">الاحصائيات</a>
-
-                                            </div>
-                                          </li>
+                                     
                                     <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
                                             style="font-size: large;"><i class="fas fa-sign-out-alt "></i></a>
