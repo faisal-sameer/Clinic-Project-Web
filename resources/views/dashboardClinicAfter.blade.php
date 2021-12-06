@@ -27,7 +27,8 @@
                 <br>
                 <h2> {{ __('ReservationDashboard.Future') }}</h2>
 
-                <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for names.."
+                <input type="text" id="myInput2" onkeyup="myFunction2()"
+                    placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
                     title="Type in a name">
 
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -60,7 +61,17 @@
                                                 </form>
 
                                             </div>
+                                            <div id="dailogs4">
+                                                <form method="POST" action="{{ route('Rejected') }}">
+                                                    @csrf
+                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
+                                                        readonly hidden required />
+                                                    <button type="submit" class="btn btn-danger">
+                                                        {{ __('ReservationDashboard.Status, :lang', ['ar' => 'رفض', 'en' => 'Reject']) }}</button>
 
+                                                    </button>
+                                                </form>
+                                            </div>
                                             <br><br>
                                         @endif
 
@@ -68,6 +79,8 @@
                                     <td colspan="1" id="texttab">
                                         @if ($Reservation->Status == 5)
                                             {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
+                                        @elseif($Reservation->Status == 9)
+                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected']) }}
 
                                         @else
                                             {{ __('ReservationDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
@@ -75,7 +88,8 @@
                                     </td>
 
                                     <td colspan="2" id="texttab">
-                                        {{ $Reservation->service->Name }}</td>
+                                        {{ $Reservation->service == null ? $Reservation->discount->title_ar : $Reservation->service['Name_ar'] }}
+                                    </td>
 
                                     <td colspan="2" id="texttab">{{ $Reservation->Date }}
                                     </td>

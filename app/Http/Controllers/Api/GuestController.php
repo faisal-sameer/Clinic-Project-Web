@@ -15,7 +15,7 @@ class GuestController extends Controller
         $Services = Service::where('Status', 1)->get();
 
         foreach ($Services as $Service) {
-            $d[] = ['id' => $Service->id, 'name' => $Service->Name,];
+            $d[] = ['id' => $Service->id, 'name' => $Service->Name_ar,];
         }
 
         return response()->json(['status' => 'success', 'data' => $d]);
@@ -107,7 +107,7 @@ class GuestController extends Controller
     protected function  dashboardUser(Request $request)
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
-            ->select('id', 'Name_ar', 'NID', 'Date', 'Phone', 'services_id', 'Status')->get();
+            ->select('id', 'Name', 'NID', 'Date', 'Phone', 'services_id', 'Status')->get();
         if ($myReservations->count() == 0) {
             $all = "Nulls";
         } else {

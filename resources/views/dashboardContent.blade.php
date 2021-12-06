@@ -228,8 +228,24 @@
                     <div id="UpdateinfoServie">
                         <!--تحديث معلومات الخدمات-->
                         <div class="row">
+                            <div class="form-group row">
+
+                                <select class="form-select" id="idnational" name="clinic"
+                                    aria-label="Default select example">
+                                    <option selected disabled>Discount</option>
+                                    @foreach ($content['clinics'] as $clinic)
+
+                                        <option value="{{ $clinic->id }}">{{ $clinic->text_ar }}
+                                        </option>
+
+                                    @endforeach
 
 
+
+                                </select>
+
+
+                            </div>
                             <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... وصف الخدمة  "
                                 class="shadow-drop-2-center" name="name" id="managertextarea" cols="100"
                                 rows="5"></textarea>
@@ -512,19 +528,25 @@
 
         function myFunctionSubService($id) { //الخدمات
 
-            var contents = @json($content);
+            var contents = @json($content['service']);
+            var result = contents.find(({
+                id
+            }) => id === $id);
+            console.log(result);
             document.getElementById("id").innerText = $id;
             document.getElementById("typeText").innerText = 2;
-
-            document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
-            document.getElementById("formEditServices").style.display = "block"; //hide
+            document.getElementById(
+                "welcome").setAttribute('style', 'height: 300%; !important;');
+            document.getElementById(
+                "formEditServices").style.display = "block"; //hide
             document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
             document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
             document.getElementById("UpdateinfoServie").style.display = "block"; //hide
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
 
-            document.getElementById("managertextarea").innerText = contents.service[$id - 1].Name_ar;
-            document.getElementById("managertextarea1").innerText = contents.service[$id - 1].Price;
+            document.getElementById("managertextarea").innerText = result.Name_ar;
+            document
+                .getElementById("managertextarea1").innerText = result.Price;
             //document.getElementById("updateB").style.display = "block"; //hide
 
         }
