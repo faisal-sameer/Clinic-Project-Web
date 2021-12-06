@@ -94,12 +94,6 @@
                                         @endforeach
                                     </div>
                                 </li>
-
-
-                                
-
-
-
                                 <li class="scroll-to-section"><a href=@yield('con') style="font-size: large;">
                                         {{ __('app.contactUs') }}</a></li>
                                 @if (Auth::user() == null)
@@ -110,10 +104,7 @@
                                 @endif
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
-
-                                    
-                                     
-                                    <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                           <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
                                             style="font-size: large;"><i class="fas fa-sign-out-alt "></i></a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
