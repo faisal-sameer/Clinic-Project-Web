@@ -189,7 +189,41 @@ class ReceptionController extends Controller
 
 
         ];
+        $messagesEn = [  // Discount waring text English
+            'DisTitle.required' => ' There must be a name  ',   // Required
+            'DisText.required' => 'There must be a description ',   // Required
+            'DisPrice.required' => 'There must be a price  ',   // Required
 
+
+            'DisTitle.string' => 'letters',   // string
+            'DisText.string' => 'There must be a price ',   // string
+            'DisPrice.string' => 'There must be a price  ',   // string
+
+            'DisTitle.min' => 'less than the limit ',   // min
+            'DisText.min' => 'less than the limit ',   // min
+            'DisPrice.min' => 'less than the limit ',   // min
+
+
+            'DisTitle.max' => 'more than the limit ',   // max
+            'DisText.max' => 'more than the limit ',   // max
+            'DisPrice.max' => 'more than the limit ',   // max
+
+            // Service  waring text English
+
+            'name.required' => 'There must be a name  ',   // Required
+            'price.required' => 'There must be a price  ',   // Required
+
+
+            'name.string' => 'letters',   // string
+            'price.string' => 'letters ',   // string
+
+            'name.min' => 'less than the limit  ',   // min
+            'price.min' => 'less than the limit  ',   // min
+
+
+            'name.max' => 'more than the limit',   // max
+            'price.max' => 'more than the limit',   // max
+        ];
         $code = Str::random(4);
 
         switch ($request->type) {
@@ -201,10 +235,14 @@ class ReceptionController extends Controller
                     'DisPrice' => 'required|string | min:3  | max:25',
 
 
-                ], $messages);
+                ], app()->getLocale() == 'ar' ? $messages : $messagesEn);
 
                 if ($validator->fails()) {
-                    Alert::error('خطأ ', $validator->messages()->all());
+                    if (app()->getLocale() == 'ar') {
+                        Alert::error('خطأ ', $validator->messages()->all());
+                    } else {
+                        Alert::error('Error ', $validator->messages()->all());
+                    }
                     return back();
                 }
                 $oldDiscount = Discount::latest()->first();;
@@ -226,7 +264,11 @@ class ReceptionController extends Controller
                 // $test->sendGCM($request->DisTitle, $request->DisText, "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
                 // cZ5OzPeISdKBzcSicPDrzc:APA91bHTU37xE-tVGiVREXPdGhmNjd7GIV0tMJzRH7_fEXm0XFEPgu1Qi5h2aIuWRrk9W-HNzmqsar11hy6CchY7oYWcfwz5byfk9Kwxd_arngyAGbkIkcJhrQRraLFNCCkSM02TLaoL
                 // Galaxy 
-
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم انشاء عرض جديد بنجاح');
+                } else {
+                    Alert::info('A new discount has been created successfully');
+                }
                 break;
             case 2:
                 $validator = Validator::make($request->all(), [
@@ -237,10 +279,15 @@ class ReceptionController extends Controller
 
 
 
-                ], $messages);
+                ], app()->getLocale() == 'ar' ? $messages : $messagesEn);
 
                 if ($validator->fails()) {
-                    Alert::error('خطأ ', $validator->messages()->all());
+                    if (app()->getLocale() == 'ar') {
+                        Alert::error('خطأ ', $validator->messages()->all());
+                    } else {
+                        Alert::error('Error ', $validator->messages()->all());
+                    }
+
                     //   Alert::error('خطأ', $validator->messages()->all());
                     return back();
                 }
@@ -252,7 +299,11 @@ class ReceptionController extends Controller
                 $Service->clinic_id = 1;
                 $Service->Status = 1;
                 $Service->save();
-
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم انشاء خدمة جديدة بنجاح');
+                } else {
+                    Alert::info('A new service has been created successfully');
+                }
                 break;
             case 3:
                 $validator = Validator::make($request->all(), [
