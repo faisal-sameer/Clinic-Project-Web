@@ -263,16 +263,16 @@
                     <div id="UpdateinfoDoctor" class="row">
                         <!--تحديث معلومات الاطباء-->
                         <div id="doctor-update-content">
-                            <textarea placeholder="الاسم الكامل  " class="shadow-drop-2-center textAF" name="DoctorName"
+                            <textarea placeholder="{{ __('dashboardContent.fullName') }}" class="shadow-drop-2-center textAF" name="DoctorName"
                                 id="DoctorName" cols="1" rows="1"></textarea>
-                            <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF" name="email"
+                            <textarea placeholder="{{ __('dashboardContent.email') }}" class="shadow-drop-2-center textAF" name="email"
                                 id="email-content" cols="1" rows="1"></textarea>
                         </div>
-                        <input placeholder="كلمة المرور " type="password" class="shadow-drop-2-center textAF"
+                        <input placeholder="{{ __('auth.Password') }}" type="password" class="shadow-drop-2-center textAF"
                             style="text-align: right ;  width: 20%  ;height: 5% ;display:none" name="DoctorPassword"
                             id="DoctorPassword">
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة عن الطبيب  "
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder="{{ __('dashboardContent.aboutDoctor') }} "
                             class="shadow-drop-2-center textAF" name="DoctorInfo" id="DoctorInfo" cols="100"
                             rows="5"></textarea>
                         <div id="filerow" style="margin-left:40%; " class="row">

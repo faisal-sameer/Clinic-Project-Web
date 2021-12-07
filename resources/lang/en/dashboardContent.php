@@ -16,6 +16,9 @@ return [
     'title' => 'Title',
     'price' => 'Price',
     'aboutService' => 'About Service .. ',
+    'fullName' => 'Full Name',
+    'email' => 'Email',
+    'aboutDoctor' => 'About Doctor ..',
 
 
 

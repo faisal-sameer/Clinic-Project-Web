@@ -16,6 +16,11 @@ return [
     'title' => 'العنوان',
     'price' => 'السعر',
     'aboutService' => 'وصف الخدمة',
+    'fullName' => 'الاسم الكامل',
+    'email' => 'الايميل',
+    'aboutDoctor' => 'نبذة عن الطبيب ...',
+
+
 
 
 ];
