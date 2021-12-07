@@ -22,7 +22,7 @@
                 <div id="mangrow" class="form-inline">
 
 
-                    <div class="select-box  " id="select1" style="width: 40%;  margin-right: 20%">
+                    <div class="select-box" id="select1" style="width: 40%;  margin-right: 20%">
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
                                 <input class="select-box__input " type="radio" name="Ben" checked="checked" />
