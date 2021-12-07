@@ -12,6 +12,11 @@ return [
     'service' => 'Service',
     'doctor' => 'Doctor',
     'about' => 'About...',
+    'DiscountDescription' => 'Discount Description ...',
+    'title' => 'Title',
+    'price' => 'Price',
+    'aboutService' => 'About Service .. ',
+
 
 
 

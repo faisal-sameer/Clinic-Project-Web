@@ -211,13 +211,13 @@
                     <div id="UpdateinfoDiscount" class="row">
                         <!--تحديث معلومات العروض-->
                         <div id="doctor-update-content">
-                            <textarea placeholder="العنوان" class="shadow-drop-2-center textAF" name="DisTitle"
+                            <textarea placeholder="{{ __('dashboardContent.title') }}" class="shadow-drop-2-center textAF" name="DisTitle"
                                 id="DisTitle" cols="1" rows="1"></textarea>
-                            <textarea placeholder="السعر " class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice"
+                            <textarea placeholder="{{ __('dashboardContent.price') }} " class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice"
                                 cols="1" rows="1"></textarea>
                         </div>
 
-                        <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" ... وصف العرض "
+                        <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.DiscountDescription') }} "
                             class="shadow-drop-2-center textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
 
 
@@ -246,10 +246,10 @@
 
 
                             </div>
-                            <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... وصف الخدمة  "
+                            <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.aboutService') }}"
                                 class="shadow-drop-2-center" name="name" id="managertextarea" cols="100"
                                 rows="5"></textarea>
-                            <textarea placeholder="التسعيرة " class="shadow-drop-2-center"
+                            <textarea placeholder="{{ __('dashboardContent.price') }}" class="shadow-drop-2-center"
                                 style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="price"
                                 id="managertextarea1" cols="1" rows="1"></textarea>
 
