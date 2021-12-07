@@ -13,9 +13,9 @@
     <div class="welcome-area" id="welcome">
         <div class="container" id="container">
 
-            <input class="btn btn-success" type="button" id="Update" value="تحديث" />
-            <input class="btn btn-info" type="button" id="New" value="جديد " />
-            <input class="btn btn-danger" type="button" id="delete" value="حذف" />
+            <input class="btn btn-success" type="button" id="Update" value="{{ __('dashboardContent.Update') }}" />
+            <input class="btn btn-info" type="button" id="New" value="{{ __('dashboardContent.New') }} " />
+            <input class="btn btn-danger" type="button" id="delete" value="{{ __('dashboardContent.Delete') }}" />
 
             <div id="updateForm">
 
