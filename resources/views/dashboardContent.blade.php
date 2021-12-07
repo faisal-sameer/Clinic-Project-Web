@@ -13,36 +13,36 @@
     <div class="welcome-area" id="welcome">
         <div class="container" id="container">
 
-            <input class="btn btn-success" type="button" id="Update" value="تحديث" />
-            <input class="btn btn-info" type="button" id="New" value="جديد " />
-            <input class="btn btn-danger" type="button" id="delete" value="حذف" />
+            <input class="btn btn-success" type="button" id="Update" value="{{ __('dashboardContent.Update') }}" />
+            <input class="btn btn-info" type="button" id="New" value="{{ __('dashboardContent.New') }} " />
+            <input class="btn btn-danger" type="button" id="delete" value="{{ __('dashboardContent.Delete') }}" />
 
             <div id="updateForm">
 
                 <div id="mangrow" class="form-inline">
 
 
-                    <div class="select-box  " id="select1" style="width: 40%;  margin-right: 20%">
+                    <div class="select-box" id="select1" style="width: 40%;  margin-right: 20%">
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
                                 <input class="select-box__input " type="radio" name="Ben" checked="checked" />
-                                <p class="select-box__input-text " id="choiceFirst"> اختار </p>
+                                <p class="select-box__input-text " id="choiceFirst"> {{ __('dashboardContent.Chose') }} </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="aboutClinic" name="Ben" />
-                                <p class="select-box__input-text" id="aboutClinic"> العيادة </p>
+                                <p class="select-box__input-text" id="aboutClinic"> {{ __('dashboardContent.Clinic') }} </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="discount" name="Ben" />
-                                <p class="select-box__input-text">العروض</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.discount') }}</p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="service" name="Ben" />
-                                <p class="select-box__input-text">الخدمات</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.service') }}</p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="doctor" name="Ben" />
-                                <p class="select-box__input-text">الاطباء</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.doctor') }}</p>
                             </div>
 
                             <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
@@ -51,23 +51,23 @@
                         <ul class="select-box__list">
                             <li>
                                 <label class="select-box__option" id="choiceFirst" aria-hidden="aria-hidden">
-                                    اختار </label>
+                                    {{ __('dashboardContent.Chose') }} </label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="aboutClinic" id="aboutClinics"
-                                    aria-hidden="aria-hidden"> العيادة </label>
+                                    aria-hidden="aria-hidden"> {{ __('dashboardContent.Clinic') }} </label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="discount" id="discount"
-                                    aria-hidden="aria-hidden">العروض</label>
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.discount') }}</label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="service" id="Service"
-                                    aria-hidden="aria-hidden">الخدمات</label>
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.service') }}</label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="doctor" id="doctor"
-                                    aria-hidden="aria-hidden">الاطباء</label>
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.doctor') }}</label>
                             </li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="0" value="4" name="discount"
                                     checked="checked" />
-                                <p class="select-box__input-text">اختار</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['discount'] as $discount)
 
@@ -93,7 +93,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">اختار</label>
+                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['discount'] as $discount)
                                 <li>
@@ -110,7 +110,7 @@
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="0" value="4" name="service"
                                     checked="checked" />
-                                <p class="select-box__input-text">اختار</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['service'] as $service)
 
@@ -126,7 +126,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">اختار</label>
+                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['service'] as $service)
                                 <li>
@@ -145,7 +145,7 @@
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="0" value="4" name="doctor"
                                     checked="checked" />
-                                <p class="select-box__input-text">اختار</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['doctor'] as $doctor)
 
@@ -161,7 +161,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">اختار</label>
+                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['doctor'] as $doctor)
                                 <li>
@@ -193,7 +193,7 @@
                         <!--تحديث معلومات العيادة-->
 
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة "
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.about') }}"
                             class="shadow-drop-2-center textAF" id="AboutText" name="AboutText" cols="100"
                             rows="5"></textarea>
 
@@ -211,13 +211,13 @@
                     <div id="UpdateinfoDiscount" class="row">
                         <!--تحديث معلومات العروض-->
                         <div id="doctor-update-content">
-                            <textarea placeholder="العنوان" class="shadow-drop-2-center textAF" name="DisTitle"
+                            <textarea placeholder="{{ __('dashboardContent.title') }}" class="shadow-drop-2-center textAF" name="DisTitle"
                                 id="DisTitle" cols="1" rows="1"></textarea>
-                            <textarea placeholder="السعر " class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice"
+                            <textarea placeholder="{{ __('dashboardContent.price') }} " class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice"
                                 cols="1" rows="1"></textarea>
                         </div>
 
-                        <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" ... وصف العرض "
+                        <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.DiscountDescription') }} "
                             class="shadow-drop-2-center textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
 
 
@@ -246,10 +246,10 @@
 
 
                             </div>
-                            <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... وصف الخدمة  "
+                            <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.aboutService') }}"
                                 class="shadow-drop-2-center" name="name" id="managertextarea" cols="100"
                                 rows="5"></textarea>
-                            <textarea placeholder="التسعيرة " class="shadow-drop-2-center"
+                            <textarea placeholder="{{ __('dashboardContent.price') }}" class="shadow-drop-2-center"
                                 style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="price"
                                 id="managertextarea1" cols="1" rows="1"></textarea>
 
@@ -263,16 +263,16 @@
                     <div id="UpdateinfoDoctor" class="row">
                         <!--تحديث معلومات الاطباء-->
                         <div id="doctor-update-content">
-                            <textarea placeholder="الاسم الكامل  " class="shadow-drop-2-center textAF" name="DoctorName"
+                            <textarea placeholder="{{ __('dashboardContent.fullName') }}" class="shadow-drop-2-center textAF" name="DoctorName"
                                 id="DoctorName" cols="1" rows="1"></textarea>
-                            <textarea placeholder="البريد الالكتروني " class="shadow-drop-2-center textAF" name="email"
+                            <textarea placeholder="{{ __('dashboardContent.email') }}" class="shadow-drop-2-center textAF" name="email"
                                 id="email-content" cols="1" rows="1"></textarea>
                         </div>
-                        <input placeholder="كلمة المرور " type="password" class="shadow-drop-2-center textAF"
+                        <input placeholder="{{ __('auth.Password') }}" type="password" class="shadow-drop-2-center textAF"
                             style="text-align: right ;  width: 20%  ;height: 5% ;display:none" name="DoctorPassword"
                             id="DoctorPassword">
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة عن الطبيب  "
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder="{{ __('dashboardContent.aboutDoctor') }} "
                             class="shadow-drop-2-center textAF" name="DoctorInfo" id="DoctorInfo" cols="100"
                             rows="5"></textarea>
                         <div id="filerow" style="margin-left:40%; " class="row">

@@ -25,4 +25,10 @@ return [
     'FeedbackMessage' => 'الاقتراح او الملاحظة ....  ',
     'FeedbackSent' => 'ارسال',
     'lang' => 'اللغة',
+    'appointmentBoard' => 'لوحة المواعيد',
+    'EditContent' => 'تعديل على المحتوى',
+    'statistics' => 'الاحصائيات',
+
+
+
 ];

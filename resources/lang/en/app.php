@@ -25,6 +25,11 @@ return [
     'FeedbackMessage' => 'Your Feedback ....  ',
     'FeedbackSent' => 'sent',
     'lang' => 'language',
+    'appointmentBoard' => 'Appointment Board',
+    'EditContent' => 'Edit Content',
+    'statistics' => 'statistics',
+
+
 
 
 ];
