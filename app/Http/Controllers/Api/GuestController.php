@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\DevicesInfo;
+use App\Mail\SendEMail;
 
 class GuestController extends Controller
 {
@@ -41,6 +42,25 @@ class GuestController extends Controller
 
 
         return response()->json(['status' => 'success', 'data' => "Done !!"]);
+    }
+    protected function contact(Request $request)
+    {
+        $detailsforCustomer = [
+            'title' => 'Af Title',
+            'description' => 'AF Body ',
+            'body' => now()
+        ];
+        $detailsforAdmin = [
+            'title' => 'Boss Af Title',
+            'description' => $request->name .  $request->text,
+            'body' => now()
+        ];
+        $email = $request['email'];
+        \Mail::to($email)->send(new SendEMail($detailsforCustomer));
+        \Mail::to('ezooag@gmail.com')->send(new SendEMail($detailsforAdmin));
+
+
+        return response()->json(['status' => 'success', 'data' => "Done"]);
     }
     protected function AppointmentNew(Request $request)
     {
@@ -107,7 +127,7 @@ class GuestController extends Controller
     protected function  dashboardUser(Request $request)
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
-            ->select('id', 'Name', 'NID', 'Date', 'Phone', 'services_id', 'Status')->get();
+            ->select('id', 'Name', 'NID', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
         if ($myReservations->count() == 0) {
             $all = "Nulls";
         } else {
@@ -115,8 +135,9 @@ class GuestController extends Controller
             foreach ($myReservations as  $myReservation) {
                 $all[$i] = [
                     'id' => $myReservation->id, 'Name' => $myReservation->Name, 'NID' => $myReservation->NID,
-                    'Day' =>  date("Y-m-d", strtotime($myReservation->Date)), 'Time' => date("h:i", strtotime($myReservation->Date)), 'Phone' => $myReservation->Phone,
-                    'service' => $myReservation->service->Name_ar,
+                    'Day' => $myReservation->Date,
+                    'Phone' => $myReservation->Phone,
+                    'service' => $myReservation->services_id == null ? $myReservation->discount->title_ar : $myReservation->service->Name_ar,
                     'Status' => $myReservation->Status
                 ];
                 $i++;

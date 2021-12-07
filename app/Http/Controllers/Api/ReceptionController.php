@@ -15,38 +15,12 @@ class ReceptionController extends Controller
     }
 
 
-    protected function Appointments()
+    protected function AppointmentsToday()
     {
-        $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->paginate(2);
-        return response()->json([
-            'status' => 'success',
-            [
-                'Content-Type' => 'application/json;charset=UTF-32', 'Charset' => 'utf-32'
-            ],
-            'data' =>  $Reservations, JSON_UNESCAPED_UNICODE
 
-        ]);
-        // $profile = User::where('user_id', auth('api')->user()->id)->first();
-        /*
-        switch ($request->type) {
-            case 0:
-                $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
 
-                break;
-            case 1:
-                $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->get();
+        $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->paginate(10);
 
-                break;
-            case 2:
-                $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->get();
-
-                break;
-
-            default:
-                $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
-
-                break;
-        }
         if ($Reservations->count() == 0) {
             $all = "Nulls";
         } else {
@@ -60,17 +34,65 @@ class ReceptionController extends Controller
                 ];
             }
         }
-        // json_encode($all, JSON_UNESCAPED_UNICODE);
-
 
         return response()->json([
             'status' => 'success',
-            [
-                'Content-Type' => 'application/json;charset=UTF-32', 'Charset' => 'utf-32'
-            ],
-            'data' =>  $all, JSON_UNESCAPED_UNICODE
 
-        ]);*/
+            'data' =>  $all
+        ]);
+    }
+
+    protected function AppointmentsPast()
+    {
+
+
+        $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->paginate(10);
+
+        if ($Reservations->count() == 0) {
+            $all = "Nulls";
+        } else {
+            $i = 0;
+            foreach ($Reservations as  $Reservation) {
+                $all[$i++] = [
+                    'id' => (int)$Reservation->id, (string) 'NID' => $Reservation->NID, (string) 'Name' => $Reservation->Name,
+                    'Day' => (string) date("Y-m-d", strtotime($Reservation->Date)), (string)'Time' => date("h:i", strtotime($Reservation->Date)),
+                    'Phone' => (string) $Reservation->Phone, (string) 'services' => $Reservation->service->Name,
+                    'Status' => (int)$Reservation->Status
+                ];
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+
+            'data' =>  $all
+        ]);
+    }
+    protected function AppointmentsFuture()
+    {
+
+
+        $Reservations = Reservation::where('Date', '>',  substr(date('c', strtotime('1 Day')), 0, -14))->paginate(10);
+
+        if ($Reservations->count() == 0) {
+            $all = "Nulls";
+        } else {
+            $i = 0;
+            foreach ($Reservations as  $Reservation) {
+                $all[$i++] = [
+                    'id' => (int)$Reservation->id, (string) 'NID' => $Reservation->NID, (string) 'Name' => $Reservation->Name,
+                    'Day' => (string) $Reservation->Date,
+                    'Phone' => (string) $Reservation->Phone, (string)
+                    'service' => $Reservation->services_id == null ? $Reservation->discount->title_ar : $Reservation->service->Name_ar,
+                    'Status' => (int)$Reservation->Status
+                ];
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'data' =>  $all
+        ]);
     }
 
     protected function Coming(Request $request)
