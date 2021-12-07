@@ -26,23 +26,23 @@
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
                                 <input class="select-box__input " type="radio" name="Ben" checked="checked" />
-                                <p class="select-box__input-text " id="choiceFirst"> اختار </p>
+                                <p class="select-box__input-text " id="choiceFirst"> {{ __('dashboardContent.Chose') }} </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="aboutClinic" name="Ben" />
-                                <p class="select-box__input-text" id="aboutClinic"> العيادة </p>
+                                <p class="select-box__input-text" id="aboutClinic"> {{ __('dashboardContent.Clinic') }} </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="discount" name="Ben" />
-                                <p class="select-box__input-text">العروض</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.discount') }}</p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="service" name="Ben" />
-                                <p class="select-box__input-text">الخدمات</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.service') }}</p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="doctor" name="Ben" />
-                                <p class="select-box__input-text">الاطباء</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.doctor') }}</p>
                             </div>
 
                             <img class="select-box__icon" src="http://cdn.onlinewebfonts.com/svg/img_295694.svg"
@@ -51,23 +51,23 @@
                         <ul class="select-box__list">
                             <li>
                                 <label class="select-box__option" id="choiceFirst" aria-hidden="aria-hidden">
-                                    اختار </label>
+                                    {{ __('dashboardContent.Chose') }} </label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="aboutClinic" id="aboutClinics"
-                                    aria-hidden="aria-hidden"> العيادة </label>
+                                    aria-hidden="aria-hidden"> {{ __('dashboardContent.Clinic') }} </label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="discount" id="discount"
-                                    aria-hidden="aria-hidden">العروض</label>
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.discount') }}</label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="service" id="Service"
-                                    aria-hidden="aria-hidden">الخدمات</label>
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.service') }}</label>
                             </li>
                             <li>
                                 <label class="select-box__option" for="doctor" id="doctor"
-                                    aria-hidden="aria-hidden">الاطباء</label>
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.doctor') }}</label>
                             </li>
                         </ul>
                     </div>
@@ -77,7 +77,7 @@
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="0" value="4" name="discount"
                                     checked="checked" />
-                                <p class="select-box__input-text">اختار</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['discount'] as $discount)
 
@@ -93,7 +93,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">اختار</label>
+                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['discount'] as $discount)
                                 <li>
@@ -110,7 +110,7 @@
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="0" value="4" name="service"
                                     checked="checked" />
-                                <p class="select-box__input-text">اختار</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['service'] as $service)
 
@@ -126,7 +126,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">اختار</label>
+                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['service'] as $service)
                                 <li>
@@ -145,7 +145,7 @@
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="0" value="4" name="doctor"
                                     checked="checked" />
-                                <p class="select-box__input-text">اختار</p>
+                                <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['doctor'] as $doctor)
 
@@ -161,7 +161,7 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">اختار</label>
+                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['doctor'] as $doctor)
                                 <li>
