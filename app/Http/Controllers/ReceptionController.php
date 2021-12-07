@@ -223,6 +223,33 @@ class ReceptionController extends Controller
 
             'name.max' => 'more than the limit',   // max
             'price.max' => 'more than the limit',   // max
+
+            // Doctor waring text English
+
+
+            'DoctorName.required' => 'There must be a name ',   // Required
+            'email.required' => 'There must be a email ',   // Required
+            'DoctorImg.required' => 'There must be a image ',   // Required
+            'DoctorPassword.required' => 'There must be a password  ',   // Required
+            'DoctorInfo.required' => 'There must be a description ',   // Required
+
+
+
+            'DoctorName.string' => 'letters',   // string
+            'DoctorInfo.string' => 'letters',   // string
+
+            'DoctorName.min' => 'name less limit ',   // min
+            'DoctorInfo.min' => 'Doctor information is less than the limit',   // min
+
+
+            'DoctorName.max' => 'more than the limit',   // max
+            'email.max' => 'more than the limit ',   // max
+            'DoctorInfo.max' => 'more than the limit',   // max
+
+            'email.unique'     => 'Email is used',   // Unique Email 
+            'email.email'     => 'Please enter the email correctly ',   //  Email 
+
+
         ];
         $code = Str::random(4);
 
@@ -315,11 +342,14 @@ class ReceptionController extends Controller
                     // 'DoctorPassword'     => 'required ',
                     'DoctorInfo'  => 'required| min:8',
 
-                ], $messages);
-
+                ], app()->getLocale() == 'ar' ? $messages : $messagesEn);
                 if ($validator->fails()) {
-                    Alert::error('خطأ ', $validator->messages()->all());
-                    //   Alert::error('خطأ', $validator->messages()->all());
+                    if (app()->getLocale() == 'ar') {
+                        Alert::error('خطأ ', $validator->messages()->all());
+                    } else {
+                        Alert::error('Error ', $validator->messages()->all());
+                    }
+
                     return back();
                 }
                 $file1 = $request->DoctorImg;
@@ -342,6 +372,11 @@ class ReceptionController extends Controller
                 $doctor->path = $destination_path1 .  $file_name1;
                 $doctor->Status = 1;
                 $doctor->save();
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم انشاء طبيب جديد بنجاح');
+                } else {
+                    Alert::info('A new doctor has been created successfully');
+                }
                 break;
             default:
                 break;
