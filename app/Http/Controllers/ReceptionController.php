@@ -461,7 +461,11 @@ class ReceptionController extends Controller
                     'text' => $request->AboutText,
                     'path' =>   $destination_path1 .  $file_name1
                 ]);
-
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم التعديل على محتوى العيادة  بنجاح');
+                } else {
+                    Alert::info('clinic details has been successfully modified');
+                }
                 break;
             default:
                 return null;
