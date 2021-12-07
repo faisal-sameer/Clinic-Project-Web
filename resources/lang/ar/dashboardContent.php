@@ -11,7 +11,7 @@ return [
     'discount' => 'العروض',
     'service' => 'الخدمات',
     'doctor' => 'الأطباء',
-
+    'about' => 'نبذة',
 
 
 ];

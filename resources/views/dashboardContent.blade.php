@@ -193,7 +193,7 @@
                         <!--تحديث معلومات العيادة-->
 
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" ... نبذة "
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.about') }}"
                             class="shadow-drop-2-center textAF" id="AboutText" name="AboutText" cols="100"
                             rows="5"></textarea>
 
