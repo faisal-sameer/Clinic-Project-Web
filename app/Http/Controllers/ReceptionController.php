@@ -403,6 +403,11 @@ class ReceptionController extends Controller
 
                     'Price' => $request->DisPrice == null ? $oldDiscount->Price : $request->DisPrice,
                 ]);
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم التعديل على العرض بنجاح');
+                } else {
+                    Alert::info('discount has been successfully modified');
+                }
                 break;
             case 2:
                 $oldService = Service::where('id', $request->id)->first();
@@ -412,6 +417,11 @@ class ReceptionController extends Controller
                     'Price' => $request->price == null ? $oldService->Price : $request->price,
                     'clinic_id' => $request->clinic == null ? $oldService->clinic_id : $request->clinic,
                 ]);
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم التعديل على الخدمة بنجاح');
+                } else {
+                    Alert::info('service has been successfully modified');
+                }
                 break;
             case 3:
                 if ($request->DoctorImg != null) {
@@ -433,6 +443,11 @@ class ReceptionController extends Controller
                     'info_ar' => $request->DoctorInfo == null ? $oldDoctor->Info_ar : $request->DoctorInfo,
                     'path' => $request->DoctorImg == null ? $oldDoctor->path : $destination_path1 .  $file_name1
                 ]);
+                if (app()->getLocale() == 'ar') {
+                    Alert::success('تم التعديل على معلومات الطبيب بنجاح');
+                } else {
+                    Alert::info('doctor has been successfully modified');
+                }
                 break;
             case 4:
                 if ($request->AboutImg != null) {
