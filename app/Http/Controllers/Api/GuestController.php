@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Models\Service;
+use App\Models\DevicesInfo;
 
 class GuestController extends Controller
 {
@@ -14,10 +15,32 @@ class GuestController extends Controller
         $Services = Service::where('Status', 1)->get();
 
         foreach ($Services as $Service) {
-            $d[] = ['id' => $Service->id, 'name' => $Service->Name,];
+            $d[] = ['id' => $Service->id, 'name' => $Service->Name_ar,];
         }
 
         return response()->json(['status' => 'success', 'data' => $d]);
+    }
+    protected function SaveDeviceInfo(Request $request)
+    {
+        //// return response()->json(['status' => 'success', 'data' => $request->all()]);
+        if ($request->OurID == null) {
+            $info = new DevicesInfo();
+            $info->ID_device_single = $request->single;
+            $info->Boot_Loader = $request->bootloader;
+            $info->Host = $request->Host;
+            $info->Model = $request->Model;
+            $info->ID_device = $request->ID;
+            $info->Token = $request->Token;
+            $info->last_active = now();
+            $info->Status = 1;
+            $info->save();
+            return response()->json(['status' => 'success', 'data' => $info->id]);
+        } else {
+            return response()->json(['status' => 'success', 'data' => "Done"]);
+        }
+
+
+        return response()->json(['status' => 'success', 'data' => "Done !!"]);
     }
     protected function AppointmentNew(Request $request)
     {
@@ -38,7 +61,7 @@ class GuestController extends Controller
 
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم اختيار نوع الخدمة  "]);
         } else {
-            $ServiceRequest = Service::where('Name', $request->Service)->first();
+            $ServiceRequest = Service::where('Name_ar', $request->Service)->first();
 
             $reservations = new Reservation();
             $reservations->NID = $request->NID;
@@ -93,7 +116,7 @@ class GuestController extends Controller
                 $all[$i] = [
                     'id' => $myReservation->id, 'Name' => $myReservation->Name, 'NID' => $myReservation->NID,
                     'Day' =>  date("Y-m-d", strtotime($myReservation->Date)), 'Time' => date("h:i", strtotime($myReservation->Date)), 'Phone' => $myReservation->Phone,
-                    'service' => $myReservation->service->Name,
+                    'service' => $myReservation->service->Name_ar,
                     'Status' => $myReservation->Status
                 ];
                 $i++;

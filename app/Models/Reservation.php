@@ -20,4 +20,8 @@ class Reservation extends Model
     {
         return $this->hasOne(Service::class, 'id', 'services_id');
     }
+    public function discount()
+    {
+        return $this->hasOne(Discount::class, 'id', 'discount_id');
+    }
 }

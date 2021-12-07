@@ -31,8 +31,11 @@
                                 <div class="form-group row">
 
                                     <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
-                                    <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
-                                        name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00">
+                                    <!--  <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
+                                                name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
+
+                                    <input id="idnational" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="Appointment"
+                                        min="2021-06-01" max="2030-07-30">
 
 
                                 </div>
@@ -41,10 +44,18 @@
 
                                     <select class="form-select" id="idnational" name="Service"
                                         aria-label="Default select example">
+                                        <option selected disabled>Discount</option>
+
+                                        @foreach ($all['discount'] as $discount)
+
+                                            <option value="D{{ $discount->id }}">{{ $discount->title_ar }}</option>
+
+                                        @endforeach
+                                        <option disabled>Service</option>
 
                                         @foreach ($all['services'] as $service)
 
-                                            <option value="{{ $service->id }}">{{ $service->Name }}</option>
+                                            <option value="S{{ $service->id }}">{{ $service->Name_ar }}</option>
 
                                         @endforeach
 

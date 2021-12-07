@@ -12,53 +12,75 @@
 @section('content')
     <div class="welcome-area" id="welcome">
         <div class="container" id="container">
-          <div class="row " style="margin-top: 15%" >
-            <div class="card bounce-in-top " id="cards">
-                   <div id="Paris" class="w3-container city" >
+            <div class="row " style="margin-top: 15%">
+                <div class="text-center  " style="background-color: rgb(189, 189, 189)">
+                    <p id="Months">احصائيات المراجعين بالاشهر </p>
+                    <p id="Services">احصائيات المراجعين بالخدمات</p>
+                    <p id="Discounts">احصائيات المراجعين بالعروض</p>
+                </div>
+                <div class="card bounce-in-top " id="cards">
+
+
+                    <div id="Paris" class="w3-container city">
                         <div id="chartContainer" style="height: 370px; width: 100%;"></div>
-                      </div>
-                  </div>
-                       </p>
-                        </div>       
-                     </div>
+                    </div>
+                </div>
+                </p>
+            </div>
+        </div>
     </div>
 @endsection
 @section('script')
-<script>
-    window.onload = function () {
-    
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        theme: "light2", // "light1", "light2", "dark1", "dark2"
-        title:{
-            text: "الأشهر"
-        },
-        axisY: {
-            title: "عدد الزيارات "
-        },
-        data: [{        
-            type: "column",  
-            showInLegend: true, 
-            legendMarkerColor: "grey",
-            legendText: "MMbbl = one million barrels",
-            dataPoints: [      
-                { y: 300878, label: "يناير" },
-                { y: 266455,  label: "فبراير" },
-                { y: 169709,  label: "مارس" },
-                { y: 158400,  label: "أبريل" },
-                { y: 142503,  label: "مايو" },
-                { y: 101500, label: "يونيو" },
-                { y: 97800,  label: "يوليو" },
-                { y: 300878,  label: "أغسطس" },
-                { y: 1000,  label: "سبتمبر" },
-                { y: 5000,  label: "أكتوبر" },
-                { y: 500000,  label: "نوفمبر" },
-                { y: 50000,  label: "ديسمبر" }
+    <script>
+        var Months = @json($all[0]['Months']);
+        window.onload = myFunctionNew(Months);
 
-            ]
-        }]
-    });
-    chart.render();
-    }
+        function myFunctionNew(data) {
+
+            var num = 1;
+
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2", // "light1", "light2", "dark1", "dark2"
+                title: {
+                    text: "الأشهر"
+                },
+                axisY: {
+                    title: "عدد الزيارات "
+                },
+                data: [{
+                    type: "column",
+                    showInLegend: true,
+                    legendMarkerColor: "لامعث",
+                    dataPoints:
+
+                        data
+
+                }]
+            });
+            chart.render();
+        }
     </script>
-    @endsection
+
+    <script>
+        document.getElementById("Services").addEventListener("click", function() {
+            var Service = @json($all[0]['Service']);
+
+            myFunctionNew(Service);
+        });
+    </script>
+    <script>
+        document.getElementById("Months").addEventListener("click", function() {
+            myFunctionNew(Months);
+        });
+    </script>
+    <script>
+        document.getElementById("Discounts").addEventListener("click", function() {
+            var Discounts = @json($all[0]['Discount']);
+
+            myFunctionNew(Discounts);
+        });
+    </script>
+
+@endsection

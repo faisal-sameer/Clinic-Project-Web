@@ -15,6 +15,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\SendNoificationFCM;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ReceptionController extends Controller
 {
@@ -35,25 +37,90 @@ class ReceptionController extends Controller
         return view('dashboardClinicPast')->with('Reservations', $Reservations);
     }
 
+    protected function dashboardClinicFuture()
+    {
+        // return  Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 8)->count();
+
+        $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 1)->orWhere('Status', 5)->orWhere('Status', 9)->get();
+        return view('dashboardClinicAfter')->with('Reservations', $Reservations);
+    }
 
     protected function dashboardStatistic()
     {
-        return view('dashboardStatistic');
+        //$app = Reservation::groupBy('services_id', 'Date')->select('services_id', DB::raw('count(*) as total'), 'Date')->get();
+        $app = Reservation::select(
+            DB::raw('count(*) as total'),
+            DB::raw("DATE_FORMAT(Date, '%Y-%m') as new_date")
+        )->groupBy('new_date')->orderBy('new_date')->get();
+        $app  =  Reservation::where('services_id', '!=', null)->groupBy('services_id')->select('services_id', DB::raw('count(*) as total'))->get();
+        $services  =  Reservation::where('services_id', '!=', null)->groupBy('services_id')->select('services_id', DB::raw('count(*) as total'))->get();
+        $discount  =  Reservation::where('discount_id', '!=', null)->groupBy('discount_id')->select('discount_id', DB::raw('count(*) as total'))->get();
+        if ($app->count() == null) {
+            $Months = "Nulls";
+        } else {
+            foreach ($app as   $item) {
+
+                $time = \Carbon\Carbon::parse($item->new_date)->format('F');
+                $Months[] = ['label' => $time, 'y' => $item->total];
+            }
+        }
+        if ($services->count() == null) {
+            $Service = "Nulls";
+        } else {
+            foreach ($services as $item) {
+                $Service[] = ['label' => $item->service->Name_ar, 'y' => $item->total];
+            }
+        }
+        if ($discount->count() == null) {
+            $Discounts = "Nulls";
+        } else {
+            foreach ($discount as $item) {
+                $Discounts[] = ['label' => $item->discount->title_ar, 'y' => $item->total];
+            }
+        }
+        $all[] = ['Months' => $Months, 'Service' => $Service, 'Discount' => $Discounts];
+        //return $Service;
+        return view('dashboardStatistic')->with('all', $all);
     }
     protected function dashboardContent()
     {
 
         $Detail = ClinicDetails::get();
-        $Service = Service::where('Status', 1)->get();
-        $Discount = Discount::get();
-        $Doctor = Doctor::get();
+        $Service = Service::where('Status', 1)->select('id', 'Name_ar', 'Price', 'clinic_id', 'employee_id')->get();
+        $Discount = Discount::where('Status', 1)->get();
+        $Doctor = Doctor::where('Status', 1)->get();
         $clinic = clinic::get();
-        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinic' => $clinic];
+
+        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinics' => $clinic];
         //$test = new SendNoificationFCM();
 
         // $test->sendGCM('AF Head', 'FA Body', "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
 
         return view('dashboardContent')->with('content', $content);
+    }
+    protected function dashboardContentDelete(Request $request)
+    {
+        switch ($request->type) {
+            case 1:
+                Discount::where('id', $request->id)->update([
+                    'Status' => 2
+                ]);
+                break;
+            case 2:
+                Service::where('id', $request->id)->update([
+                    'Status' => 2
+                ]);
+                break;
+            case 3:
+                Doctor::where('id', $request->id)->update([
+                    'Status' => 2
+                ]);
+                break;
+            default:
+                break;
+        }
+
+        return back();
     }
     protected function dashboardContentNew(Request $request)
     {
@@ -145,7 +212,7 @@ class ReceptionController extends Controller
                 $Discount->title_ar  = $request->DisTitle;
                 $Discount->title_en  = " ";
                 $Discount->employee_id = auth()->user()->id;
-                $Discount->clinic_id = 1;
+                $Discount->clinic_id = $request->clinic;
                 $Discount->text_ar = $request->DisText == null ?  null : $request->DisText;
                 $Discount->text_en = " ";
 
@@ -180,6 +247,7 @@ class ReceptionController extends Controller
                 $Service = new Service();
                 $Service->Name_ar = $request->name;
                 $Service->Name_en = '';
+                $Service->employee_id = 1;
                 $Service->Price = $request->price;
                 $Service->clinic_id = 1;
                 $Service->Status = 1;
@@ -193,7 +261,7 @@ class ReceptionController extends Controller
                     'DoctorImg' => 'required',
                     'DoctorName'     => 'required|string  | min:3   | max:255',
                     'email'     => 'required | email | max:255 | unique:users',
-                    'DoctorPassword'     => 'required ',
+                    // 'DoctorPassword'     => 'required ',
                     'DoctorInfo'  => 'required| min:8',
 
                 ], $messages);
@@ -212,7 +280,7 @@ class ReceptionController extends Controller
                 $user = new User();
                 $user->name = $request->DoctorName;
                 $user->email = $request->email;
-                $user->password = Hash::make($request->DoctorPassword);
+                $user->password = Hash::make("123456789");
                 $user->permission_id = 2;
                 $user->Status = 1;
                 $user->save();
@@ -233,7 +301,7 @@ class ReceptionController extends Controller
     protected function dashboardContentUpdate(Request $request)
     {
 
-        //return $request->all();
+        //return $request->clinic;
         $code = Str::random(4);
         Alert::success('تم تسجيل حضور للمراجع ', '');
 
@@ -252,10 +320,11 @@ class ReceptionController extends Controller
                 break;
             case 2:
                 $oldService = Service::where('id', $request->id)->first();
-                Service::where('id', $request->id)->update([
+                $arr =  Service::where('id', $request->id)->update([
                     'Name_ar' => $request->name == null ? $oldService->Name_ar : $request->name,
                     'Name_en' => $request->name == null ? $oldService->Name_en : $request->name,
-                    'Price' => $request->price == null ? $oldService->Price : $request->price
+                    'Price' => $request->price == null ? $oldService->Price : $request->price,
+                    'clinic_id' => $request->clinic == null ? $oldService->clinic_id : $request->clinic,
                 ]);
                 break;
             case 3:
@@ -301,13 +370,6 @@ class ReceptionController extends Controller
 
         return $request->all();
     }
-    protected function dashboardClinicFuture()
-    {
-        // return  Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 8)->count();
-
-        $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 1)->orWhere('Status', 5)->get();
-        return view('dashboardClinicAfter')->with('Reservations', $Reservations);
-    }
 
     protected function Coming(Request $request)
     {
@@ -331,7 +393,19 @@ class ReceptionController extends Controller
 
         return back();
     }
+    protected function Rejected(Request $request)
+    {
+        Reservation::where('id', $request->id)->update([
+            'Status' => 9,
+            'employee_id' => auth()->user()->id
 
+        ]);
+        $Reservation =  Reservation::where('id', $request->id)->first();
+
+        Alert::success('تم رفض الحجز ', '');
+
+        return back();
+    }
     protected function DidCome(Request $request)
     {
         Reservation::where('id', $request->id)->update([

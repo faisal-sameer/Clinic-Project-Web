@@ -24,6 +24,8 @@ Route::group(
 
 
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+        Route::post('/SendEmail', [App\Http\Controllers\HomeController::class, 'SendEmail'])->name('SendEmail');
+
 
         Auth::routes();
 
@@ -32,6 +34,7 @@ Route::group(
 
         Route::post('/dashboardContentUpdate', [App\Http\Controllers\ReceptionController::class, 'dashboardContentUpdate'])->name('Update');
         Route::post('/dashboardContentNew', [App\Http\Controllers\ReceptionController::class, 'dashboardContentNew'])->name('New');
+        Route::post('/dashboardContentDelete', [App\Http\Controllers\ReceptionController::class, 'dashboardContentDelete'])->name('Delete');
 
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -42,10 +45,12 @@ Route::group(
         Route::any('/NewAppointment', [App\Http\Controllers\GuestController::class, 'AppointmentNew'])->name('NewAppointment');
         Route::any('/ChangeApp', [App\Http\Controllers\GuestController::class, 'ChangeApp'])->name('ChangeApp');
 
-
+        // Appointments Dashboard 
         Route::get('/TodayAppointments', [App\Http\Controllers\ReceptionController::class, 'dashboardClinicToday']);
         Route::get('/PastAppointments', [App\Http\Controllers\ReceptionController::class, 'dashboardClinicPast']);
         Route::get('/FutureAppointments', [App\Http\Controllers\ReceptionController::class, 'dashboardClinicFuture']);
+        // Action is Appointment Dashboard 
+        Route::any('/Rejected', [App\Http\Controllers\ReceptionController::class, 'Rejected'])->name('Rejected');
         Route::any('/Coming', [App\Http\Controllers\ReceptionController::class, 'Coming'])->name('Coming');
         Route::any('/DidCome', [App\Http\Controllers\ReceptionController::class, 'DidCome'])->name('DidCome');
         Route::any('/Confirm', [App\Http\Controllers\ReceptionController::class, 'Confirm'])->name('Confirm');

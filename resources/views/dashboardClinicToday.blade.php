@@ -29,7 +29,8 @@
                 <br>
                 <h2> {{ __('ReservationDashboard.Today') }} </h2>
 
-                <input type="text" id="myInput0" onkeyup="myFunction()" placeholder="Search for names.."
+                <input type="text" id="myInput0" onkeyup="myFunction()"
+                    placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
                     title="Type in a name">
 
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -50,6 +51,32 @@
                                 <tr>
                                     <td colspan="2">
                                         @if ($Reservation->Status == 1)
+
+                                            <div id="dailogs1">
+
+                                                <form method="POST" action="{{ route('Confirm') }}">
+                                                    @csrf
+                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
+                                                        readonly hidden required />
+
+                                                    <button type="submit" class="btn btn-success">
+                                                        {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تاكيد الحجز', 'en' => 'Approving']) }}</button>
+                                                </form>
+
+                                            </div>
+                                            <div id="dailogs4">
+                                                <form method="POST" action="{{ route('Rejected') }}">
+                                                    @csrf
+                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
+                                                        readonly hidden required />
+                                                    <button type="submit" class="btn btn-danger">
+                                                        {{ __('ReservationDashboard.Status, :lang', ['ar' => 'رفض', 'en' => 'Reject']) }}</button>
+
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <br><br>
+                                        @elseif($Reservation->Status == 5 )
                                             <div id="dailogs3">
 
                                                 <form method="POST" action="{{ route('Coming') }}">
@@ -62,8 +89,7 @@
                                                 </form>
 
                                             </div>
-                                            <br>
-                                            <br>
+
                                             <div id="dailogs4">
                                                 <form method="POST" action="{{ route('DidCome') }}">
                                                     @csrf
@@ -73,8 +99,7 @@
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'لم يحضر', 'en' => 'Did not Arrived']) }}</button>
                                                 </form>
                                             </div>
-                                            <br><br>
-                                        @elseif($Reservation->Status == 5 )
+                                        @elseif($Reservation->Status == 2)
                                             <div style="margin:auto">
                                                 <form method="POST" action="{{ route('Complete') }}">
                                                     @csrf
@@ -84,8 +109,6 @@
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'انهاء الجلسة', 'en' => 'Completed']) }}</button>
                                                 </form>
                                             </div>
-                                            <br>
-
                                         @endif
                                     </td>
                                     <td colspan="1" id="texttab">
@@ -103,11 +126,15 @@
                                         @elseif($Reservation->Status == 5 )
                                             {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
 
+                                        @elseif($Reservation->Status == 9)
+                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected']) }}
+
                                         @endif
                                     </td>
 
                                     <td colspan="2" id="texttab">
-                                        {{ $Reservation->service->Name }}</td>
+                                        {{ $Reservation->service == null ? $Reservation->discount->title_ar : $Reservation->service['Name_ar'] }}
+                                    </td>
 
                                     <td colspan="2" id="texttab">{{ $Reservation->Date }}
                                     </td>

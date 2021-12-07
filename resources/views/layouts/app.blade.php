@@ -30,6 +30,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+
+
     <!-- Styles -->
 </head>
 <body>
@@ -294,13 +296,13 @@
 
                 <script>
                     /*   document.addEventListener('contextmenu', function(e) {
-                                                                        e.preventDefault();
-                                                                    });
-                                                                    document.onkeydown = function(e) {
-                                                                        if (event.keyCode == 123) { //F12 keycode is 123
-                                                                            return false;
-                                                                        }
-                                                                    }*/
+                                                                                        e.preventDefault();
+                                                                                    });
+                                                                                    document.onkeydown = function(e) {
+                                                                                        if (event.keyCode == 123) { //F12 keycode is 123
+                                                                                            return false;
+                                                                                        }
+                                                                                    }*/
                 </script>
                 @yield('script')
     </body>

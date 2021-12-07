@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ClinicDetails;
 use App\Models\Service;
 use App\Models\Discount;
-
+use App\Mail\SendEMail;
 
 class HomeController extends Controller
 {
@@ -34,5 +34,24 @@ class HomeController extends Controller
 
         // need to send all data 
         return view('welcome')->with('all', $all);
+    }
+
+    protected function SendEmail(Request $request)
+    {
+        $detailsforCustomer = [
+            'title' => 'Af Title',
+            'description' => 'AF Body ',
+            'body' => now() . 'صلاحية الكود تنتهي بعد '
+        ];
+        $detailsforAdmin = [
+            'title' => 'Boss Af Title',
+            'description' => 'Boss AF Body ',
+            'body' => now() . 'صلاحية الكود تنتهي بعد '
+        ];
+        $email = $request['email'];
+        \Mail::to($email)->send(new SendEMail($detailsforCustomer));
+        \Mail::to('ezooag@gmail.com')->send(new SendEMail($detailsforAdmin));
+
+        return back();
     }
 }
