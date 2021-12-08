@@ -26,16 +26,17 @@
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Name" class="form-control"
-                                        placeholder="{{ __('AppReservation.name') }}" required>
+                                        placeholder="{{ __('AppReservation.name') }}" value="{{ old('Name') }}"
+                                        required>
                                 </div>
                                 <div class="form-group row">
 
                                     <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
                                     <!--  <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
-                                                name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
+                                                                                    name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
 
                                     <input id="idnational" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="Appointment"
-                                        min="2021-06-01" max="2030-07-30">
+                                        min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
 
                                 </div>
@@ -44,40 +45,26 @@
 
                                     <select class="form-select" id="idnational" name="Service"
                                         aria-label="Default select example">
-                                        <option selected disabled>Discount</option>
-
+                                        <option selected disabled>
+                                            {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عروض', 'en' => 'Discount']) }}
+                                        </option>
                                         @foreach ($all['discount'] as $discount)
-
                                             <option value="D{{ $discount->id }}">{{ $discount->title_ar }}</option>
-
                                         @endforeach
-                                        <option disabled>Service</option>
-
+                                        <option disabled>
+                                            {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'خدمات', 'en' => 'Service']) }}
+                                        </option>
                                         @foreach ($all['services'] as $service)
-
                                             <option value="S{{ $service->id }}">{{ $service->Name_ar }}</option>
-
                                         @endforeach
-
-
-
                                     </select>
-
-
                                 </div>
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Phone" class="form-control"
                                         placeholder="  {{ __('AppReservation.phone') }}" required>
-
-
                                 </div>
-
-
-
                                 <br>
-
-
                                 <div class="form-group row mb-0">
 
                                     <button type="submit" class="btn btn-outline-info" id="idnational">

@@ -148,32 +148,26 @@
 
                                                             </div>
 
+
                                                             <div class="form-group row">
 
                                                                 <select class="form-select" id="idnational"
                                                                     name="Service" aria-label="Default select example">
-                                                                    <option selected disabled>Discount</option>
-
+                                                                    <option selected disabled>
+                                                                        {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عروض', 'en' => 'Discount']) }}
+                                                                    </option>
                                                                     @foreach ($all['discount'] as $discount)
-
                                                                         <option value="D{{ $discount->id }}">
                                                                             {{ $discount->title_ar }}</option>
-
                                                                     @endforeach
-                                                                    <option disabled>Service</option>
-
+                                                                    <option disabled>
+                                                                        {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'خدمات', 'en' => 'Service']) }}
+                                                                    </option>
                                                                     @foreach ($all['services'] as $service)
-
                                                                         <option value="S{{ $service->id }}">
                                                                             {{ $service->Name_ar }}</option>
-
                                                                     @endforeach
-
-
-
                                                                 </select>
-
-
                                                             </div>
                                                             <div class="form-group row">
 

@@ -100,98 +100,88 @@ class GuestController extends Controller
 
     protected function AppointmentNew(Request $request)
     {
+
         $messages = [
             // Discount waring text
             'Appointment.required' => 'لابد من وجود اسم ',   // Required
             'Appointment.date' =>  'ادخل تاريخ  ',   // Required
             'Appointment.after' => "Oh No",   // Required
 
+            'Service.required' => 'يجب عليك اختيار احد الخدمات المتوفرة UP',   // Required
+
         ];
         $validator = Validator::make($request->all(), [
             // discount inputs
-            //   'NID' => 'required | min:10  | max:13',
-            //   'Name' => 'required | min:3  | max:100',
-            //  'Phone' => 'required | min:10  | max:25',
-            //  'Appointment' => 'required | date |after:start_date',
-            //    'Service' => 'required | min:3  | max:25',
+            'NID' => 'required | min:10  | max:13',
+            'Name' => 'required | min:3  | max:100',
+            'Phone' => 'required | min:10  | max:13',
+            'Appointment' => 'required | date |after:tomorrow',
+            'Service' => 'required ',
 
 
         ], $messages);
+        $services  = Service::where('Status', 1)->select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
 
+        $all['NID'] = $request->NID;
+        $all['services'] = $services;
+        $all['discount'] = $discount;
         if ($validator->fails()) {
             Alert::error('خطأ ', $validator->messages()->all());
-            return back();
+
+            return view('regester')->with('all', $all);
+        }
+
+        if ((substr($request->Service, 0, 1) != 'D' && substr($request->Service, 0, 1) != 'S')) {
+
+            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
+            return view('regester')->with('all', $all);
+        } else if (Service::find(substr($request->Service, 1)) == null || Discount::find(substr($request->Service, 1)) == null) {
+
+            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
+            return view('regester')->with('all', $all);
+        }
+
+
+        $reservations = new Reservation();
+        $reservations->NID = $request->NID;
+        $reservations->Name = $request->Name;
+        $reservations->Date = $request->Appointment;
+        $reservations->Phone = $request->Phone;
+        $reservations->services_id =  substr($request->Service, 0, 1) == 'S' ?  substr($request->Service, 1) : null;
+        $reservations->discount_id = substr($request->Service, 0, 1) == 'D' ?  substr($request->Service, 1) : null;
+        $reservations->Status = 1;
+        $reservations->save();
+        $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
+        $counts = Reservation::where('NID', $request->NID)->count();
+        $services  = Service::select('id',  'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+
+        if ($reservations->count() == 0) {
+            $all = ['NID' => $request->NID];
+            $all['reservations'] = 0;
+            $all['data'] = 0;
+            $all['page'] = null;
+            $all['current'] = 0;
+            $all['services'] = $services;
+            $all['discount'] = $discount;
         } else {
-            //return substr($request->Service, 1);
+            $all['NID'] = $request->NID;
+            $all['reservations'] = $reservations;
+            $all['data'] = 1;
+            $all['current'] = $request->page;
+            $all['services'] = $services;
+            $all['discount'] = $discount;
+            $all['page'] = round($counts / 6);
+            // }
+            Alert::success('تم حجز موعد جديد ',);
 
-            if ($request->NID == null) {
-
-                Alert::info('لا يمكن حجز موعد بدون رقم هوية  ');
-
-                return back();
-            } else if ($request->Name == null) {
-                Alert::info('لا بد من ادخل اسم الثلاثة ');
-
-                return back();
-            } else if ($request->Phone == null) {
-                Alert::info('لابد من ادخال رقم الجوال ', '');
-
-                return back();
-            } else if ($request->Appointment == null || $request->Appointment  <  substr(date('c'), 0, -9)) {
-                Alert::info('يجب عليك تحديد موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
-
-                return back();
-            } else if ($request->Service == null || (substr($request->Service, 0, 1) != 'D' && substr($request->Service, 0, 1) != 'S')) {
-                Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
-
-                return back();
-            } else {
-
-
-                $reservations = new Reservation();
-                $reservations->NID = $request->NID;
-                $reservations->Name = $request->Name;
-                $reservations->Date = $request->Appointment;
-                $reservations->Phone = $request->Phone;
-                $reservations->services_id =  substr($request->Service, 0, 1) == 'S' ?  substr($request->Service, 1) : null;
-                $reservations->discount_id = substr($request->Service, 0, 1) == 'D' ?  substr($request->Service, 1) : null;
-                $reservations->Status = 1;
-                $reservations->save();
-                $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
-                    ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
-                $counts = Reservation::where('NID', $request->NID)->count();
-                $services  = Service::select('id',  'Name_ar')->get();
-                $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
-
-                if ($reservations->count() == 0) {
-                    $all = ['NID' => $request->NID];
-                    $all['reservations'] = 0;
-                    $all['data'] = 0;
-                    $all['page'] = null;
-                    $all['current'] = 0;
-                    $all['services'] = $services;
-                    $all['discount'] = $discount;
-                } else {
-                    $all['NID'] = $request->NID;
-                    $all['reservations'] = $reservations;
-                    $all['data'] = 1;
-                    $all['current'] = $request->page;
-                    $all['services'] = $services;
-                    $all['discount'] = $discount;
-
-
-                    $all['page'] = round($counts / 6);
-                }
-                Alert::success('تم حجز موعد جديد ',);
-
-                return view('dashboardUser')->with('all', $all);
-            }
+            return view('dashboardUser')->with('all', $all);
         }
     }
     protected function ChangeApp(Request $request)
     {
-        //return  $request->Appointment . 'sdsdsdsdsds' .  substr(date('c'), 0, -9);
-        // return  $request->all();
         $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
             ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
         $services  = Service::select('id',  'Name_ar')->get();
@@ -220,7 +210,7 @@ class GuestController extends Controller
 
             return view('dashboardUser')->with('all', $all);
         } else if ($request->Appointment == null || $request->Appointment <  substr(date('c'), 0, -9)) {
-            Alert::info('يجب عليك تحديدhh موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
+            Alert::info('يجب عليك تحديد موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
 
 
             return view('dashboardUser')->with('all', $all);
@@ -256,3 +246,29 @@ class GuestController extends Controller
         }
     }
 }
+
+
+  //return substr($request->Service, 1);
+
+        /*  if ($request->NID == null) {
+
+                Alert::info('لا يمكن حجز موعد بدون رقم هوية  ');
+
+                return back();
+            } else if ($request->Name == null) {
+                Alert::info('لا بد من ادخل اسم الثلاثة ');
+
+                return back();
+            } else if ($request->Phone == null) {
+                Alert::info('لابد من ادخال رقم الجوال ', '');
+
+                return back();
+            } else if ($request->Appointment == null || $request->Appointment  <  substr(date('c'), 0, -9)) {
+                Alert::info('يجب عليك تحديد موعد الحجز ', 'تاكد من اختيار تاريخ فعال');
+
+                return back();
+            } else if ($request->Service == null || (substr($request->Service, 0, 1) != 'D' && substr($request->Service, 0, 1) != 'S')) {
+                Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
+
+                return back();
+            } else {*/
