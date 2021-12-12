@@ -24,22 +24,17 @@
                                 <input type="text" name="NID" readonly required hidden value="{{ $all['NID'] }}">
 
                                 <div class="form-group row">
-
-                                    <input id="idnational" type="text" name="Name" class="form-control"
+                                        <input id="idnational" type="text" name="Name" class="form-control"
                                         placeholder="{{ __('AppReservation.name') }}" required>
                                 </div>
                                 <div class="form-group row">
-
-                                    <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
+                                <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
                                     <!--  <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
                                                 name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
 
                                     <input id="idnational" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="Appointment"
                                         min="2021-06-01" max="2030-07-30">
-
-
-                                </div>
-
+                                       </div>
                                 <div class="form-group row">
 
                                     <select class="form-select" id="idnational" name="Service"
