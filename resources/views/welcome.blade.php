@@ -132,78 +132,24 @@
     <!-- ***** Features Small Start ***** -->
     <section class="section" id="services">
         <div class="container">
-            <div class="row">
+            <div class="row">                    
+
                 <div class="owl-carousel owl-theme">
+                    @foreach ($all['doctor'] as $doctor)
                     <div class="item service-item">
                         <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
+                            <i><img src="{{ $doctor->path }}" alt=""></i>
                         </div>
-                        <h5 class="service-title">تنظيف الجير وتبييض الأسنان
+                        <h5 class="service-title">{{ $doctor->user->name}}
                         </h5>
-                        <p>جير الأسنان أو طبقة القلح هي عبارة عن طبقة لزجة شفافة أو بيضاء من البكتيريا واللعاب وفتات الطعام
-                            تتجمع على الأسنان, وان لم تنتزع بالتنظيف اليومي تتصلب لتصبح حصى متماسكة, ويعد الجير هو السبب
-                            الأساسي لحدوث ألتهاب اللثة, فهو يهيج اللثة ويفصل بينها وبين جذور الأسنان مكونا فراغات وهذه
-                            الفراغات قد تمتلئ بفتات الطعام والصديد ويسبب هذا أحمرارا ونزفا للثة عند عمليه تنظيف الأسنان, وأن
-                            أهمل جير الأسنان ولم يعالج يحدث أرتخاء للأسنان وفي النهاية يكون أقتلاعها محتوما. و قد تظهر الجير
-                            على شكلين: فوق خطّ اللثة حيث يكون الجير مرئيا تحت خطّ اللثة حيث يتشكّل في الجيوب بين الأسنان
-                            واللثة.
+                        <p>
+                            {{$doctor->info_ar}}
                         </p>
-                        <a href="#" class="main-button">Read More</a>
+                     
                     </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Second Box Title</h5>
-                        <p>Pellentesque vitae urna ut nisi viverra tristique quis at dolor. In non sodales dolor, id egestas
-                            quam. Aliquam erat volutpat. </p>
-                        <a href="#" class="main-button">Discover More</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Third Title Box</h5>
-                        <p>Quisque finibus libero augue, in ultrices quam dictum id. Aliquam quis tellus sit amet urna
-                            tincidunt bibendum.</p>
-                        <a href="#" class="main-button">More Detail</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Fourth Service Box</h5>
-                        <p>Fusce sollicitudin feugiat risus, tempus faucibus arcu blandit nec. Duis auctor dolor eu
-                            scelerisque vestibulum.</p>
-                        <a href="#" class="main-button">Read More</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/teeth.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Fifth Service Title</h5>
-                        <p>Curabitur aliquam eget tellus id porta. Proin justo sapien, posuere suscipit tortor in, fermentum
-                            mattis elit.</p>
-                        <a href="#" class="main-button">Discover</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/service-icon-03.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Sixth Box Title</h5>
-                        <p>Ut nibh velit, aliquam vitae pellentesque nec, convallis vitae lacus. Aliquam porttitor urna ut
-                            pellentesque.</p>
-                        <a href="#" class="main-button">Detail</a>
-                    </div>
-                    <div class="item service-item">
-                        <div class="icon">
-                            <i><img src="images/service-icon-01.png" alt=""></i>
-                        </div>
-                        <h5 class="service-title">Seventh Title Box</h5>
-                        <p>Sed a consequat velit. Morbi lectus sapien, vestibulum et sapien sit amet, ultrices malesuada
-                            odio. Donec non quam.</p>
-                        <a href="#" class="main-button">Read More</a>
-                    </div>
+                 
+                        
+                    @endforeach
                 </div>
             </div>
         </div>
