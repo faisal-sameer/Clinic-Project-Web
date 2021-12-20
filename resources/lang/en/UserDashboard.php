@@ -19,4 +19,5 @@ return [
     'AppPhone' => 'Phone',
     'AppUpdate' => 'Update',
     'AppClose' => 'Close ',
+
 ];

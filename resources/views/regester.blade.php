@@ -12,6 +12,12 @@
 @section('content')
     <div class="welcome-area" id="welcome">
         <div class="container">
+            <div id="backdiv">
+             
+                    <button id="back" class="btn btn-light" onclick="history.back()"> <i
+                        class="fa fa-arrow-right" aria-hidden="true"></i> </button>
+            </div>
+            <br><br>
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
