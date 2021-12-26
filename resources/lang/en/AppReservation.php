@@ -8,7 +8,7 @@ return [
     'Date' => 'Choose  Date  ',
     'phone' => 'Phone ',
     'submit' => 'Submit',
-    '' => '',
+    'titleSelect, :Lang' => ':en',
     '' => '',
     '' => '',
     '' => '',

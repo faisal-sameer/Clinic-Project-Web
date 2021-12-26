@@ -458,7 +458,7 @@ class ReceptionController extends Controller
                     $file1->move($destination_path1, $file_name1);
                 }
                 ClinicDetails::where('id', $request->id)->update([
-                    'text' => $request->AboutText,
+                    'text_ar' => $request->AboutText,
                     'path' =>   $destination_path1 .  $file_name1
                 ]);
                 if (app()->getLocale() == 'ar') {

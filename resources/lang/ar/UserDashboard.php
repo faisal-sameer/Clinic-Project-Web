@@ -4,7 +4,7 @@
 return [
 
     'NewApp' => 'حجز جديد',
-    'action' => 'Action ',
+    'action' => '# ',
     'EditB' => 'تغير',
     'StatusT' => 'الحالة',
     'service' => 'الخدمة',
