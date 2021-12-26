@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\clinic;
 use App\Models\Discount;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -102,7 +103,36 @@ class GuestController extends Controller
 
     protected function AppointmentNew(Request $request)
     {
+        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+        $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
+        $services  = Service::select('id', 'Name_ar')->get();
 
+        $counts = Reservation::where('NID', $request->NID)->count();
+
+        $all['NID'] = $request->NID;
+        $all['reservations'] = $reservations;
+        $all['data'] = 1;
+        $all['current'] = $request->page;
+        $all['page'] = ceil($counts / 6);
+        $all['services'] = $services;
+        $all['discount'] = $discount;
+
+        $all['dermatology'] = $dermatology;
+        $all['dental'] = $dental;
+        $oldDental = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+            $q->where('clinic_id', 1);
+        })->count();
+        $oldDermatology = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+            $q->where('clinic_id', 2);
+        })->count();
+        // return $oldDermatology;
+        if ($oldDental > 0 || $oldDermatology > 0) {
+            Alert::info('لديك حجز مسبق في نفس العيادة ', 'xxxx');
+            return view('dashboardUser')->with('all', $all);
+        }
         $messages = [
             // Discount waring text
             'Appointment.required' => 'لابد من وجود اسم ',   // Required
@@ -122,14 +152,7 @@ class GuestController extends Controller
 
 
         ], $messages);
-        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
-        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
-        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
 
-        $all['NID'] = $request->NID;
-        $all['dermatology'] = $dermatology;
-        $all['dental'] = $dental;
-        $all['discount'] = $discount;
         if ($validator->fails()) {
             Alert::error('خطأ ', $validator->messages()->all());
 
@@ -138,13 +161,14 @@ class GuestController extends Controller
 
         if ((substr($request->Service, 0, 1) != 'D' && substr($request->Service, 0, 1) != 'S')) {
 
-            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
+            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'xxxx');
             return view('regester')->with('all', $all);
-        } else if (Service::find(substr($request->Service, 1)) == null || Discount::find(substr($request->Service, 1)) == null) {
+        }/* else
+         if (Service::find(substr($request->Service, 1)) == null || Discount::find(substr($request->Service, 1)) == null) {
 
-            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', '');
+            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'rrrr');
             return view('regester')->with('all', $all);
-        }
+        }*/
 
 
         $reservations = new Reservation();
@@ -162,6 +186,7 @@ class GuestController extends Controller
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+        $services  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
 
 
         if ($reservations->count() == 0) {
@@ -173,6 +198,7 @@ class GuestController extends Controller
             $all['dermatology'] = $dermatology;
             $all['dental'] = $dental;
             $all['discount'] = $discount;
+            $all['services'] = $services;
         } else {
             $all['NID'] = $request->NID;
             $all['reservations'] = $reservations;
@@ -180,6 +206,8 @@ class GuestController extends Controller
             $all['current'] = $request->page;
             $all['dermatology'] = $dermatology;
             $all['dental'] = $dental;
+            $all['services'] = $services;
+
             $all['discount'] = $discount;
             $all['page'] = round($counts / 6);
             // }
