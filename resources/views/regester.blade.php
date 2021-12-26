@@ -18,6 +18,7 @@
                         <div class="card-header" style="text-align: center">
                             {{ __('AppReservation.title') }} </div>
 
+
                         <div class="card-body">
                             <form method="POST" action="{{ route('NewAppointment') }}">
                                 @csrf
@@ -33,7 +34,7 @@
 
                                     <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
                                     <!--  <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
-                                                                                    name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
+                                                                                                                                                                                                        name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
 
                                     <input id="idnational" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="Appointment"
                                         min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
@@ -41,8 +42,19 @@
 
                                 </div>
 
-                                <div class="form-group row">
+                                <div style="margin-left: 40%;  direction: ltr">
+                                    <input type="radio" style="margin-right: 2%" onclick="javascript:yesnoCheck();"
+                                        name="type" id="yesteeth" class="second" value="1">
+                                    <span class="wrap"><strong>
+                                            {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عيادة جلدية', 'en' => 'Dermatology']) }}</strong></span>
 
+                                    <input type="radio" style="margin-right: 2%" onclick="javascript:yesnoCheck();"
+                                        name="type" id="yesSken" class="second" value="2">
+                                    <span class="wrap"><strong>
+                                            {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عيادة اسنان', 'en' => 'Dental']) }}</strong></span>
+                                </div>
+                                <!-- Dermatology -->
+                                <div style="display: none" id="ifYes" class="form-group row">
                                     <select class="form-select" id="idnational" name="Service"
                                         aria-label="Default select example">
                                         <option selected disabled>
@@ -54,11 +66,34 @@
                                         <option disabled>
                                             {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'خدمات', 'en' => 'Service']) }}
                                         </option>
-                                        @foreach ($all['services'] as $service)
-                                            <option value="S{{ $service->id }}">{{ $service->Name_ar }}</option>
+
+                                        @foreach ($all['dermatology'] as $dermatology)
+                                            <option value="S{{ $dermatology->id }}">{{ $dermatology->Name_ar }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>
+                                <!-- Dental -->
+                                <div style="display: none" id="ifNO" class="form-group row">
+                                    <select class="form-select" id="idnational" name="Service"
+                                        aria-label="Default select example">
+                                        <option selected disabled>
+                                            {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عروض', 'en' => 'Discount']) }}
+                                        </option>
+                                        @foreach ($all['discount'] as $discount)
+                                            <option value="D{{ $discount->id }}">{{ $discount->title_ar }}</option>
+                                        @endforeach
+                                        <option disabled>
+                                            {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'خدمات ', 'en' => 'Service']) }}
+                                        </option>
+
+                                        @foreach ($all['dental'] as $dental)
+                                            <option value="S{{ $dental->id }}">{{ $dental->Name_ar }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Phone" class="form-control"

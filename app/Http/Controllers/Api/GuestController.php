@@ -8,22 +8,44 @@ use Illuminate\Http\Request;
 use App\Models\Service;
 use App\Models\DevicesInfo;
 use App\Mail\SendEMail;
+use App\Models\ClinicDetails;
+use App\Models\Discount;
 
 class GuestController extends Controller
 {
-    protected function Services()
+    protected function About()
     {
+        $about = ClinicDetails::select('text_ar')->get();
+        $d['about'] = $about;
         $Services = Service::where('Status', 1)->get();
 
         foreach ($Services as $Service) {
-            $d[] = ['id' => $Service->id, 'name' => $Service->Name_ar,];
+            $service[] = ['id' => $Service->id, 'name' => $Service->Name_ar,];
         }
+        $d['service'] = $service;
+        return response()->json(['status' => 'success', 'data' => $d]);
+    }
+    protected function Services()
+    {
 
+        $ServiceDermatology = Service::where(['Status' => 1, 'clinic_id' => 1])->get();
+        $ServiceDental = Service::where(['Status' => 1, 'clinic_id' => 2])->get();
+
+        $discount = Discount::select('title_ar')->get();
+        $d['discount'] = $discount;
+        foreach ($ServiceDermatology as $Service) {
+            $dermatology[] = ['id' => $Service->id, 'name' => $Service->Name_ar,];
+        }
+        foreach ($ServiceDental as $Service) {
+            $dental[] = ['id' => $Service->id, 'name' => $Service->Name_ar,];
+        }
+        $d['dental'] = $dental;
+        $d['dermatology'] = $dermatology;
         return response()->json(['status' => 'success', 'data' => $d]);
     }
     protected function SaveDeviceInfo(Request $request)
     {
-        //// return response()->json(['status' => 'success', 'data' => $request->all()]);
+        /// return response()->json(['status' => 'success', 'data' => $request->all()]);
         if ($request->OurID == null) {
             $info = new DevicesInfo();
             $info->ID_device_single = $request->single;
@@ -82,13 +104,16 @@ class GuestController extends Controller
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم اختيار نوع الخدمة  "]);
         } else {
             $ServiceRequest = Service::where('Name_ar', $request->Service)->first();
+            $DiscountRequest = Discount::where('title_ar', $request->Service)->first();
+            // return response()->json(['status' => 'success', 'data' =>  $DiscountRequest]);
 
             $reservations = new Reservation();
             $reservations->NID = $request->NID;
             $reservations->Name = $request->Name;
-            $reservations->Date = $request->Day . "T" . date("H:i", strtotime($request->Time));
+            $reservations->Date = $request->Day;
             $reservations->Phone = $request->Phone;
-            $reservations->services_id = $ServiceRequest->id;
+            $reservations->services_id = $ServiceRequest == null ? null :  $ServiceRequest->id;
+            $reservations->discount_id = $DiscountRequest == null   ? null :  $DiscountRequest->id;
             $reservations->Status = 1;
             $reservations->save();
         }

@@ -19,7 +19,7 @@ class ReceptionController extends Controller
     {
 
 
-        $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->paginate(10);
+        $Reservations = Reservation::where('Date', date('Y-m-d'))->paginate(10);
 
         if ($Reservations->count() == 0) {
             $all = "Nulls";
@@ -28,8 +28,9 @@ class ReceptionController extends Controller
             foreach ($Reservations as  $Reservation) {
                 $all[$i++] = [
                     'id' => (int)$Reservation->id, (string) 'NID' => $Reservation->NID, (string) 'Name' => $Reservation->Name,
-                    'Day' => (string) date("Y-m-d", strtotime($Reservation->Date)), (string)'Time' => date("h:i", strtotime($Reservation->Date)),
-                    'Phone' => (string) $Reservation->Phone, (string) 'services' => $Reservation->service->Name,
+                    'Day' => (string) $Reservation->Date,
+                    'Phone' => (string) $Reservation->Phone, (string)
+                    'service' => $Reservation->services_id == null ? $Reservation->discount->title_ar : $Reservation->service->Name_ar,
                     'Status' => (int)$Reservation->Status
                 ];
             }
@@ -37,7 +38,6 @@ class ReceptionController extends Controller
 
         return response()->json([
             'status' => 'success',
-
             'data' =>  $all
         ]);
     }
@@ -46,7 +46,7 @@ class ReceptionController extends Controller
     {
 
 
-        $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->paginate(10);
+        $Reservations = Reservation::where('Date', '<', date('Y-m-d') . '%')->paginate(10);
 
         if ($Reservations->count() == 0) {
             $all = "Nulls";
@@ -55,8 +55,9 @@ class ReceptionController extends Controller
             foreach ($Reservations as  $Reservation) {
                 $all[$i++] = [
                     'id' => (int)$Reservation->id, (string) 'NID' => $Reservation->NID, (string) 'Name' => $Reservation->Name,
-                    'Day' => (string) date("Y-m-d", strtotime($Reservation->Date)), (string)'Time' => date("h:i", strtotime($Reservation->Date)),
-                    'Phone' => (string) $Reservation->Phone, (string) 'services' => $Reservation->service->Name,
+                    'Day' => (string) $Reservation->Date,
+                    'Phone' => (string) $Reservation->Phone, (string)
+                    'service' => $Reservation->services_id == null ? $Reservation->discount->title_ar : $Reservation->service->Name_ar,
                     'Status' => (int)$Reservation->Status
                 ];
             }
@@ -64,7 +65,6 @@ class ReceptionController extends Controller
 
         return response()->json([
             'status' => 'success',
-
             'data' =>  $all
         ]);
     }
@@ -72,7 +72,7 @@ class ReceptionController extends Controller
     {
 
 
-        $Reservations = Reservation::where('Date', '>',  substr(date('c', strtotime('1 Day')), 0, -14))->paginate(10);
+        $Reservations = Reservation::where('Date', '>',  date('Y-m-d'))->paginate(10);
 
         if ($Reservations->count() == 0) {
             $all = "Nulls";

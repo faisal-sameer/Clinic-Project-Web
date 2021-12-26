@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('login',  [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::get('Services',  [App\Http\Controllers\Api\GuestController::class, 'Services']);
 Route::get('/',  [App\Http\Controllers\Api\GuestController::class, 'welcome']);
+Route::get('About',  [App\Http\Controllers\Api\GuestController::class, 'About']);
 Route::post('SaveInfo',  [App\Http\Controllers\Api\GuestController::class, 'SaveDeviceInfo']);
 Route::post('contact',  [App\Http\Controllers\Api\GuestController::class, 'contact']);
 Route::post('NewAppointment',  [App\Http\Controllers\Api\GuestController::class, 'AppointmentNew']);

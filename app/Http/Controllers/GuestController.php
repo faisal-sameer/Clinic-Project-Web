@@ -88,11 +88,13 @@ class GuestController extends Controller
         if ($request->NID == null) {
             return back();
         }
-        $services  = Service::where('Status', 1)->select('id', 'Name_ar')->get();
+        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
 
         $all['NID'] = $request->NID;
-        $all['services'] = $services;
+        $all['dermatology'] = $dermatology;
+        $all['dental'] = $dental;
         $all['discount'] = $discount;
         // return $all;
         return view('regester')->with('all', $all);
@@ -115,16 +117,18 @@ class GuestController extends Controller
             'NID' => 'required | min:10  | max:13',
             'Name' => 'required | min:3  | max:100',
             'Phone' => 'required | min:10  | max:13',
-            'Appointment' => 'required | date |after:tomorrow',
+            'Appointment' => 'required | date |after: ',
             'Service' => 'required ',
 
 
         ], $messages);
-        $services  = Service::where('Status', 1)->select('id', 'Name_ar')->get();
+        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
 
         $all['NID'] = $request->NID;
-        $all['services'] = $services;
+        $all['dermatology'] = $dermatology;
+        $all['dental'] = $dental;
         $all['discount'] = $discount;
         if ($validator->fails()) {
             Alert::error('خطأ ', $validator->messages()->all());
@@ -155,8 +159,10 @@ class GuestController extends Controller
         $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
             ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
         $counts = Reservation::where('NID', $request->NID)->count();
-        $services  = Service::select('id',  'Name_ar')->get();
+        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+
 
         if ($reservations->count() == 0) {
             $all = ['NID' => $request->NID];
@@ -164,14 +170,16 @@ class GuestController extends Controller
             $all['data'] = 0;
             $all['page'] = null;
             $all['current'] = 0;
-            $all['services'] = $services;
+            $all['dermatology'] = $dermatology;
+            $all['dental'] = $dental;
             $all['discount'] = $discount;
         } else {
             $all['NID'] = $request->NID;
             $all['reservations'] = $reservations;
             $all['data'] = 1;
             $all['current'] = $request->page;
-            $all['services'] = $services;
+            $all['dermatology'] = $dermatology;
+            $all['dental'] = $dental;
             $all['discount'] = $discount;
             $all['page'] = round($counts / 6);
             // }
@@ -184,7 +192,8 @@ class GuestController extends Controller
     {
         $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
             ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
-        $services  = Service::select('id',  'Name_ar')->get();
+        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
 
         $counts = Reservation::where('NID', $request->NID)->count();
         $all['NID'] = $request->NID;
@@ -192,7 +201,8 @@ class GuestController extends Controller
         $all['data'] = 1;
         $all['current'] = $request->page;
         $all['page'] = ceil($counts / 6);
-        $all['services'] = $services;
+        $all['dermatology'] = $dermatology;
+        $all['dental'] = $dental;
         if ($request->NID == null) {
             Alert::info('لا يمكن حجز موعد بدون رقم هوية  ');
 
@@ -229,7 +239,8 @@ class GuestController extends Controller
             ]);
             $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
                 ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
-            $services  = Service::select('id',  'Name_ar')->get();
+            $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+            $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
             $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
 
             $counts = Reservation::where('NID', $request->NID)->count();
@@ -238,7 +249,8 @@ class GuestController extends Controller
             $all['data'] = 1;
             $all['current'] = $request->page;
             $all['page'] = ceil($counts / 6);
-            $all['services'] = $services;
+            $all['dermatology'] = $dermatology;
+            $all['dental'] = $dental;
             $all['discount'] = $discount;
             Alert::success('تم تعديل الموعد  بنجاح  ', '');
 

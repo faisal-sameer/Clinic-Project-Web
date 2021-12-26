@@ -34,9 +34,11 @@
 
     <!-- Styles -->
 </head>
+
 <body>
-<body class="main-layout">
-<!-- ***** Preloader Start ***** -->
+
+    <body class="main-layout">
+        <!-- ***** Preloader Start ***** -->
         <div id="preloader">
             <div class="jumper">
                 <div></div>
@@ -52,28 +54,33 @@
                             <a href="#" class="logo"> اللوقو</a>
 
                             <ul class="nav">
-                            
+
                                 <li class="scroll-to-section"><a href="@yield('we')" style="font-size: large;"
                                         class="active"> {{ __('app.HomePage') }}</a></li>
                                 <li class="scroll-to-section"><a
                                         href="{{ \LaravelLocalization::localizeURL('/reservation') }}"
                                         style="font-size: large;"> {{ __('app.reservation') }}</a></li>
-                                        @if (Auth::user() != null)
+                                @if (Auth::user() != null)
 
-                                        <li class="scroll-to-section nav-item dropdown"  id="scroool">
-                                            <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                {{ __('app.DashBoard') }}
-                                            </a>
-                                            <div class="dropdown-menu dropdown-menu-right"  style="margin-bottom: 5%" aria-labelledby="navbarDropdownBlog">
-                                              <a class="dropdown-item"  style="color: black;text-align: right" href="/TodayAppointments">
+                                    <li class="scroll-to-section nav-item dropdown" id="scroool">
+                                        <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">
+                                            {{ __('app.DashBoard') }}
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right" style="margin-bottom: 5%"
+                                            aria-labelledby="navbarDropdownBlog">
+                                            <a class="dropdown-item" style="color: black;text-align: right"
+                                                href="/TodayAppointments">
                                                 {{ __('app.appointmentBoard') }}
-                                              </a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardContent">  {{ __('app.EditContent') }}</a>
-                                              <a class="dropdown-item" style="color: black;text-align: right" href="dashboardStatistic">  {{ __('app.statistics') }}</a>
+                                            </a>
+                                            <a class="dropdown-item" style="color: black;text-align: right"
+                                                href="dashboardContent"> {{ __('app.EditContent') }}</a>
+                                            <a class="dropdown-item" style="color: black;text-align: right"
+                                                href="dashboardStatistic"> {{ __('app.statistics') }}</a>
 
-                                            </div>
-                                          </li>
-                                        @endif
+                                        </div>
+                                    </li>
+                                @endif
                                 <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
                                         {{ __('app.services') }}</a></li>
                                 <li class="scroll-to-section nav-item dropdown">
@@ -88,7 +95,8 @@
 
 
 
-                                            <a style="text-align: center" rel="alternate" hreflang="{{ $localeCode }}"
+                                            <a style="text-align: center" rel="alternate"
+                                                hreflang="{{ $localeCode }}"
                                                 href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
                                                 {{ $properties['native'] }}
                                             </a>
@@ -106,7 +114,7 @@
                                 @endif
                                 <!--يظهر عند تسجيل الدخول-->
                                 @if (Auth::user() != null)
-                           <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                    <li class="scroll-to-section"><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();"
                                             style="font-size: large;"><i class="fas fa-sign-out-alt "></i></a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST"
@@ -168,7 +176,25 @@
 
                 <!-- Global Init -->
                 <script src="../js/custom.js"></script>
+                <script defer type="text/javascript">
+                    function yesnoCheck() {
+                        if (document.getElementById('yesteeth').checked) {
+                            document.getElementById('ifNO').style.display = 'none';
 
+                            document.getElementById('ifYes').style.display = 'block';
+
+                        } else if (document.getElementById('yesSken').checked) {
+                            document.getElementById('ifYes').style.display = 'none';
+
+                            document.getElementById('ifNO').style.display = 'block';
+
+                        } else {
+                            document.getElementById('ifNO').style.display = 'none';
+                            document.getElementById('ifYes').style.display = 'none';
+
+                        }
+                    }
+                </script>
 
                 <script>
                     function myFunction() {
@@ -296,13 +322,13 @@
 
                 <script>
                     /*   document.addEventListener('contextmenu', function(e) {
-                                                                                        e.preventDefault();
-                                                                                    });
-                                                                                    document.onkeydown = function(e) {
-                                                                                        if (event.keyCode == 123) { //F12 keycode is 123
-                                                                                            return false;
-                                                                                        }
-                                                                                    }*/
+                                                                                                        e.preventDefault();
+                                                                                                    });
+                                                                                                    document.onkeydown = function(e) {
+                                                                                                        if (event.keyCode == 123) { //F12 keycode is 123
+                                                                                                            return false;
+                                                                                                        }
+                                                                                                    }*/
                 </script>
                 @yield('script')
     </body>
