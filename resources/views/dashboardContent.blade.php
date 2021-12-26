@@ -181,11 +181,11 @@
                 <form method="POST" id="formTag" action="{{ route('Update') }}" enctype="multipart/form-data">
                     @csrf
                     <textarea placeholder="id" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5% ;" name="id" id="id" cols="1"
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%  ; display: none;" name="id" id="id" cols="1"
                         rows="1"></textarea>
                     <!--لاظهار الاي دي    display: none;  -->
                     <textarea placeholder="type" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; " name="type" id="typeText"
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; display: none;" name="type" id="typeText"
                         cols="1" rows="1"></textarea>
                     <!--لاظهار نوع اللست سواء طبيب أو عروض أو الخ-->
 

@@ -323,7 +323,7 @@ class ReceptionController extends Controller
                 $Service->Name_en = '';
                 $Service->employee_id = 1;
                 $Service->Price = $request->price;
-                $Service->clinic_id = 1;
+                $Service->clinic_id = $request->clinic;
                 $Service->Status = 1;
                 $Service->save();
                 if (app()->getLocale() == 'ar') {
