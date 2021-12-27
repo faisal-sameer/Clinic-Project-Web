@@ -94,8 +94,10 @@ class GuestController extends Controller
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
-        if ($reservations->count() > 0) {
+        if ($reservations != []) {
             $all['user_info'] = $reservations;
+        } else {
+            $all['user_info'] = null;
         }
         $all['NID'] = $request->NID;
         $all['dermatology'] = $dermatology;

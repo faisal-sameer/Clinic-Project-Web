@@ -8,6 +8,29 @@
 @section('con')
     #contact-us
 @endsection
+@section('lang')
+<li class="scroll-to-section nav-item dropdown">
+    <a style="font-size: large" href="#" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        {{ __('app.lang') }}
+    </a>
+    <div class="dropdown-menu dropdown-menu-right"
+        style="margin-bottom: 5%;padding-left: 0%" aria-labelledby="navbarDropdownBlog">
+
+        @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+
+
+
+            <a style="text-align: center" rel="alternate"
+                hreflang="{{ $localeCode }}"
+                href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                {{ $properties['native'] }}
+            </a>
+
+        @endforeach
+    </div>
+</li>
+@endsection
 @section('content')
 
     <!-- ***** Header Area End ***** -->
