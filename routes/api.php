@@ -25,6 +25,7 @@ Route::post('UpdateAppointment',  [App\Http\Controllers\Api\GuestController::cla
 Route::post('dashboardUser',  [App\Http\Controllers\Api\GuestController::class, 'dashboardUser']);
 Route::get('ClinicAppointments',  [App\Http\Controllers\Api\ReceptionController::class, 'Appointments']);
 Route::post('AcceptedAppointments',  [App\Http\Controllers\Api\ReceptionController::class, 'AppointmentsAccepted']);
+Route::post('RejectedAppointments',  [App\Http\Controllers\Api\ReceptionController::class, 'AppointmentsRejected']);
 Route::post('ArrivePatient',  [App\Http\Controllers\Api\ReceptionController::class, 'PatientArrive']);
 
 Route::get('ClinicAppointmentsToday',  [App\Http\Controllers\Api\ReceptionController::class, 'AppointmentsToday']);

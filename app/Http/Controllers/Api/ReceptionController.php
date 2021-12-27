@@ -122,4 +122,13 @@ class ReceptionController extends Controller
 
         return response()->json(['status' => 'success', 'data' => 'Done!!']);
     }
+    protected function AppointmentsRejected(Request $request)
+    {
+
+        Reservation::where('id', $request->id)->update([
+            'Status' => 9
+        ]);
+
+        return response()->json(['status' => 'success', 'data' => 'Done!!']);
+    }
 }
