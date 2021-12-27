@@ -119,6 +119,12 @@ button {
     direction: rtl;
     width: 60%;
 }
+#backdiv {
+    margin-left: 20%;
+    margin-bottom: 1%;
+    direction: rtl;
+    width: 60%;
+}
 #dailogs {
     margin-right: 20%;
 }
@@ -372,6 +378,9 @@ a.float:hover + div.label-container {
         width: 80%;
     }
 
+    #back {
+        width: 40%;
+    }
     #texttab {
         font-size: 3vw;
         text-align: center;

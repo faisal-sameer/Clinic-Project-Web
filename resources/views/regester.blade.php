@@ -12,6 +12,12 @@
 @section('content')
     <div class="welcome-area" id="welcome">
         <div class="container">
+            <div id="backdiv">
+             
+                    <button id="back" class="btn btn-light" onclick="history.back()"> <i
+                        class="fa fa-arrow-right" aria-hidden="true"></i> </button>
+            </div>
+            <br><br>
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
@@ -27,12 +33,11 @@
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Name" class="form-control"
-                                        placeholder="{{ __('AppReservation.name') }}" value="{{ old('Name') }}"
+                                        placeholder="{{ __('AppReservation.name') }}" value="{{$all['user_info'] == null ? null: $all['user_info']->Name}}"
                                         required>
                                 </div>
                                 <div class="form-group row">
-
-                                    <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
+                                <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
                                     <!--  <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
                                                                                                                                                                                                         name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
 
@@ -93,11 +98,11 @@
                                     </select>
                                 </div>
 
-
+<br> 
                                 <div class="form-group row">
 
-                                    <input id="idnational" type="text" name="Phone" class="form-control"
-                                        placeholder="  {{ __('AppReservation.phone') }}" required>
+                                    <input id="idnational" type="text" name="Phone" class="form-control"  value="{{$all['user_info'] == null ? null:  $all['user_info']->Phone}}"
+                                        placeholder="{{ __('AppReservation.phone') }}  " required>
                                 </div>
                                 <br>
                                 <div class="form-group row mb-0">

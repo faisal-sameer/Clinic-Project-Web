@@ -7,6 +7,7 @@ use App\Models\ClinicDetails;
 use App\Models\Service;
 use App\Models\Discount;
 use App\Mail\SendEMail;
+use App\Models\Doctor;
 
 class HomeController extends Controller
 {
@@ -28,9 +29,10 @@ class HomeController extends Controller
         $services = Service::select('id', 'Name_ar')->get();
 
         $discounts = Discount::select('id', 'title_ar', 'text_ar', 'Price')->get();
+        $doctor = Doctor::select('id', 'doctor_id', 'info_ar', 'path')->get();
 
 
-        $all = ['aboutUs' => $aboutUs, 'services' => $services, 'discounts' => $discounts];
+        $all = ['aboutUs' => $aboutUs, 'services' => $services, 'discounts' => $discounts, 'doctor' => $doctor];
 
         // need to send all data 
         return view('welcome')->with('all', $all);
