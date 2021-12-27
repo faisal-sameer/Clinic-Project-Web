@@ -33,7 +33,7 @@
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Name" class="form-control"
-                                        placeholder="{{ __('AppReservation.name') }}" value="{{ old('Name') }}"
+                                        placeholder="{{ __('AppReservation.name') }}" value="{{ $all['user_info']->Name}}"
                                         required>
                                 </div>
                                 <div class="form-group row">
@@ -98,10 +98,10 @@
                                     </select>
                                 </div>
 
-
+<br> 
                                 <div class="form-group row">
 
-                                    <input id="idnational" type="text" name="Phone" class="form-control"
+                                    <input id="idnational" type="text" name="Phone" class="form-control"  value="{{ $all['user_info']->Phone}}"
                                         placeholder="  {{ __('AppReservation.phone') }}" required>
                                 </div>
                                 <br>

@@ -89,10 +89,14 @@ class GuestController extends Controller
         if ($request->NID == null) {
             return back();
         }
+        $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Phone')->first();
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
-
+        if ($reservations->count() > 0) {
+            $all['user_info'] = $reservations;
+        }
         $all['NID'] = $request->NID;
         $all['dermatology'] = $dermatology;
         $all['dental'] = $dental;
