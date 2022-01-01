@@ -20,4 +20,6 @@ return [
     'AppPhone' => 'رقم الجوال',
     'AppUpdate' => 'تحديث',
     'AppClose' => 'اغلاق',
+    'ApprovedApp' => 'تاكيد الحجز'
+
 ];

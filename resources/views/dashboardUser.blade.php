@@ -14,9 +14,12 @@
 
         <div class="container">
 
+
+
             <br><br>
             <div id="London" class="city form-inline">
                 <br>
+
                 <div id="dash">
                     <form method="POST" action="{{ route('Appointment') }}">
                         @csrf
@@ -60,17 +63,32 @@
 
 
                                         <tr>
+
                                             <td colspan="1" id="texttab" style="text-align: center">
+                                                @if ($reservation->Status == 1)
 
-                                                <div id="dailogs">
+                                                    <div id="dailogs">
 
-                                                    <input type="number" value="{{ $reservation->id }}" name="id"
-                                                        readonly hidden required />
-                                                    <button type="submit" data-toggle="modal"
-                                                        data-target="#exampleModal{{ $reservation->id }}"
-                                                        class="btn btn-warning"> {{ __('UserDashboard.EditB') }} </button>
+                                                        <button type="submit" data-toggle="modal"
+                                                            data-target="#exampleModal{{ $reservation->id }}"
+                                                            class="btn btn-warning"> {{ __('UserDashboard.EditB') }}
+                                                        </button>
 
-                                                </div>
+                                                    </div>
+                                                @elseif($reservation->Status == 6)
+
+                                                    <div id="dailogs">
+
+
+                                                        <button type="submit" data-toggle="modal"
+                                                            data-target="#exampleModalNeedToApproved{{ $reservation->id }}"
+                                                            class="btn btn-info"> {{ __('UserDashboard.ApprovedApp') }}
+                                                        </button>
+
+                                                    </div>
+                                                @endif
+
+
                                                 <br><br>
                                             </td>
                                             <td colspan="2" id="texttab" style="text-align: center">
@@ -85,9 +103,9 @@
                                                 @elseif($reservation->Status == 5 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
                                                 @elseif($reservation->Status == 6 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'غادرت', 'en' => 'Leave']) }}
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار موافقتك', 'en' => ' ']) }}
                                                 @elseif($reservation->Status == 7 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'انهيت الجلسة بدون موعد', 'en' => 'Leave without Appointment']) }}
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة على الموعد', 'en' => 'Appointment accpeted  ']) }}
                                                 @endif
                                             </td>
 
@@ -197,6 +215,50 @@
                                                             {{ __('UserDashboard.AppClose') }}</button>
 
                                                     </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="modal fade" id="exampleModalNeedToApproved{{ $reservation->id }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title justify-content-center "
+                                                            id="exampleModalLabel">
+                                                            {{ __('UserDashboard.ApprovedApp') }}
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body ">
+                                                        <form method="POST" action="{{ route('ApprovedApp') }}">
+                                                            @csrf
+                                                            <input type="text" name="id" readonly required hidden
+                                                                value="{{ $reservation->id }}">
+                                                            <div class="form-group justify-content-center">
+                                                                <p> الموعد : {{ $reservation->Date }}</p><br>
+                                                                <p>الخدمة : {{ $reservation->service->Name_ar }} </p>
+                                                            </div>
+                                                            <div class='form-inline justify-content-center'>
+
+
+                                                                <button type="button" class="btn btn-danger"
+                                                                    data-dismiss="modal"> رفض</button>
+                                                                <br>
+                                                                <button type='submit' style='margin:15px'
+                                                                    class='btn btn-success'>تاكيد
+                                                                </button>
+
+                                                            </div>
+                                                        </form>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

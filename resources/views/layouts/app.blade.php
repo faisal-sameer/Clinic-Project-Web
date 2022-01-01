@@ -31,8 +31,6 @@
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
 
-
-    <!-- Styles -->
 </head>
 
 <body>
@@ -83,10 +81,10 @@
                                 @endif
                                 <li class="scroll-to-section"><a href=@yield('se') style="font-size: large;">
                                         {{ __('app.services') }}</a></li>
-                                        <main>
-                                            @yield('lang')
+                                <main>
+                                    @yield('lang')
 
-                            </main>
+                                </main>
                                 <li class="scroll-to-section"><a href=@yield('con') style="font-size: large;">
                                         {{ __('app.contactUs') }}</a></li>
                                 @if (Auth::user() == null)
@@ -143,8 +141,11 @@
                 </div>
 
 
+                <script src="../jquery/jquery-3.6.0.min.js"></script>
 
                 <script src="../js/jquery-2.1.0.min.js"></script>
+                <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+                <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
                 <!-- Bootstrap -->
                 <script src="../js/popper.js"></script>
@@ -178,7 +179,33 @@
                         }
                     }
                 </script>
+                <!-- Test Another Sweet Alert 
+                <script>
+                    $('.delete-confirm').on('click', function(event) {
+                        event.preventDefault();
 
+                        var form = $(this);
+
+                        swal({
+                            title: "Are you sure?",
+                            text: "You will not be able to recover this imaginary file!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "Yes, delete it!",
+                            closeOnConfirm: false
+                        }, function(isConfirmed) {
+                            if (isConfirmed) {
+                                form.submit();
+                            }
+                        });
+
+                        return false;
+                    });
+                </script>
+            -->
+
+                @yield('checkDate')
                 <script>
                     function myFunction() {
                         var input, filter, table, tr, td, i, txtValue;
@@ -305,13 +332,13 @@
 
                 <script>
                     /*   document.addEventListener('contextmenu', function(e) {
-                                                                                                        e.preventDefault();
-                                                                                                    });
-                                                                                                    document.onkeydown = function(e) {
-                                                                                                        if (event.keyCode == 123) { //F12 keycode is 123
-                                                                                                            return false;
-                                                                                                        }
-                                                                                                    }*/
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        e.preventDefault();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    });
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    document.onkeydown = function(e) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        if (event.keyCode == 123) { //F12 keycode is 123
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            return false;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }*/
                 </script>
                 @yield('script')
     </body>

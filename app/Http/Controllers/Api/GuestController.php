@@ -103,6 +103,29 @@ class GuestController extends Controller
 
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم اختيار نوع الخدمة  "]);
         } else {
+
+            // Check if patient have app in same clinic or not 
+            $oldDental = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+                $q->where('clinic_id', 2);
+            })->count();
+            $oldDermatology = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+                $q->where('clinic_id', 1);
+            })->count();
+            // end Check 
+            $Service = $request->type  == 2 ? $request->Service : $request->Service;
+            $SelectedService = Service::where('Name_ar',  $Service)->first();
+
+            if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
+                return response()->json(['status' => 'error', 'data' =>  "لا يمكن حجز اي موعد حتى ينتهي حجزك السابق  "]);
+            } else if ($oldDental == 0 && $oldDermatology > 0 &&  $request->type == 1) { //  Case 3 patient have app in جلدية  but can get new app for اسنان 
+                if ($SelectedService->clinic_id == 1) {
+                    return response()->json(['status' => 'error', 'data' =>  "لديك حجز مسبق في نفس العيادة "]);
+                }
+            } else if ($oldDental > 0 && $oldDermatology == 0 && $request->type == 2) {
+                if ($SelectedService->clinic_id == 2) {
+                    return response()->json(['status' => 'error', 'data' =>  "لديك حجز مسبق في نفس العيادة "]);
+                }
+            }
             $ServiceRequest = Service::where('Name_ar', $request->Service)->first();
             $DiscountRequest = Discount::where('title_ar', $request->Service)->first();
             // return response()->json(['status' => 'success', 'data' =>  $DiscountRequest]);
@@ -137,18 +160,45 @@ class GuestController extends Controller
 
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم اختيار نوع الخدمة  "]);
         } else {
-            $ServiceRequest = Service::where('Name', $request->Service)->first();
+
+            // Check if patient have app in same clinic or not 
+            $oldDental = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+                $q->where('clinic_id', 2);
+            })->count();
+            $oldDermatology = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+                $q->where('clinic_id', 1);
+            })->count();
+            // end Check 
+            $SelectedService = $request->type != 0 ?  Service::where('Name_ar',  $request->Service)->first() : null;
+
+            if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
+                return response()->json(['status' => 'error', 'data' =>  "لا يمكن حجز اي موعد حتى ينتهي حجزك السابق  "]);
+            } else if ($oldDental == 0 && $oldDermatology > 0 &&  $request->type == 1) { //  Case 3 patient have app in جلدية  but can get new app for اسنان 
+                if ($SelectedService->clinic_id == 1) {
+                    return response()->json(['status' => 'error', 'data' =>  "لديك حجز مسبق في نفس العيادة "]);
+                }
+            } else if ($oldDental > 0 && $oldDermatology == 0 && $request->type == 2) {
+                if ($SelectedService->clinic_id == 2) {
+                    return response()->json(['status' => 'error', 'data' =>  "لديك حجز مسبق في نفس العيادة "]);
+                }
+            }
+
+            $ServiceRequest = Service::where('Name_ar', $request->Service)->first();
+            $DiscountRequest = Discount::where('title_ar', $request->Service)->first();
 
             $reservations =  Reservation::where('id', $request->id)->update([
                 'name' => $request->Name,
-                'Date' =>  $request->Day . "T" . date("H:i", strtotime($request->Time)),
+                'Date' =>  $request->Day,
                 'Phone' =>  $request->Phone,
-                'services_id' => $ServiceRequest->id,
+                'services_id' =>  $ServiceRequest == null ? null :  $ServiceRequest->id,
+                'discount_id' => $DiscountRequest == null   ? null :  $DiscountRequest->id,
                 'Status' => 1
             ]);
         }
         return response()->json(['status' => 'success', 'data' =>  $reservations]);
     }
+
+
     protected function  dashboardUser(Request $request)
     {
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')

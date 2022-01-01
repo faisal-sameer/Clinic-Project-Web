@@ -13,9 +13,9 @@
     <div class="welcome-area" id="welcome">
         <div class="container">
             <div id="backdiv">
-             
-                    <button id="back" class="btn btn-light" onclick="history.back()"> <i
-                        class="fa fa-arrow-right" aria-hidden="true"></i> </button>
+
+                <button id="back" class="btn btn-light" onclick="history.back()"> <i class="fa fa-arrow-right"
+                        aria-hidden="true"></i> </button>
             </div>
             <br><br>
             <div class="row justify-content-center">
@@ -33,13 +33,13 @@
                                 <div class="form-group row">
 
                                     <input id="idnational" type="text" name="Name" class="form-control"
-                                        placeholder="{{ __('AppReservation.name') }}" value="{{$all['user_info'] == null ? null: $all['user_info']->Name}}"
-                                        required>
+                                        placeholder="{{ __('AppReservation.name') }}"
+                                        value="{{ $all['user_info'] == null ? null : $all['user_info']->Name }}" required>
                                 </div>
                                 <div class="form-group row">
-                                <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
+                                    <label id="idnational"> {{ __('AppReservation.Date') }}</label> <br>
                                     <!--  <input id="idnational" value="<?php echo Date('Y-m-d\TH:i', time()); ?>" type="datetime-local"
-                                                                                                                                                                                                        name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
+                                                                                                                                                                                                            name="Appointment" min="2021-06-01T10:00" max="2030-07-30T20:00"> -->
 
                                     <input id="idnational" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="Appointment"
                                         min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
@@ -60,7 +60,7 @@
                                 </div>
                                 <!-- Dermatology -->
                                 <div style="display: none" id="ifYes" class="form-group row">
-                                    <select class="form-select" id="idnational" name="Service"
+                                    <select class="form-select" id="idnational" name="ServiceDermatology"
                                         aria-label="Default select example">
                                         <option selected disabled>
                                             {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عروض', 'en' => 'Discount']) }}
@@ -80,7 +80,7 @@
                                 </div>
                                 <!-- Dental -->
                                 <div style="display: none" id="ifNO" class="form-group row">
-                                    <select class="form-select" id="idnational" name="Service"
+                                    <select class="form-select" id="idnational" name="ServiceDental"
                                         aria-label="Default select example">
                                         <option selected disabled>
                                             {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عروض', 'en' => 'Discount']) }}
@@ -98,10 +98,11 @@
                                     </select>
                                 </div>
 
-<br> 
+                                <br>
                                 <div class="form-group row">
 
-                                    <input id="idnational" type="text" name="Phone" class="form-control"  value="{{$all['user_info'] == null ? null:  $all['user_info']->Phone}}"
+                                    <input id="idnational" type="text" name="Phone" class="form-control"
+                                        value="{{ $all['user_info'] == null ? null : $all['user_info']->Phone }}"
                                         placeholder="{{ __('AppReservation.phone') }}  " required>
                                 </div>
                                 <br>

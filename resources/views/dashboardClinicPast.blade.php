@@ -15,8 +15,8 @@
 
         <div id="ptf" class="container">
             <div id="mess">
-                <a href="/FutureAppointments" class="btn btn-outline-light"> {{ __('ReservationDashboard.Future') }} </a>
-
+                <a href="/FutureAppointments-0" class="btn btn-outline-light">
+                    {{ __('ReservationDashboard.Future') }} </a>
                 <a href="/TodayAppointments" class="btn btn-outline-light"> {{ __('ReservationDashboard.Today') }}</a>
                 <a href="/PastAppointments" class="btn btn-outline-light"> {{ __('ReservationDashboard.Past') }}</a>
 

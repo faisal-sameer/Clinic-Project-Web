@@ -51,37 +51,93 @@ class GuestController extends Controller
 
             $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
                 ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
-
-
+            $needApproved =   Reservation::where(['NID' => $request->NID, 'Status' => 6])->first();
             $services  = Service::select('id', 'Name_ar')->get();
             $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+            $all = ['NID' => $request->NID];
+            $all['services'] = $services;
+            $all['discount'] = $discount;
+            $all['reservations'] =  $reservations->count() == 0 ? 0 :  $reservations;
+            $all['data'] =  $reservations->count() == 0 ? 0 :  1;
+            $all['Need'] = $needApproved == [] ? 0 : 1;
+            $all['needApproved'] =   $needApproved == [] ? 0 : $needApproved;
+            $DateService =  $needApproved == [] ? 0 : $needApproved->Date;
+            $NameService =  $needApproved == [] ? 0 : $needApproved->service->Name_ar;
 
-            $counts = Reservation::where('NID', $request->NID)->count();
-
-            if ($reservations->count() == 0) {
-                $all = ['NID' => $request->NID];
-                $all['current'] = 0;
-                $all['reservations'] = 0;
-                $all['data'] = 0;
-                $all['page'] = null;
-                $all['services'] = $services;
-                $all['discount'] = $discount;
+            if ($needApproved == []) {
+                app()->getLocale() == 'ar' ?
+                    Alert::success('اهلا بك ', '' . $request->NID) :
+                    Alert::success('Welcome  ', '' . $request->NID);
             } else {
-                $all['NID'] = $request->NID;
-                $all['reservations'] = $reservations;
-                $all['data'] = 1;
-                $all['current'] = $request->page;
-                $all['page'] = ceil($counts / 6);
-                $all['services'] = $services;
-                $all['discount'] = $discount;
+                app()->getLocale() == 'ar' ?
+                    Alert::html(
+                        '<i>تم حجز موعد جديد لك  </i><br> <p>الرجاء الموافقة عليه او رفضه في حالة لم يناسبك الموعد</p>',
+                        "
+                    <p> الموعد : $DateService</p>
+                    <p>الخدمة :  $NameService </p>
+                    <div class='form-inline' style='margin-left: 35%' > 
+
+                    
+                    <button type='submit'
+                    class='btn btn-danger'>  <a   style='color: white'href='#'>رفض</a></button>
+                    <br>
+                     <button type='submit' style='margin:10px'
+                    class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>تاكيد</a> </button>
+                    
+                   </div> ",
+                        'info'
+                    )->showConfirmButton(false, "#ffff")->showCloseButton()
+                    ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>') :
+
+                    Alert::html(
+                        '<i>تم حجز موعد جديد لك  </i><br> <p>الرجاء الموافقة عليه او رفضه في حالة لم يناسبك الموعد</p>',
+                        "
+                    <p> Appoitement  : $DateService</p>
+                    <p>Service  :  $NameService </p>
+                    <div class='form-inline' style='margin-left: 35%' > 
+
+                    
+                    <button type='submit'
+                    class='btn btn-danger'>  <a   style='color: white'href='#'>رفض</a></button>
+                    <br>
+                     <button type='submit' style='margin:10px'
+                    class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>تاكيد</a> </button>
+                    
+                   </div> ",
+                        'info'
+                    )->showConfirmButton(false, "#ffff")->showCloseButton()
+                    ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>');
             }
-            app()->getLocale() == 'ar' ?  Alert::success('اهلا بك ', '' . $request->NID) :
-                Alert::success('Welcome  ', '' . $request->NID);
+            //  Alert::success('اهلا بك ' . $request->NID, 'تم حجز موعد جديد لك الرجاء الموافقة عليه او رفضه في حالة لم يناسبك الموعد ')
+
 
             return view('dashboardUser')->with('all', $all);
         }
     }
 
+    protected function PatientApproved(Request $request)
+    {
+        Reservation::where('id', $request->id)->update([
+            'Status' => 7
+        ]);
+        $info =  Reservation::where('id', $request->id)->first();
+
+        $reservations = Reservation::where('NID', $info->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
+        $needApproved =   Reservation::where(['NID' => $info->NID, 'Status' => 6])->first();
+        $services  = Service::select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+        $all = ['NID' => $info->NID];
+        $all['services'] = $services;
+        $all['discount'] = $discount;
+        $all['reservations'] =  $reservations->count() == 0 ? 0 :  $reservations;
+        $all['data'] =  $reservations->count() == 0 ? 0 :  1;
+        $all['Need'] = $needApproved == [] ? 0 : 1;
+        $all['needApproved'] =   $needApproved == [] ? 0 : $needApproved;
+        return  redirect()->route('NewReservation', ['NID' => $info->NID]);
+
+        return view('dashboardUser')->with('all', $all);
+    }
 
     protected function regester(Request $request)
     {
@@ -112,11 +168,15 @@ class GuestController extends Controller
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+        $user_info = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Phone')->first();
         $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
             ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
+
         $services  = Service::select('id', 'Name_ar')->get();
 
         $counts = Reservation::where('NID', $request->NID)->count();
+        $all['user_info'] = $user_info == null ? null : $user_info;
 
         $all['NID'] = $request->NID;
         $all['reservations'] = $reservations;
@@ -125,36 +185,50 @@ class GuestController extends Controller
         $all['page'] = ceil($counts / 6);
         $all['services'] = $services;
         $all['discount'] = $discount;
-
         $all['dermatology'] = $dermatology;
         $all['dental'] = $dental;
+
+        // Check if patient have app in same clinic or not 
         $oldDental = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
-            $q->where('clinic_id', 1);
-        })->count();
-        $oldDermatology = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
             $q->where('clinic_id', 2);
         })->count();
-        // return $oldDermatology;
-        if ($oldDental > 0 || $oldDermatology > 0) {
-            Alert::info('لديك حجز مسبق في نفس العيادة ', 'xxxx');
+        $oldDermatology = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
+            $q->where('clinic_id', 1);
+        })->count();
+        // end Check 
+        // check of the service that selected by patient 
+        $Service = $request->type  == 2 ? $request->ServiceDental : $request->ServiceDermatology;
+        $SelectedService = Service::where('id',  substr($Service, 1))->first();
+
+        if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
+            Alert::info('لديك حجز مسبق في نفس العيادة ', 'All Full ');
             return view('dashboardUser')->with('all', $all);
+        } else if ($oldDental == 0 && $oldDermatology > 0 &&  $request->type == 1) { //  Case 3 patient have app in جلدية  but can get new app for اسنان 
+            if ($SelectedService->clinic_id == 1) {
+                Alert::info('لديك حجز مسبق في نفس العيادة ', 'Der Full ');
+                return view('dashboardUser')->with('all', $all);
+            }
+        } else if ($oldDental > 0 && $oldDermatology == 0 && $request->type == 2) {
+            if ($SelectedService->clinic_id == 2) {
+                Alert::info('لديك حجز مسبق في نفس العيادة ', 'Dental  Full ');
+                return view('dashboardUser')->with('all', $all);
+            }
         }
+
+        // Messages for valid Input 
         $messages = [
-            // Discount waring text
             'Appointment.required' => 'لابد من وجود اسم ',   // Required
             'Appointment.date' =>  'ادخل تاريخ  ',   // Required
-            'Appointment.after' => "Oh No",   // Required
-
-            'Service.required' => 'يجب عليك اختيار احد الخدمات المتوفرة UP',   // Required
+            'Appointment.after' => "لا يمكنك حجز الموعد بتاريخ اليوم  ",   // Required
+            //  'Service.required' => 'يجب عليك اختيار احد الخدمات المتوفرة UP',   // Required
 
         ];
         $validator = Validator::make($request->all(), [
-            // discount inputs
             'NID' => 'required | min:10  | max:13',
             'Name' => 'required | min:3  | max:100',
             'Phone' => 'required | min:10  | max:13',
             'Appointment' => 'required | date |after: ',
-            'Service' => 'required ',
+            // 'Service' => 'required ',
 
 
         ], $messages);
@@ -164,17 +238,16 @@ class GuestController extends Controller
 
             return view('regester')->with('all', $all);
         }
+        if ((substr($Service, 0, 1) != 'D' && substr($Service, 0, 1) != 'S')) {
 
-        if ((substr($request->Service, 0, 1) != 'D' && substr($request->Service, 0, 1) != 'S')) {
-
-            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'xxxx');
+            Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'Down');
             return view('regester')->with('all', $all);
-        }/* else
-         if (Service::find(substr($request->Service, 1)) == null || Discount::find(substr($request->Service, 1)) == null) {
+        } else
+         if (Service::find(substr($Service, 1)) == null || Discount::find(substr($Service, 1)) == null) {
 
             Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'rrrr');
             return view('regester')->with('all', $all);
-        }*/
+        }
 
 
         $reservations = new Reservation();
@@ -182,8 +255,8 @@ class GuestController extends Controller
         $reservations->Name = $request->Name;
         $reservations->Date = $request->Appointment;
         $reservations->Phone = $request->Phone;
-        $reservations->services_id =  substr($request->Service, 0, 1) == 'S' ?  substr($request->Service, 1) : null;
-        $reservations->discount_id = substr($request->Service, 0, 1) == 'D' ?  substr($request->Service, 1) : null;
+        $reservations->services_id =  substr($Service, 0, 1) == 'S' ?  substr($Service, 1) : null;
+        $reservations->discount_id = substr($Service, 0, 1) == 'D' ?  substr($Service, 1) : null;
         $reservations->Status = 1;
         $reservations->save();
         $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
@@ -193,6 +266,8 @@ class GuestController extends Controller
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
         $services  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
+        $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
 
 
         if ($reservations->count() == 0) {

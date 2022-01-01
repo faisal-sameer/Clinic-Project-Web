@@ -1,4 +1,6 @@
-#idnational {
+#idnational,
+#idnationalOld,
+#idnationalNew {
     text-align-last: center;
     position: relative;
     left: 20%;
@@ -12,6 +14,10 @@
 #doctor-update-content {
     margin-left: 60%;
     justify-content: space-between;
+}
+#option {
+    text-align: center;
+    font-weight: 400;
 }
 #DisTitle {
     text-align: right;
@@ -369,7 +375,9 @@ a.float:hover + div.label-container {
     #regdiv {
         margin-right: 25%;
     }
-    #idnational {
+    #idnational,
+    #idnationalOld,
+    #idnationalNew {
         position: relative;
         right: 50%;
     }

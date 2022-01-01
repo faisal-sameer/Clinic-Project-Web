@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\SendNoificationFCM;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use DateTime;
 
 class ReceptionController extends Controller
 {
@@ -26,25 +27,81 @@ class ReceptionController extends Controller
     }
     protected function dashboardClinicToday()
     {
-        $Reservations = Reservation::where('Date', 'like',  substr(date('c'), 0, -14) . '%')->get();
-        return view('dashboardClinicToday')->with('Reservations', $Reservations);
+        $Reservations = Reservation::where('Date', date('Y-m-d'))->get();
+        $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+        $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+
+        $AllAppointment = Reservation::where('Date', date('Y-m-d'))->count();
+        $AllApprovedAppointment = Reservation::where(['Date' => date('Y-m-d'),   'Status' => 2])->count();
+        $sets =  ClinicDetails::where('type', 1)->select('text_en')->first();
+        $all['AllAppointment'] = $AllAppointment;
+        $all['AllApprovedAppointment'] = $AllApprovedAppointment;
+        $all['sets'] = $sets->text_en;
+
+
+        $all['Reservations'] = $Reservations;
+        $all['dermatology'] = $dermatology;
+        $all['dental'] = $dental;
+        $all['discount'] = $discount;
+        return view('dashboardClinicToday')->with('all', $all);
     }
 
     protected function dashboardClinicPast()
     {
-        // return Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->count();
-        $Reservations = Reservation::where('Date', '<',  substr(date('c'), 0, -14) . '%')->get();
+        $Reservations = Reservation::where('Date', '<',  date('Y-m-d'))->get();
         return view('dashboardClinicPast')->with('Reservations', $Reservations);
     }
-
-    protected function dashboardClinicFuture()
+    function validateDate($date, $format = 'Y-m-d')
     {
-        // return  Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 8)->count();
-
-        $Reservations = Reservation::where('Date', '>',  substr(date('c'), 0, -14) . '%')->where('Status', 1)->orWhere('Status', 5)->orWhere('Status', 9)->get();
-        return view('dashboardClinicAfter')->with('Reservations', $Reservations);
+        $d = DateTime::createFromFormat($format, $date);
+        // The Y ( 4 digits year ) returns TRUE for any integer with any number of digits so changing the comparison from == to === fixes the issue.
+        return $d && $d->format($format) === $date;
     }
+    protected function dashboardClinicFuture($date)
+    {
+        if ($this->validateDate($date) == false) {
+            $all['Date'] = false;
+        } else {
+            $Reservations = Reservation::where('Date', $date)->get();
+            $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
+            $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
+            $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+            $AllAppointment = Reservation::where('Date', $date)->count();
+            $AllApprovedAppointment = Reservation::where(['Date' => $date,   'Status' => 2])->count();
+            $sets =  ClinicDetails::where('type', 1)->select('text_en')->first();
+            $all['AllAppointment'] = $AllAppointment;
+            $all['AllApprovedAppointment'] = $AllApprovedAppointment;
+            $all['sets'] = $sets->text_en;
+            $all['Date'] = true;
+            $all['Reservations'] = $Reservations;
+            $all['dermatology'] = $dermatology;
+            $all['dental'] = $dental;
+            $all['discount'] = $discount;
+        }
+        return view('dashboardClinicAfter')->with('all', $all);
+    }
+    protected function getFreeDate(Request $request)
+    {
+        $AllAppointment = Reservation::where('Date', $request->AppointmentCheck)->count();
+        $AllApprovedAppointment = Reservation::where(['Date' => $request->AppointmentCheck,  'Status' => 2])->count();
+        $sets =  ClinicDetails::where('type', 1)->select('text_en')->first();
+        $NearDate =  Reservation::where('Date', '>',  date('Y-m-d'))->groupBy('Date')
+            ->select(DB::raw('count(*) as total'), 'Date')->orderBy('total')->first();
 
+        $all['AllAppointment'] = $AllAppointment;
+        $all['AllApprovedAppointment'] = $AllApprovedAppointment;
+        $all['sets'] = $sets->text_en;
+        $all['Date'] =  $request->AppointmentCheck;
+        $all['NearDate'] =  $NearDate->Date;
+
+        return response()->json(['code' =>  0, 'date' => $all]);
+    }
+    protected function NearDate(Request $request)
+    {
+
+        return response()->json(['code' =>  0, 'date' => "2022-01-01"]);
+    }
     protected function dashboardStatistic()
     {
         //$app = Reservation::groupBy('services_id', 'Date')->select('services_id', DB::raw('count(*) as total'), 'Date')->get();
@@ -535,18 +592,27 @@ class ReceptionController extends Controller
         return back();
     }
 
-    protected function NewAppointment(Request $request)
+    protected function NewAppointmentStaff(Request $request)
     {
+        $reservations = new Reservation();
+        $reservations->NID = $request->NID;
+        $reservations->Name = $request->Name;
+        $reservations->Date = $request->Appointment;
+        $reservations->Phone = $request->Phone;
+        $reservations->services_id =  substr($request->Service, 0, 1) == 'S' ?  substr($request->Service, 1) : null;
+        $reservations->discount_id = substr($request->Service, 0, 1) == 'D' ?  substr($request->Service, 1) : null;
+        $reservations->Status = 6; // need patient to accept the app 
+        $reservations->save();
+        $Reservation =  Reservation::where('id', $reservations->id)->first();
         Reservation::where('id', $request->id)->update([
-            'Status' => 5
+            'Status' => 10
         ]);
-        $Reservation =  Reservation::where('id', $request->id)->first();
-
-        Alert::success(' تم حجز موعد جديد للمراجع', $Reservation->Name . ' ' . $Reservation->NID);
+        Alert::success(' تم حجز موعد جديد للمراجع', $Reservation->Name_ar . ' ' . $Reservation->NID);
 
         return back();
     }
-
+    /*  
+        Maybe We Don't need it right now  bro !! 
     protected function Leave(Request $request)
     {
         Reservation::where('id', $request->id)->update([
@@ -570,6 +636,7 @@ class ReceptionController extends Controller
 
         return back();
     }
+    */
 }
 
 

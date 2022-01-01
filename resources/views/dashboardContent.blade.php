@@ -26,11 +26,13 @@
                         <div class="select-box__current" tabindex="1">
                             <div class="select-box__value">
                                 <input class="select-box__input " type="radio" name="Ben" checked="checked" />
-                                <p class="select-box__input-text " id="choiceFirst"> {{ __('dashboardContent.Chose') }} </p>
+                                <p class="select-box__input-text " id="choiceFirst"> {{ __('dashboardContent.Chose') }}
+                                </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="aboutClinic" name="Ben" />
-                                <p class="select-box__input-text" id="aboutClinic"> {{ __('dashboardContent.Clinic') }} </p>
+                                <p class="select-box__input-text" id="aboutClinic"> {{ __('dashboardContent.Clinic') }}
+                                </p>
                             </div>
                             <div class="select-box__value">
                                 <input class="select-box__input" type="radio" id="discount" name="Ben" />
@@ -93,7 +95,8 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
+                                <label class="select-box__option" for="0" id="0"
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['discount'] as $discount)
                                 <li>
@@ -126,7 +129,8 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
+                                <label class="select-box__option" for="0" id="0"
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['service'] as $service)
                                 <li>
@@ -161,7 +165,8 @@
                         </div>
                         <ul class="select-box__list">
                             <li>
-                                <label class="select-box__option" for="0" id="0" aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
+                                <label class="select-box__option" for="0" id="0"
+                                    aria-hidden="aria-hidden">{{ __('dashboardContent.Chose') }}</label>
                             </li>
                             @foreach ($content['doctor'] as $doctor)
                                 <li>
@@ -181,21 +186,21 @@
                 <form method="POST" id="formTag" action="{{ route('Update') }}" enctype="multipart/form-data">
                     @csrf
                     <textarea placeholder="id" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%  ; display: none;" name="id" id="id" cols="1"
-                        rows="1"></textarea>
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%  ; display: none;" name="id"
+                        id="id" cols="1" rows="1"></textarea>
                     <!--لاظهار الاي دي    display: none;  -->
                     <textarea placeholder="type" class="shadow-drop-2-center" readonly
-                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; display: none;" name="type" id="typeText"
-                        cols="1" rows="1"></textarea>
+                        style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%; display: none;" name="type"
+                        id="typeText" cols="1" rows="1"></textarea>
                     <!--لاظهار نوع اللست سواء طبيب أو عروض أو الخ-->
 
                     <div id="UpdateinfoAbout" class="row">
                         <!--تحديث معلومات العيادة-->
 
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.about') }}"
-                            class="shadow-drop-2-center textAF" id="AboutText" name="AboutText" cols="100"
-                            rows="5"></textarea>
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;"
+                            placeholder=" {{ __('dashboardContent.about') }}" class="shadow-drop-2-center textAF"
+                            id="AboutText" name="AboutText" cols="100" rows="5"></textarea>
 
 
                         <div id="filerow" style="margin-left:40%; " class="row">
@@ -211,13 +216,16 @@
                     <div id="UpdateinfoDiscount" class="row">
                         <!--تحديث معلومات العروض-->
                         <div id="doctor-update-content">
-                            <textarea placeholder="{{ __('dashboardContent.title') }}" class="shadow-drop-2-center textAF" name="DisTitle"
-                                id="DisTitle" cols="1" rows="1"></textarea>
-                            <textarea placeholder="{{ __('dashboardContent.price') }} " class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice"
-                                cols="1" rows="1"></textarea>
+                            <textarea placeholder="{{ __('dashboardContent.title') }}"
+                                class="shadow-drop-2-center textAF" name="DisTitle" id="DisTitle" cols="1"
+                                rows="1"></textarea>
+                            <textarea placeholder="{{ __('dashboardContent.price') }} "
+                                class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice" cols="1"
+                                rows="1"></textarea>
                         </div>
 
-                        <textarea style="margin-left:1%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.DiscountDescription') }} "
+                        <textarea style="margin-left:1%;text-align: right ;height: 30%;"
+                            placeholder=" {{ __('dashboardContent.DiscountDescription') }} "
                             class="shadow-drop-2-center textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
 
 
@@ -246,9 +254,9 @@
 
 
                             </div>
-                            <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder=" {{ __('dashboardContent.aboutService') }}"
-                                class="shadow-drop-2-center" name="name" id="managertextarea" cols="100"
-                                rows="5"></textarea>
+                            <textarea style="margin-left:5%;text-align: right ;height: 30%;"
+                                placeholder=" {{ __('dashboardContent.aboutService') }}" class="shadow-drop-2-center"
+                                name="name" id="managertextarea" cols="100" rows="5"></textarea>
                             <textarea placeholder="{{ __('dashboardContent.price') }}" class="shadow-drop-2-center"
                                 style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="price"
                                 id="managertextarea1" cols="1" rows="1"></textarea>
@@ -263,18 +271,21 @@
                     <div id="UpdateinfoDoctor" class="row">
                         <!--تحديث معلومات الاطباء-->
                         <div id="doctor-update-content">
-                            <textarea placeholder="{{ __('dashboardContent.fullName') }}" class="shadow-drop-2-center textAF" name="DoctorName"
-                                id="DoctorName" cols="1" rows="1"></textarea>
-                            <textarea placeholder="{{ __('dashboardContent.email') }}" class="shadow-drop-2-center textAF" name="email"
-                                id="email-content" cols="1" rows="1"></textarea>
+                            <textarea placeholder="{{ __('dashboardContent.fullName') }}"
+                                class="shadow-drop-2-center textAF" name="DoctorName" id="DoctorName" cols="1"
+                                rows="1"></textarea>
+                            <textarea placeholder="{{ __('dashboardContent.email') }}"
+                                class="shadow-drop-2-center textAF" name="email" id="email-content" cols="1"
+                                rows="1"></textarea>
                         </div>
-                        <input placeholder="{{ __('auth.Password') }}" type="password" class="shadow-drop-2-center textAF"
+                        <input placeholder="{{ __('auth.Password') }}" type="password"
+                            class="shadow-drop-2-center textAF"
                             style="text-align: right ;  width: 20%  ;height: 5% ;display:none" name="DoctorPassword"
                             id="DoctorPassword">
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;" placeholder="{{ __('dashboardContent.aboutDoctor') }} "
-                            class="shadow-drop-2-center textAF" name="DoctorInfo" id="DoctorInfo" cols="100"
-                            rows="5"></textarea>
+                        <textarea style="margin-left:5%;text-align: right ;height: 30%;"
+                            placeholder="{{ __('dashboardContent.aboutDoctor') }} " class="shadow-drop-2-center textAF"
+                            name="DoctorInfo" id="DoctorInfo" cols="100" rows="5"></textarea>
                         <div id="filerow" style="margin-left:40%; " class="row">
                             <input type="file" class="foo" name="DoctorImg" id="fileInput"
                                 onchange="readURL(this);">

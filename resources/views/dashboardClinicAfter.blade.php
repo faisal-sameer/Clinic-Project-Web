@@ -17,102 +17,169 @@
         <div id="ptf" class="container">
             <div id="mess">
 
-                <a href="/FutureAppointments" class="btn btn-outline-light"> {{ __('ReservationDashboard.Future') }} </a>
-
+                <a href="/FutureAppointments-0" class="btn btn-outline-light">
+                    {{ __('ReservationDashboard.Future') }} </a>
                 <a href="/TodayAppointments" class="btn btn-outline-light"> {{ __('ReservationDashboard.Today') }}</a>
                 <a href="/PastAppointments" class="btn btn-outline-light"> {{ __('ReservationDashboard.Past') }}</a>
             </div>
+            @if ($all['Date'])
 
-            <div id="London" class=" city">
-                <br>
-                <h2> {{ __('ReservationDashboard.Future') }}</h2>
 
-                <input type="text" id="myInput2" onkeyup="myFunction2()"
-                    placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
-                    title="Type in a name">
+                <div id="London" class=" city">
+                    <br>
+                    <h2> {{ __('ReservationDashboard.Future') }}</h2>
 
-                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                    <table id="myTable2" class="table table-bordered table-striped mb-0">
-                        <thead>
-                            <tr>
-                                <th colspan="2"> {{ __('ReservationDashboard.action') }}</th>
-                                <th colspan="1"> {{ __('ReservationDashboard.StatusT') }}</th>
-                                <th colspan="2">{{ __('ReservationDashboard.service') }}</th>
-                                <th colspan="2" scope="col">{{ __('ReservationDashboard.ShiftDate') }}</th>
-                                <th colspan="2" scope="col">{{ __('ReservationDashboard.Name') }}</th>
-                                <th colspan="2" scope="col">{{ __('ReservationDashboard.NID') }}</th>
+                    <div class="form-inline">
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($Reservations as $Reservation)
+                        <input type="text" id="myInput2" onkeyup="myFunction()"
+                            placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
+                            title="Type in a name">
+                        <div class="text-center"></div>
+                        <p>عدد المواعيد : <span style="color: yellowgreen" class="allApp"
+                                id="allApp">{{ $all['AllAppointment'] }}</span></p>
+                        <p>عدد المواعيدالموافق عليها : <span style="color:  green" class="AllappApproved"
+                                id="AllappApproved">{{ $all['AllApprovedAppointment'] }}</span>
+                        </p>
+                        <p>الطاقة الاستعابية : <span style="color: red" class="sets"
+                                id="sets">{{ $all['sets'] }}</span></p>
+                        <button type="submit" data-toggle="modal" data-target="#ChangeDate" class="btn btn-secondary">
+                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تغير التاريخ ', 'en' => 'Change Date']) }}</button>
+
+                    </div>
+
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table id="myTable2" class="table table-bordered table-striped mb-0">
+                            <thead>
                                 <tr>
-                                    <td colspan="2" id="texttab">
-                                        @if ($Reservation->Status == 1)
-                                            <div id="dailogs1">
-
-                                                <form method="POST" action="{{ route('Confirm') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
-                                                        readonly hidden required />
-
-                                                    <button type="submit" class="btn btn-success">
-                                                        {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تاكيد الحجز', 'en' => 'Approving']) }}</button>
-                                                </form>
-
-                                            </div>
-                                            <div id="dailogs4">
-                                                <form method="POST" action="{{ route('Rejected') }}">
-                                                    @csrf
-                                                    <input type="number" value="{{ $Reservation->id }}" name="id"
-                                                        readonly hidden required />
-                                                    <button type="submit" class="btn btn-danger">
-                                                        {{ __('ReservationDashboard.Status, :lang', ['ar' => 'رفض', 'en' => 'Reject']) }}</button>
-
-                                                    </button>
-                                                </form>
-                                            </div>
-                                            <br><br>
-                                        @endif
-
-                                    </td>
-                                    <td colspan="1" id="texttab">
-                                        @if ($Reservation->Status == 5)
-                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
-                                        @elseif($Reservation->Status == 9)
-                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected']) }}
-
-                                        @else
-                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
-                                        @endif
-                                    </td>
-
-                                    <td colspan="2" id="texttab">
-                                        {{ $Reservation->service == null ? $Reservation->discount->title_ar : $Reservation->service['Name_ar'] }}
-                                    </td>
-
-                                    <td colspan="2" id="texttab">{{ $Reservation->Date }}
-                                    </td>
-
-                                    <td colspan="2" id="texttab">{{ $Reservation->Name }}
-                                    </td>
-                                    <td colspan="2" id="texttab">
-                                        {{ $Reservation->NID }}</td>
+                                    <th colspan="2"> {{ __('ReservationDashboard.action') }}</th>
+                                    <th colspan="1"> {{ __('ReservationDashboard.StatusT') }}</th>
+                                    <th colspan="2">{{ __('ReservationDashboard.service') }}</th>
+                                    <th colspan="2" scope="col">{{ __('ReservationDashboard.ShiftDate') }}</th>
+                                    <th colspan="2" scope="col">{{ __('ReservationDashboard.Name') }}</th>
+                                    <th colspan="2" scope="col">{{ __('ReservationDashboard.NID') }}</th>
 
                                 </tr>
-                            @endforeach
+                            </thead>
+
+                            <tbody>
+                                @foreach ($all['Reservations'] as $Reservation)
+                                    <tr>
+                                        <td colspan="2" id="texttab">
+                                            @if ($Reservation->Status == 1)
+                                                <div id="dailogs1">
+
+                                                    <form method="POST" action="{{ route('Confirm') }}">
+                                                        @csrf
+                                                        <input type="number" value="{{ $Reservation->id }}" name="id"
+                                                            readonly hidden required />
+
+                                                        <button type="submit" class="btn btn-success">
+                                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تاكيد الحجز', 'en' => 'Approving']) }}</button>
+                                                    </form>
+
+                                                </div>
+                                                <div id="dailogs4">
+                                                    <form method="POST" action="{{ route('Rejected') }}">
+                                                        @csrf
+                                                        <input type="number" value="{{ $Reservation->id }}" name="id"
+                                                            readonly hidden required />
+                                                        <button type="submit" class="btn btn-danger">
+                                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'رفض', 'en' => 'Reject']) }}</button>
+
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                <br><br>
+                                            @endif
+
+                                        </td>
+                                        <td colspan="1" id="texttab">
+                                            @if ($Reservation->Status == 5)
+                                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
+                                            @elseif($Reservation->Status == 9)
+                                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected']) }}
+
+                                            @else
+                                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
+                                            @endif
+                                        </td>
+
+                                        <td colspan="2" id="texttab">
+                                            {{ $Reservation->service == null ? $Reservation->discount['title_ar'] : $Reservation->service['Name_ar'] }}
+                                        </td>
+
+                                        <td colspan="2" id="texttab">{{ $Reservation->Date }}
+                                        </td>
+
+                                        <td colspan="2" id="texttab">{{ $Reservation->Name }}
+                                        </td>
+                                        <td colspan="2" id="texttab">
+                                            {{ $Reservation->NID }}</td>
+
+                                    </tr>
+                                @endforeach
 
 
-                        </tbody>
-                    </table>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+
+
                 </div>
+                <div class="modal fade" id="ChangeDate" tabindex="-1" role="dialog" aria-labelledby="ChangeDateLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label id="idnational">
+                                        {{ __('AppReservation.Date') }}</label> <br>
 
+                                    <input id="idnationalOld" value="<?php echo Date('Y-m-d', time()); ?>" type="date"
+                                        name="AppointmentCheck" min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
-            </div>
+                                </div>
+                                <button id="SearchDate" class="btn btn-outline-info" type="submit">بحث </button>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+            @else
+
+                <div class="form-group row">
+                    <label id="idnational">
+                        {{ __('AppReservation.Date') }}</label> <br>
+
+                    <input id="idnationalOld" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="AppointmentCheck"
+                        min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
+
+                </div>
+                <button id="SearchDate" class="btn btn-info" type="submit">بحث </button>
+            @endif
 
 
 
         </div>
     </div>
+@endsection
+
+
+@section('checkDate')
+    <script>
+        $("#SearchDate").click(function(e) {
+            e.preventDefault();
+            var date = document.getElementById('idnationalOld').value;
+            window.location = "/FutureAppointments-" + date;
+        });
+    </script>
 @endsection
