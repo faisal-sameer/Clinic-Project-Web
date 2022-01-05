@@ -19,6 +19,10 @@ return [
     'AppPhone' => 'Phone',
     'AppUpdate' => 'Update',
     'AppClose' => 'Close ',
-    'ApprovedApp' => 'Approved'
+    'ApprovedApp' => 'Approved',
+    'date' => 'Date',
+    'Reject' => 'Reject',
+
+
 
 ];

@@ -87,21 +87,21 @@ class GuestController extends Controller
                    </div> ",
                         'info'
                     )->showConfirmButton(false, "#ffff")->showCloseButton()
-                    ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>') :
+                    ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>') : // else
                     // Eng
                     Alert::html(
-                        '<i>تم حجز موعد جديد لك  </i><br> <p>الرجاء الموافقة عليه او رفضه في حالة لم يناسبك الموعد</p>',
+                        '<i>A new appointment has been booked for you </i><br> <p>Please accept or reject it if the appointment does not suit you</p>',
                         "
                     <p> Appoitement  : $DateService</p>
                     <p>Service  :  $NameService </p>
-                    <div class='form-inline' style='margin-left: 35%' > 
+                    <div class='form-inline' style='margin-left: 30%' > 
 
                     
                     <button type='submit'
-                    class='btn btn-danger'>  <a   style='color: white'href='/RejectedApp-$needApproved->id'>رفض</a></button>
+                    class='btn btn-danger'>  <a   style='color: white'href='/RejectedApp-$needApproved->id'>Reject</a></button>
                     <br>
                      <button type='submit' style='margin:10px'
-                    class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>تاكيد</a> </button>
+                    class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>Approved</a> </button>
                     
                    </div> ",
                         'info'

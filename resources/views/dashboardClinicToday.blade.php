@@ -27,23 +27,35 @@
             <div id="London" class=" city">
                 <br>
                 <h2> {{ __('ReservationDashboard.Today') }} </h2>
-                <div class="form-inline">
-
+                <div class="row">
+                     <div class="col-md-4">
                     <input type="text" id="myInput0" onkeyup="myFunction()"
                         placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
                         title="Type in a name">
-                    <div class="text-center"></div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
                     <p>عدد المواعيد : <span style="color: yellowgreen" class="allApp"
-                            id="allApp">{{ $all['AllAppointment'] }}</span></p>
+                            id="allApp">{{ $all['AllAppointment'] }}</span></p></div>
+                            <div class="col-md-4">
+
                     <p>عدد المواعيدالموافق عليها : <span style="color:  green" class="AllappApproved"
                             id="AllappApproved">{{ $all['AllApprovedAppointment'] }}</span>
                     </p>
+                            </div>
+                            <div class="col-md-4">
+
                     <p>الطاقة الاستعابية : <span style="color: red" class="sets"
                             id="sets">{{ $all['sets'] }}</span></p>
+                            </div>
+                        </div>
 
+                        </div>
+                        <div class="col-md-2">
                     <button type="submit" data-toggle="modal" data-target="#NewApp" class="btn btn-secondary">
                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد', 'en' => 'New Appointment']) }}</button>
-
+                  </div>
                 </div>
 
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
