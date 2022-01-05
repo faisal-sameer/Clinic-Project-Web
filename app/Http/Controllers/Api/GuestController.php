@@ -138,12 +138,14 @@ class GuestController extends Controller
             $reservations->services_id = $ServiceRequest == null ? null :  $ServiceRequest->id;
             $reservations->discount_id = $DiscountRequest == null   ? null :  $DiscountRequest->id;
             $reservations->Status = 1;
+            $reservations->Token =  $request->token;
             $reservations->save();
         }
         return response()->json(['status' => 'success', 'data' =>  "Done"]);
     }
     protected function UpdatingAppointment(Request $request)
     {
+
         if ($request->NID == null) {
 
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ رقم الهوية او الاقامة"]);
@@ -201,6 +203,7 @@ class GuestController extends Controller
 
     protected function  dashboardUser(Request $request)
     {
+
         $myReservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
             ->select('id', 'Name', 'NID', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
         if ($myReservations->count() == 0) {
@@ -212,7 +215,7 @@ class GuestController extends Controller
                     'id' => $myReservation->id, 'Name' => $myReservation->Name, 'NID' => $myReservation->NID,
                     'Day' => $myReservation->Date,
                     'Phone' => $myReservation->Phone,
-                    'service' => $myReservation->services_id == null ? $myReservation->discount->title_ar : $myReservation->service->Name_ar,
+                    'service' => $myReservation->services_id == null ? $myReservation->discount['title_ar'] : $myReservation->service->Name_ar,
                     'Status' => $myReservation->Status
                 ];
                 $i++;
@@ -220,5 +223,23 @@ class GuestController extends Controller
         }
 
         return response()->json(['status' => 'success', 'data' =>  $all]);
+    }
+    protected function PatientAcceptedApp(Request $request)
+    {
+
+        Reservation::where('id', $request->id)->update([
+            'Status' => 8
+        ]);
+
+        return response()->json(['status' => 'success', 'data' => 'Done!!']);
+    }
+    protected function PatientRejectedApp(Request $request)
+    {
+
+        Reservation::where('id', $request->id)->update([
+            'Status' => 9
+        ]);
+
+        return response()->json(['status' => 'success', 'data' => 'Done!!']);
     }
 }

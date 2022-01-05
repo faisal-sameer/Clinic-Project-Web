@@ -94,13 +94,25 @@
 
                                         </td>
                                         <td colspan="1" id="texttab">
-                                            @if ($Reservation->Status == 5)
-                                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
-                                            @elseif($Reservation->Status == 9)
-                                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected']) }}
+                                            @if ($Reservation->Status == 1)
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
+                                            @elseif($Reservation->Status == 2 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
+                                            @elseif($Reservation->Status == 3 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected ']) }}
+                                            @elseif($Reservation->Status == 4 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'في العيادة', 'en' => 'Arraive']) }}
+                                            @elseif($Reservation->Status == 5 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'انتهت الجلسة ', 'en' => 'Completed  ']) }}
+                                            @elseif($Reservation->Status == 6 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'لم يحظر ', 'en' => 'Did not come ']) }}
+                                            @elseif($Reservation->Status == 7 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار موافقتك  ', 'en' => 'Need your Approval']) }}
+                                            @elseif($Reservation->Status == 8 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة على الموعد', 'en' => 'Appointment accpeted  ']) }}
+                                            @elseif($Reservation->Status == 9 )
+                                                {{ __('UserDashboard.Status, :lang', ['ar' => 'تم رفض الموعد من قبل المراجع', 'en' => 'Appointment Rejected from Patient ']) }}
 
-                                            @else
-                                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
                                             @endif
                                         </td>
 

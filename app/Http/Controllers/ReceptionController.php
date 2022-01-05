@@ -27,6 +27,7 @@ class ReceptionController extends Controller
     }
     protected function dashboardClinicToday()
     {
+
         $Reservations = Reservation::where('Date', date('Y-m-d'))->get();
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
@@ -86,22 +87,26 @@ class ReceptionController extends Controller
         $AllAppointment = Reservation::where('Date', $request->AppointmentCheck)->count();
         $AllApprovedAppointment = Reservation::where(['Date' => $request->AppointmentCheck,  'Status' => 2])->count();
         $sets =  ClinicDetails::where('type', 1)->select('text_en')->first();
-        $NearDate =  Reservation::where('Date', '>',  date('Y-m-d'))->groupBy('Date')
-            ->select(DB::raw('count(*) as total'), 'Date')->orderBy('total')->first();
-
+        for ($i = 0; $i <= 10; $i++) {
+            $dateNew = Reservation::where('Date',  Carbon::now()->addDays($i)->format('Y-m-d'))->get();
+            if ($dateNew->count() == 0) {
+                $NearDate =  Carbon::now()->addDays($i)->format('Y-m-d');
+                break;
+            } else if ($dateNew->count() < 1) {
+                $NearDate =  Carbon::now()->addDays($i)->format('Y-m-d');
+            } else {
+                $NearDate =  Carbon::now()->addDays($i)->format('Y-m-d');
+            }
+        }
         $all['AllAppointment'] = $AllAppointment;
         $all['AllApprovedAppointment'] = $AllApprovedAppointment;
         $all['sets'] = $sets->text_en;
         $all['Date'] =  $request->AppointmentCheck;
-        $all['NearDate'] =  $NearDate->Date;
+        $all['NearDate'] =  $NearDate;
 
         return response()->json(['code' =>  0, 'date' => $all]);
     }
-    protected function NearDate(Request $request)
-    {
 
-        return response()->json(['code' =>  0, 'date' => "2022-01-01"]);
-    }
     protected function dashboardStatistic()
     {
         //$app = Reservation::groupBy('services_id', 'Date')->select('services_id', DB::raw('count(*) as total'), 'Date')->get();
@@ -149,9 +154,9 @@ class ReceptionController extends Controller
         $clinic = clinic::get();
 
         $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinics' => $clinic];
-        //$test = new SendNoificationFCM();
+        $test = new SendNoificationFCM();
 
-        // $test->sendGCM('AF Head', 'FA Body', "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
+        $test->sendGCM('AF Head', 'FA Body', "eB_aZbe6QfOD39JCagD2Oj:APA91bGf_AHH3YYO3he2HkxhoHrGtUTyrNINP0Z8B7QolhLpkBnt_bR_DUjbG7DST_af-orN6lt9BvlVezQ0TiE6uZj54Z_RAOLlJMmxZm5OrZhXgiQ-S-xYFShOLt1m-VCTXWYkFLMs", "1", "w");
 
         return view('dashboardContent')->with('content', $content);
     }
@@ -533,21 +538,12 @@ class ReceptionController extends Controller
         return $request->all();
     }
 
-    protected function Coming(Request $request)
+    protected function Confirm(Request $request) //  تاكيد الحجز من قبل العيادة
     {
         Reservation::where('id', $request->id)->update([
-            'Status' => 2
-        ]);
-        $Reservation =  Reservation::where('id', $request->id)->first();
+            'Status' => 2,
+            'employee_id' => auth()->user()->id
 
-        Alert::success('تم تسجيل حضور للمراجع ', $Reservation->Name . ' ' . $Reservation->NID);
-
-        return back();
-    }
-    protected function Confirm(Request $request)
-    {
-        Reservation::where('id', $request->id)->update([
-            'Status' => 5
         ]);
         $Reservation =  Reservation::where('id', $request->id)->first();
 
@@ -555,10 +551,10 @@ class ReceptionController extends Controller
 
         return back();
     }
-    protected function Rejected(Request $request)
+    protected function Rejected(Request $request) // رفض الحجز من قبل العيادة 
     {
         Reservation::where('id', $request->id)->update([
-            'Status' => 9,
+            'Status' => 3,
             'employee_id' => auth()->user()->id
 
         ]);
@@ -568,22 +564,25 @@ class ReceptionController extends Controller
 
         return back();
     }
-    protected function DidCome(Request $request)
+    protected function Coming(Request $request) //  عمل وصول للمراجع
     {
         Reservation::where('id', $request->id)->update([
-            'Status' => 3
+            'Status' => 4,
+            'employee_id' => auth()->user()->id
+
         ]);
         $Reservation =  Reservation::where('id', $request->id)->first();
 
-        Alert::info('تم تسجيل عدم حضور للمراجع ', $Reservation->Name . ' ' . $Reservation->NID);
+        Alert::success('تم تاكيد الحجز  ', $Reservation->Name . ' ' . $Reservation->NID);
 
         return back();
     }
-
-    protected function Complete(Request $request)
+    protected function Complete(Request $request) //  انتهاء المراجع من العيادة 
     {
         Reservation::where('id', $request->id)->update([
-            'Status' => 4
+            'Status' => 5,
+            'employee_id' => auth()->user()->id
+
         ]);
         $Reservation =  Reservation::where('id', $request->id)->first();
 
@@ -592,7 +591,23 @@ class ReceptionController extends Controller
         return back();
     }
 
-    protected function NewAppointmentStaff(Request $request)
+    protected function DidCome(Request $request) // لم يحضر المريض 
+    {
+        Reservation::where('id', $request->id)->update([
+            'Status' => 6,
+            'employee_id' => auth()->user()->id
+
+        ]);
+        $Reservation =  Reservation::where('id', $request->id)->first();
+
+        Alert::info('تم تسجيل عدم حضور للمراجع ', $Reservation->Name . ' ' . $Reservation->NID);
+
+        return back();
+    }
+
+
+
+    protected function NewAppointmentStaff(Request $request) // تسجيل موعد جديد للمراجع من قبل العيادة 
     {
         $reservations = new Reservation();
         $reservations->NID = $request->NID;
@@ -601,11 +616,13 @@ class ReceptionController extends Controller
         $reservations->Phone = $request->Phone;
         $reservations->services_id =  substr($request->Service, 0, 1) == 'S' ?  substr($request->Service, 1) : null;
         $reservations->discount_id = substr($request->Service, 0, 1) == 'D' ?  substr($request->Service, 1) : null;
-        $reservations->Status = 6; // need patient to accept the app 
+        $reservations->Status = 7; // need patient to accept the app 
         $reservations->save();
         $Reservation =  Reservation::where('id', $reservations->id)->first();
         Reservation::where('id', $request->id)->update([
-            'Status' => 10
+            'Status' => 5,
+            'employee_id' => auth()->user()->id
+
         ]);
         Alert::success(' تم حجز موعد جديد للمراجع', $Reservation->Name_ar . ' ' . $Reservation->NID);
 

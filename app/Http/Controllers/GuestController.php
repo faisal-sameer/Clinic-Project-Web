@@ -51,7 +51,7 @@ class GuestController extends Controller
 
             $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
                 ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
-            $needApproved =   Reservation::where(['NID' => $request->NID, 'Status' => 6])->first();
+            $needApproved =   Reservation::where(['NID' => $request->NID, 'Status' => 7])->first();
             $services  = Service::select('id', 'Name_ar')->get();
             $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
             $all = ['NID' => $request->NID];
@@ -79,7 +79,7 @@ class GuestController extends Controller
 
                     
                     <button type='submit'
-                    class='btn btn-danger'>  <a   style='color: white'href='#'>رفض</a></button>
+                    class='btn btn-danger'>  <a   style='color: white'href='/RejectedApp-$needApproved->id'>رفض</a></button>
                     <br>
                      <button type='submit' style='margin:10px'
                     class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>تاكيد</a> </button>
@@ -88,7 +88,7 @@ class GuestController extends Controller
                         'info'
                     )->showConfirmButton(false, "#ffff")->showCloseButton()
                     ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>') :
-
+                    // Eng
                     Alert::html(
                         '<i>تم حجز موعد جديد لك  </i><br> <p>الرجاء الموافقة عليه او رفضه في حالة لم يناسبك الموعد</p>',
                         "
@@ -98,7 +98,7 @@ class GuestController extends Controller
 
                     
                     <button type='submit'
-                    class='btn btn-danger'>  <a   style='color: white'href='#'>رفض</a></button>
+                    class='btn btn-danger'>  <a   style='color: white'href='/RejectedApp-$needApproved->id'>رفض</a></button>
                     <br>
                      <button type='submit' style='margin:10px'
                     class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>تاكيد</a> </button>
@@ -115,10 +115,10 @@ class GuestController extends Controller
         }
     }
 
-    protected function PatientApproved(Request $request)
+    protected function PatientApprovedModel(Request $request) // قبول موعد العيادة الجديد من قبل المراجع  
     {
         Reservation::where('id', $request->id)->update([
-            'Status' => 7
+            'Status' => 8
         ]);
         $info =  Reservation::where('id', $request->id)->first();
 
@@ -135,8 +135,47 @@ class GuestController extends Controller
         $all['Need'] = $needApproved == [] ? 0 : 1;
         $all['needApproved'] =   $needApproved == [] ? 0 : $needApproved;
         return  redirect()->route('NewReservation', ['NID' => $info->NID]);
+    }
 
-        return view('dashboardUser')->with('all', $all);
+    protected function PatientApproved($id) // قبول موعد العيادة الجديد من قبل المراجع  
+    {
+        Reservation::where('id', $id)->update([
+            'Status' => 8
+        ]);
+        $info =  Reservation::where('id', $id)->first();
+
+        $reservations = Reservation::where('NID', $info->NID)->orderBy('created_at', 'DESC')
+            ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
+        $needApproved =   Reservation::where(['NID' => $info->NID, 'Status' => 6])->first();
+        $services  = Service::select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+        $all = ['NID' => $info->NID];
+        $all['services'] = $services;
+        $all['discount'] = $discount;
+        $all['reservations'] =  $reservations->count() == 0 ? 0 :  $reservations;
+        $all['data'] =  $reservations->count() == 0 ? 0 :  1;
+        $all['Need'] = $needApproved == [] ? 0 : 1;
+        $all['needApproved'] =   $needApproved == [] ? 0 : $needApproved;
+        return  redirect()->route('NewReservation', ['NID' => $info->NID]);
+    }
+
+    protected function PatientRejected($id) // رفض الحجز العيادة من قبل المراجع sweetAlert
+    {
+        Reservation::where('id', $id)->update([
+            'Status' => 9
+        ]);
+        $info =  Reservation::where('id', $id)->first();
+
+        return  redirect()->route('NewReservation', ['NID' => $info->NID]);
+    }
+    protected function PatientRejectedModel(Request $request) // رفض الحجز العيادة من قبل المراجع Model 
+    {
+        Reservation::where('id', $request->id)->update([
+            'Status' => 9
+        ]);
+        $info =  Reservation::where('id', $request->id)->first();
+
+        return  redirect()->route('NewReservation', ['NID' => $info->NID]);
     }
 
     protected function regester(Request $request)

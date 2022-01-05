@@ -95,17 +95,22 @@
                                                 @if ($reservation->Status == 1)
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
                                                 @elseif($reservation->Status == 2 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'في صالة الانتظار ', 'en' => 'Waiting Room']) }}
-                                                @elseif($reservation->Status == 3 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'لم تحضر', 'en' => 'Did not come ']) }}
-                                                @elseif($reservation->Status == 4 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'انهيت الجسلة', 'en' => 'finished']) }}
-                                                @elseif($reservation->Status == 5 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
+                                                @elseif($reservation->Status == 3 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected ']) }}
+                                                @elseif($reservation->Status == 4 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'في العيادة', 'en' => 'Arraive']) }}
+                                                @elseif($reservation->Status == 5 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'انتهت الجلسة ', 'en' => 'Completed  ']) }}
                                                 @elseif($reservation->Status == 6 )
-                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار موافقتك', 'en' => ' ']) }}
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'لم يحظر ', 'en' => 'Did not come ']) }}
                                                 @elseif($reservation->Status == 7 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار موافقتك  ', 'en' => 'Need your Approval']) }}
+                                                @elseif($reservation->Status == 8 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة على الموعد', 'en' => 'Appointment accpeted  ']) }}
+                                                @elseif($reservation->Status == 9 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'تم رفض الموعد من قبل المراجع', 'en' => 'Appointment Rejected from Patient ']) }}
+
                                                 @endif
                                             </td>
 
@@ -237,7 +242,8 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body ">
-                                                        <form method="POST" action="{{ route('ApprovedApp') }}">
+                                                        <form method="POST" id="formTag{{ $reservation->id }}"
+                                                            action="{{ route('ApprovedApp') }}">
                                                             @csrf
                                                             <input type="text" name="id" readonly required hidden
                                                                 value="{{ $reservation->id }}">
@@ -247,9 +253,9 @@
                                                             </div>
                                                             <div class='form-inline justify-content-center'>
 
+                                                                <input class="btn btn-danger" type="submit"
+                                                                    id="New{{ $reservation->id }}" value="رفض" />
 
-                                                                <button type="button" class="btn btn-danger"
-                                                                    data-dismiss="modal"> رفض</button>
                                                                 <br>
                                                                 <button type='submit' style='margin:15px'
                                                                     class='btn btn-success'>تاكيد
@@ -257,6 +263,7 @@
 
                                                             </div>
                                                         </form>
+
                                                     </div>
 
                                                 </div>
@@ -280,5 +287,25 @@
         </div>
 
     </div>
+
+@endsection
+
+
+@section('script')
+
+
+
+    @foreach ($all['reservations'] as $reservation)
+
+        <script>
+            document.getElementById("New{{ $reservation->id }}").addEventListener("click", function() {
+                alert("AF");
+
+                var frm = document.getElementById('formTag{{ $reservation->id }}');
+
+                frm.action = '{{ route('PatientRejected') }}';
+            });
+        </script>
+    @endforeach
 
 @endsection

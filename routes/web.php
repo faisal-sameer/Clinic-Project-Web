@@ -41,7 +41,17 @@ Route::group(
 
         Route::get('/reservation', [App\Http\Controllers\GuestController::class, 'reservation'])->name('reservation');
         Route::any('/dashboardUser', [App\Http\Controllers\GuestController::class, 'dashboardUser'])->name('NewReservation');
-        Route::post('/ApprovedApp', [App\Http\Controllers\GuestController::class, 'PatientApproved'])->name('ApprovedApp');
+
+
+
+        Route::post('/ApprovedApp', [App\Http\Controllers\GuestController::class, 'PatientApprovedModel'])->name('ApprovedApp');
+        Route::post('/RejectApp', [App\Http\Controllers\GuestController::class, 'PatientRejectedModel'])->name('PatientRejected');
+
+        Route::get('/ApprovedApp-{id}', [App\Http\Controllers\GuestController::class, 'PatientApproved']);
+        Route::get('/RejectedApp-{id}', [App\Http\Controllers\GuestController::class, 'PatientRejected']);
+
+
+
         Route::any('/regester', [App\Http\Controllers\GuestController::class, 'regester'])->name('Appointment');
         Route::any('/NewAppointment', [App\Http\Controllers\GuestController::class, 'AppointmentNew'])->name('NewAppointment');
         Route::any('/ChangeApp', [App\Http\Controllers\GuestController::class, 'ChangeApp'])->name('ChangeApp');
@@ -51,7 +61,6 @@ Route::group(
         Route::get('/PastAppointments', [App\Http\Controllers\ReceptionController::class, 'dashboardClinicPast']);
         Route::get('/FutureAppointments-{date}', [App\Http\Controllers\ReceptionController::class, 'dashboardClinicFuture']);
         Route::post('/getFreeDate', [App\Http\Controllers\ReceptionController::class, 'getFreeDate'])->name('FreeData');
-        Route::post('/NearDate', [App\Http\Controllers\ReceptionController::class, 'NearDate'])->name('NearDate');
 
         // Action is Appointment Dashboard 
         Route::any('/Rejected', [App\Http\Controllers\ReceptionController::class, 'Rejected'])->name('Rejected');

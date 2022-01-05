@@ -37,7 +37,7 @@ class SendNoificationFCM extends Controller
 
         $headers = array(
 
-            'Authorization: key=' .  "AAAAgH1f1Is:APA91bG3Hja39tZcfolV5_XObOrSH7MiatHQSmQLwwhazkobB1Q6RZDvIycTQ2r916ejC6-yRI_KKka-DlO287C6QGl1BbGtFvHMxb8vEM7l30Gczio9IOgV8KvUt-1rkDSKFZfQ7eXh",
+            'Authorization: key=' .  "AAAAgH1f1Is:APA91bFDpkXF_bMLFH3YLi4a1ZAe3dmwEQuI2ZofoWov5iSRmvd6WLmpLDTH1nFJO4BYrBId5r3OVZcmvIfjQvGpUZERGboHEFvH1-wVmhO7X3f5rBwZeS19YVtse_efRa9UJOZVRru7",
             'Content-Type: application/json'
         );
 
