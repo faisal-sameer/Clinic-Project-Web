@@ -102,7 +102,7 @@
                                                 </form>
                                             </div>
                                             <br><br>
-                                        @elseif($Reservation->Status == 5 )
+                                        @elseif($Reservation->Status == 2 )
                                             <div id="dailogs3">
 
                                                 <form method="POST" action="{{ route('Coming') }}">
@@ -125,7 +125,7 @@
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'لم يحضر', 'en' => 'Did not Arrived']) }}</button>
                                                 </form>
                                             </div>
-                                        @elseif($Reservation->Status == 2)
+                                        @elseif($Reservation->Status == 4)
                                             <div style="margin:auto">
                                                 <form method="POST" action="{{ route('Complete') }}">
                                                     @csrf
@@ -135,7 +135,7 @@
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'انهاء الجلسة', 'en' => 'Completed']) }}</button>
                                                 </form>
                                             </div>
-                                        @elseif($Reservation->Status == 4 || $Reservation->Status == 3 )
+                                        @elseif($Reservation->Status == 5 )
                                             <div style="margin:auto">
 
                                                 <input type="number" value="{{ $Reservation->id }}" name="id" readonly
