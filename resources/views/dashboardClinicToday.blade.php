@@ -36,7 +36,7 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-4">
-                    <p>عدد المواعيد : <span style="color: yellowgreen" class="allApp"
+                    <p>{{ __('ReservationDashboard.numberofappointments') }} : <span style="color: yellowgreen" class="allApp"
                             id="allApp">{{ $all['AllAppointment'] }}</span></p>
                         </div>
                             <div class="col-md-4">

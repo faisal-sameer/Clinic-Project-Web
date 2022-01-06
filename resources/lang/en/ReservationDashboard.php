@@ -22,6 +22,6 @@ return [
     'Today' => 'Today Appointment',
     'Past' => 'Past Appointment',
     'search, :lang' =>  ':en',
-    '' => '',
+    'numberofappointments' => 'number of appointments',
     '' => '',
 ];

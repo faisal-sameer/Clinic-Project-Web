@@ -22,6 +22,6 @@ return [
     'Today' => 'مواعيد اليوم',
     'Past' => 'المواعيد السابقة',
     'search, :lang' =>  ':ar',
-    '' => '',
+    'numberofappointments' => 'عدد المواعيد',
     '' => '',
 ];
