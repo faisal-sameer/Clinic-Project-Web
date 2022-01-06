@@ -126,15 +126,18 @@
                                                 </form>
                                             </div>
                                         @elseif($Reservation->Status == 4)
-                                            <div style="margin:auto">
+                                          
                                                 <form method="POST" action="{{ route('Complete') }}">
                                                     @csrf
+                                                    <div class="row">
+                                                        <div class="col-md-9">
                                                     <input type="number" value="{{ $Reservation->id }}" name="id"
                                                         readonly hidden required />
                                                     <button type="submit" class="btn btn-success">
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'انهاء الجلسة', 'en' => 'Completed']) }}</button>
-                                                </form>
-                                            </div>
+                                                    </div>
+                                                    </div>
+                                                    </form>
                                         @elseif($Reservation->Status == 5 )
                                             <div style="margin:auto">
 
