@@ -161,7 +161,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header text-center">
-                                                        <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
                                                         </h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -184,20 +184,20 @@
 
                                                             </div>
                                                          
-                                                            <p>عدد المواعيد : <span style="color: yellowgreen"
+                                                            <p>{{ __('ReservationDashboard.numberofappointments') }} : <span style="color: yellowgreen"
                                                                     class="allApp" id="allApp"></span></p>
                                                             
-                                                            <p>عدد المواعيدالموافق عليها : <span style="color:  green"
+                                                            <p>{{ __('ReservationDashboard.Numberofappointmentsapproved') }} : <span style="color:  green"
                                                                     class="AllappApproved" id="AllappApproved"></span> </p>
-                                                            <p>الطاقة الاستعابية : <span style="color: red"
+                                                            <p>{{ __('ReservationDashboard.Capacity') }} : <span style="color: red"
                                                                     class="sets" id="sets"></span></p>
                                                                   
-                                                            <p>اقرب موعد : <span style="color: rgb(7, 90, 25)"
+                                                            <p>{{ __('ReservationDashboard.earliestdate') }} : <span style="color: rgb(7, 90, 25)"
                                                                     class="NearDate" id="NearDate"></span></p>
                                                                
                                                                     <div class="row">
                                                                         <div class="col-md-6" style="margin-left: 25%">
-                                                            <button type="submit" style="width: 100%;"> التاكد من المساحة : </button>
+                                                            <button type="submit" style="width: 100%;"> {{ __('ReservationDashboard.Checkspace') }} : </button>
                                                         </div>
                                                     </div>
                                                         </form>
@@ -223,7 +223,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header text-center">
-                                                        <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
                                                         </h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -373,7 +373,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                            <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -385,7 +385,7 @@
                                 <div class="form-group row">
                                     <input type="text" name="type" readonly hidden required value="1">
                                     <input id="idnational" type="text" name="NID" class="form-control"
-                                        placeholder="رقم الهوية" required>
+                                        placeholder="{{ __('ReservationDashboard.NID') }}" required>
                                 </div>
                                 <div class="form-group row">
 

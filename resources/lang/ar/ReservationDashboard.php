@@ -25,5 +25,7 @@ return [
     'numberofappointments' => 'عدد المواعيد',
     'Numberofappointmentsapproved' => 'عدد الموافق عليها',
     'Capacity' => 'الطاقة الاستيعابية',
+    'Checkspace' => 'التاكد من المساحة',
+    'earliestdate' => 'اقرب موعد',
 
 ];
