@@ -238,7 +238,7 @@ class GuestController extends Controller
         // check of the service that selected by patient 
         $Service = $request->type  == 2 ? $request->ServiceDental : $request->ServiceDermatology;
         $SelectedService = Service::where('id',  substr($Service, 1))->first();
-
+        // return Discount::find(substr($Service, 1));
         if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
             Alert::info('لديك حجز مسبق في نفس العيادة ', 'All Full ');
             return view('dashboardUser')->with('all', $all);
@@ -282,7 +282,7 @@ class GuestController extends Controller
             Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'Down');
             return view('regester')->with('all', $all);
         } else
-         if (Service::find(substr($Service, 1)) == null || Discount::find(substr($Service, 1)) == null) {
+         if (Service::find(substr($Service, 1)) == null && (substr($Service, 0, 1) == 'S')) {
 
             Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'rrrr');
             return view('regester')->with('all', $all);
