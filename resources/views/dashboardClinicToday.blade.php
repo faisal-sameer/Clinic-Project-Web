@@ -37,7 +37,8 @@
                         <div class="row">
                             <div class="col-md-4">
                     <p>عدد المواعيد : <span style="color: yellowgreen" class="allApp"
-                            id="allApp">{{ $all['AllAppointment'] }}</span></p></div>
+                            id="allApp">{{ $all['AllAppointment'] }}</span></p>
+                        </div>
                             <div class="col-md-4">
 
                     <p>عدد المواعيدالموافق عليها : <span style="color:  green" class="AllappApproved"
