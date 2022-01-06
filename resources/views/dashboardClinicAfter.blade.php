@@ -173,13 +173,14 @@
 
                                 </div>
                             </div>
-                            <div class="model-footer">
-                                <div class="col-md-9">
+                            <div class="modal-footer" style="width: 100%">
+                                <div class="col-md-12">
                                     <button id="SearchDate" class="btn btn-outline-info" type="submit">بحث </button>
                                 </div>
                             </div>
                     </div>
                 </div>
+
             @else
 
                 <div class="form-group row">
@@ -193,7 +194,7 @@
                 <button id="SearchDate" class="btn btn-info" type="submit">بحث </button>
             @endif
 
-
+        </div>
 
         </div>
     </div>

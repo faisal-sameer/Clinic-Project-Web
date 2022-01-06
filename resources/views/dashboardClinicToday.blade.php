@@ -216,7 +216,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
+                                        </div>
                                         <!-- Submit the App-->
                                         <div class="modal fade" id="exampleModal{{ $Reservation->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -311,9 +311,7 @@
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal">اغلاق</button>
-
+                                                     
                                                     </div>
                                                 </div>
                                             </div>
@@ -453,7 +451,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
+                      
 
                         </div>
                     </div>
