@@ -23,5 +23,7 @@ return [
     'Past' => 'المواعيد السابقة',
     'search, :lang' =>  ':ar',
     'numberofappointments' => 'عدد المواعيد',
-    '' => '',
+    'Numberofappointmentsapproved' => 'عدد الموافق عليها',
+    'Capacity' => 'الطاقة الاستيعابية',
+
 ];
