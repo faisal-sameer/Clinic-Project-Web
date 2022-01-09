@@ -111,6 +111,9 @@
                                                 @elseif($reservation->Status == 9 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'تم رفض الموعد من قبل المراجع', 'en' => 'Appointment Rejected from Patient ']) }}
 
+                                                @elseif($reservation->Status == 10 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'انتهاء الموعد', 'en' => 'Appointment has been Expart ']) }}
+
                                                 @endif
                                             </td>
 
@@ -249,7 +252,7 @@
                                                                 value="{{ $reservation->id }}">
                                                             <div class="form-group justify-content-center">
                                                                 <p> الموعد : {{ $reservation->Date }}</p><br>
-                                                                <p>الخدمة : {{ $reservation->service->Name_ar }} </p>
+                                                                <p>الخدمة : {{ $reservation->service['Name_ar'] }} </p>
                                                             </div>
                                                             <div class='form-inline justify-content-center'>
 
@@ -293,19 +296,21 @@
 
 @section('script')
 
+    @if ($all['data'] == 0)
 
+    @else
 
-    @foreach ($all['reservations'] as $reservation)
+        @foreach ($all['reservations'] as $reservation)
 
-        <script>
-            document.getElementById("New{{ $reservation->id }}").addEventListener("click", function() {
-                alert("AF");
+            <script>
+                document.getElementById("New{{ $reservation->id }}").addEventListener("click", function() {
+                    alert("AF");
 
-                var frm = document.getElementById('formTag{{ $reservation->id }}');
+                    var frm = document.getElementById('formTag{{ $reservation->id }}');
 
-                frm.action = '{{ route('PatientRejected') }}';
-            });
-        </script>
-    @endforeach
-
+                    frm.action = '{{ route('PatientRejected') }}';
+                });
+            </script>
+        @endforeach
+    @endif
 @endsection

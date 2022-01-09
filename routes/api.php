@@ -32,6 +32,8 @@ Route::get('ClinicAppointments',  [App\Http\Controllers\Api\ReceptionController:
 Route::post('AcceptedAppointments',  [App\Http\Controllers\Api\ReceptionController::class, 'AppointmentsAccepted']);
 Route::post('RejectedAppointments',  [App\Http\Controllers\Api\ReceptionController::class, 'AppointmentsRejected']);
 Route::post('ArrivePatient',  [App\Http\Controllers\Api\ReceptionController::class, 'PatientArrive']);
+Route::post('DidNotComePatient',  [App\Http\Controllers\Api\ReceptionController::class, 'PatientDidNotCome']);
+Route::post('CompleteAppPatient',  [App\Http\Controllers\Api\ReceptionController::class, 'PatientCompleted']);
 Route::post('CheckDateApp',  [App\Http\Controllers\Api\ReceptionController::class, 'CheckDate']);
 Route::post('NewAppointmentReception',  [App\Http\Controllers\Api\ReceptionController::class, 'ReceptionNewAppointment']);
 

@@ -216,9 +216,14 @@
                     <div id="UpdateinfoDiscount" class="row">
                         <!--تحديث معلومات العروض-->
                         <div id="doctor-update-content">
+                            <input type="date" id="DisFrom" style="background-color: aqua" name="DisFrom">
+                            <input type="date" id="DisTo" name="DisTo">
+
                             <textarea placeholder="{{ __('dashboardContent.title') }}"
                                 class="shadow-drop-2-center textAF" name="DisTitle" id="DisTitle" cols="1"
                                 rows="1"></textarea>
+
+
                             <textarea placeholder="{{ __('dashboardContent.price') }} "
                                 class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice" cols="1"
                                 rows="1"></textarea>
@@ -508,6 +513,8 @@
             document.getElementById("DisTitle").innerText = contents.discount[$id - 1].title_ar;
             document.getElementById("DisText").innerText = contents.discount[$id - 1].text_ar;
             document.getElementById("DisPrice").innerText = contents.discount[$id - 1].Price;
+            document.getElementById("DisFrom").innerText = contents.discount[$id - 1].from;
+            document.getElementById("DisTo").innerText = contents.discount[$id - 1].to;
 
             document.getElementById("id").innerText = $id;
             document.getElementById("typeText").innerText = 1;

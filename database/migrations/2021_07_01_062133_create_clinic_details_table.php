@@ -21,6 +21,7 @@ class CreateClinicDetailsTable extends Migration
             $table->integer('type')->nullable();
             $table->string('text_ar')->nullable();
             $table->string('text_en')->nullable();
+            $table->integer('limit')->nullable();
             $table->string('path')->nullable();
             $table->integer('order')->nullable();
             $table->tinyInteger('Status');
