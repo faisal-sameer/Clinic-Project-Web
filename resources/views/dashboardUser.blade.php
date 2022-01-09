@@ -109,6 +109,9 @@
                                                 @elseif($reservation->Status == 9 )
                                                     {{ __('UserDashboard.Status, :lang', ['ar' => 'تم رفض الموعد من قبل المراجع', 'en' => 'Appointment Rejected from Patient ']) }}
 
+                                                @elseif($reservation->Status == 10 )
+                                                    {{ __('UserDashboard.Status, :lang', ['ar' => 'انتهاء الموعد', 'en' => 'Appointment has been Expart ']) }}
+
                                                 @endif
                                             </td>
 
@@ -298,12 +301,10 @@
         <script>
             document.getElementById("delete{{ $reservation->id }}").addEventListener("click", function() {
 
-                var frm = document.getElementById('formTag{{ $reservation->id }}');
 
-                frm.action = '{{ route('PatientRejected') }}';
-            });
-        </script>
-    @endforeach
+                    frm.action = '{{ route('PatientRejected') }}';
+                });
+            </script>
+        @endforeach
     @endif
-
 @endsection

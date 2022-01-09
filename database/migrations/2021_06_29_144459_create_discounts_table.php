@@ -25,6 +25,8 @@ class CreateDiscountsTable extends Migration
             $table->string('title_en');
             $table->string('text_ar')->nullable();
             $table->string('text_en')->nullable();
+            $table->date('from')->nullable();
+            $table->date('to')->nullable();
             $table->string('Price')->nullable();
             $table->integer('order')->nullable();
             $table->tinyInteger('Status');

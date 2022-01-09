@@ -207,6 +207,8 @@ class ReceptionController extends Controller
             'DisText.max' => 'اكثر  من الحد ',   // max
             'DisPrice.max' => 'اكثر  من الحد ',   // max
 
+            'DisTo.after_or_equal' => 'تاريخ نهاية العرض قبل تاريخ بداية العرض ',   // after_or_equal
+
             // Service  waring text
 
             'name.required' => 'لابد من وجود اسم ',   // Required
@@ -270,6 +272,8 @@ class ReceptionController extends Controller
             'DisText.max' => 'more than the limit ',   // max
             'DisPrice.max' => 'more than the limit ',   // max
 
+            'DisTo.after_or_equal' => 'The end Date Less Then Start Date',   // after_or_equal
+
             // Service  waring text English
 
             'name.required' => 'There must be a name  ',   // Required
@@ -321,6 +325,8 @@ class ReceptionController extends Controller
                     // discount inputs
                     'DisTitle' => 'required|string | min:3  | max:100',
                     'DisText' => 'required|string | min:3  | max:250',
+                    'DisFrom' => 'required ',
+                    'DisTo' => 'required| after_or_equal:DisFrom',
                     'DisPrice' => 'required|string | min:3  | max:25',
 
 
@@ -342,7 +348,8 @@ class ReceptionController extends Controller
                 $Discount->clinic_id = $request->clinic;
                 $Discount->text_ar = $request->DisText == null ?  null : $request->DisText;
                 $Discount->text_en = " ";
-
+                $Discount->from = $request->DisFrom;
+                $Discount->to = $request->DisTo;
                 $Discount->Price = $request->DisPrice == null ? null : $request->DisPrice;
                 $Discount->order = $oldDiscount == null ? 1 : $oldDiscount->order  + 1;
                 $Discount->Status = 1;
@@ -540,14 +547,19 @@ class ReceptionController extends Controller
 
     protected function Confirm(Request $request) //  تاكيد الحجز من قبل العيادة
     {
+
+
         Reservation::where('id', $request->id)->update([
             'Status' => 2,
             'employee_id' => auth()->user()->id
 
         ]);
         $Reservation =  Reservation::where('id', $request->id)->first();
+        $test = new SendNoificationFCM();
 
-        Alert::success('تم تاكيد الحجز  ', $Reservation->Name . ' ' . $Reservation->NID);
+        $test->sendGCM("تم تاكيد موعدك", $Reservation->Date, $Reservation->Token, "1", "w");
+
+        Alert::success('تم تاكيد الحجز  ', $Reservation->Name . ' ' . $Reservation->Token);
 
         return back();
     }

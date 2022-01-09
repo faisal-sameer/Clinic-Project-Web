@@ -51,6 +51,9 @@ class GuestController extends Controller
 
             $reservations = Reservation::where('NID', $request->NID)->orderBy('created_at', 'DESC')
                 ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
+            Reservation::where(['NID' => $request->NID, 'Status' => 1])->where('Date', '<', date('Y-m-d'))->update([
+                'Status' => 10
+            ]);
             $needApproved =   Reservation::where(['NID' => $request->NID, 'Status' => 7])->first();
             $services  = Service::select('id', 'Name_ar')->get();
             $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
@@ -188,6 +191,9 @@ class GuestController extends Controller
             ->select('id', 'Name', 'Phone')->first();
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
+        Discount::where('Status', 1)->where('to', '<', date('Y-m-d'))->update([
+            'Status' => 2
+        ]);
         $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
         if ($reservations != []) {
             $all['user_info'] = $reservations;
@@ -252,7 +258,14 @@ class GuestController extends Controller
                 Alert::info('لديك حجز مسبق في نفس العيادة ', 'Dental  Full ');
                 return view('dashboardUser')->with('all', $all);
             }
+        } else if (substr($Service, 0, 1) == 'D') {
+            $oldDiscount = Reservation::where(['NID' => $request->NID, 'discount_id' => substr($Service, 1),  'Status' => 1])->count();
+            if ($oldDiscount > 1) {
+                Alert::info('لديك حجز مسبوق لهذا العرض  ', 'بعد انتهاء الموعد يمكنك حجزه من جديد');
+                return view('dashboardUser')->with('all', $all);
+            }
         }
+
 
         // Messages for valid Input 
         $messages = [
@@ -276,6 +289,16 @@ class GuestController extends Controller
             Alert::error('خطأ ', $validator->messages()->all());
 
             return view('regester')->with('all', $all);
+        }
+
+
+        if (substr($Service, 0, 1) == 'D') {
+
+            $limit =  Discount::where('id', substr($Service, 1))->first();
+            if ($limit->from > $request->Appointment || $limit->to < $request->Appointment) {
+                Alert::info('الخدمة غير متوفرة بالتاريخ المدخل ', 'Date');
+                return view('regester')->with('all', $all);
+            }
         }
         if ((substr($Service, 0, 1) != 'D' && substr($Service, 0, 1) != 'S')) {
 
