@@ -27,5 +27,6 @@ return [
     'Capacity' => 'الطاقة الاستيعابية',
     'Checkspace' => 'التاكد من المساحة',
     'earliestdate' => 'اقرب موعد',
+    'search' => 'بحث',
 
 ];

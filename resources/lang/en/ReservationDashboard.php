@@ -26,7 +26,8 @@ return [
     'Numberofappointmentsapproved' => 'Number of appointments approved',
     'Capacity' => 'Capacity',
     'Checkspace' => 'Check space',
-    'earliestdate' => 'earliest date'
+    'earliestdate' => 'earliest date',
+    'search' => 'search'
 
 
 ];

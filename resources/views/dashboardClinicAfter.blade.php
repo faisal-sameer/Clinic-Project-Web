@@ -175,7 +175,8 @@
                             </div>
                             <div class="modal-footer" style="width: 100%">
                                 <div class="col-md-12">
-                                    <button id="SearchDate" class="btn btn-outline-info" type="submit">بحث </button>
+                                    <button id="SearchDate" class="btn btn-outline-info" type="submit">
+                                        {{ __('ReservationDashboard.search') }} </button>
                                 </div>
                             </div>
                     </div>
@@ -191,7 +192,7 @@
                         min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
                 </div>
-                <button id="SearchDate" class="btn btn-info" type="submit">بحث </button>
+                <button id="SearchDate" class="btn btn-info" type="submit">{{ __('ReservationDashboard.search') }}  </button>
             @endif
 
         </div>
