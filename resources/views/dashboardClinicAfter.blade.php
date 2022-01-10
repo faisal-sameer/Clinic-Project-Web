@@ -29,22 +29,35 @@
                     <br>
                     <h2> {{ __('ReservationDashboard.Future') }}</h2>
 
-                    <div class="form-inline">
+                    <div class="row">
+                        <div class="col-md-4">
 
                         <input type="text" id="myInput2" onkeyup="myFunction()"
                             placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
                             title="Type in a name">
-                        <div class="text-center"></div>
-                        <p>عدد المواعيد : <span style="color: yellowgreen" class="allApp"
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                        <p>{{ __('ReservationDashboard.numberofappointments') }} : <span style="color: yellowgreen" class="allApp"
                                 id="allApp">{{ $all['AllAppointment'] }}</span></p>
-                        <p>عدد المواعيدالموافق عليها : <span style="color:  green" class="AllappApproved"
+                            </div>
+                            <div class="col-md-4">
+                        <p>{{ __('ReservationDashboard.Numberofappointmentsapproved') }} : <span style="color:  green" class="AllappApproved"
                                 id="AllappApproved">{{ $all['AllApprovedAppointment'] }}</span>
-                        </p>
-                        <p>الطاقة الاستعابية : <span style="color: red" class="sets"
+                            </p>
+                        </div>
+                        <div class="col-md-4">
+                        <p>{{ __('ReservationDashboard.Capacity') }} : <span style="color: red" class="sets"
                                 id="sets">{{ $all['sets'] }}</span></p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-md-2">
+
                         <button type="submit" data-toggle="modal" data-target="#ChangeDate" class="btn btn-secondary">
                             {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تغير التاريخ ', 'en' => 'Change Date']) }}</button>
-
+                        </div>                    
                     </div>
 
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -145,8 +158,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header text-center">
-                                <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
-                                </h5>
+                              
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -160,12 +172,16 @@
                                         name="AppointmentCheck" min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
                                 </div>
-                                <button id="SearchDate" class="btn btn-outline-info" type="submit">بحث </button>
                             </div>
-
-                        </div>
+                            <div class="modal-footer" style="width: 100%">
+                                <div class="col-md-12">
+                                    <button id="SearchDate" class="btn btn-outline-info" type="submit">
+                                        {{ __('ReservationDashboard.search') }} </button>
+                                </div>
+                            </div>
                     </div>
                 </div>
+
             @else
 
                 <div class="form-group row">
@@ -176,10 +192,10 @@
                         min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
                 </div>
-                <button id="SearchDate" class="btn btn-info" type="submit">بحث </button>
+                <button id="SearchDate" class="btn btn-info" type="submit">{{ __('ReservationDashboard.search') }}  </button>
             @endif
 
-
+        </div>
 
         </div>
     </div>

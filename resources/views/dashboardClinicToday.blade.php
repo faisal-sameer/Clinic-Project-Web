@@ -27,23 +27,36 @@
             <div id="London" class=" city">
                 <br>
                 <h2> {{ __('ReservationDashboard.Today') }} </h2>
-                <div class="form-inline">
-
+                <div class="row">
+                     <div class="col-md-4">
                     <input type="text" id="myInput0" onkeyup="myFunction()"
                         placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
                         title="Type in a name">
-                    <div class="text-center"></div>
-                    <p>عدد المواعيد : <span style="color: yellowgreen" class="allApp"
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                    <p>{{ __('ReservationDashboard.numberofappointments') }} : <span style="color: yellowgreen" class="allApp"
                             id="allApp">{{ $all['AllAppointment'] }}</span></p>
-                    <p>عدد المواعيدالموافق عليها : <span style="color:  green" class="AllappApproved"
+                        </div>
+                            <div class="col-md-4">
+
+                    <p>{{ __('ReservationDashboard.Numberofappointmentsapproved') }}: <span style="color:  green" class="AllappApproved"
                             id="AllappApproved">{{ $all['AllApprovedAppointment'] }}</span>
                     </p>
-                    <p>الطاقة الاستعابية : <span style="color: red" class="sets"
-                            id="sets">{{ $all['sets'] }}</span></p>
+                            </div>
+                            <div class="col-md-4">
 
+                    <p>{{ __('ReservationDashboard.Capacity') }}: <span style="color: red" class="sets"
+                            id="sets">{{ $all['sets'] }}</span></p>
+                            </div>
+                        </div>
+
+                        </div>
+                        <div class="col-md-2">
                     <button type="submit" data-toggle="modal" data-target="#NewApp" class="btn btn-secondary">
                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد', 'en' => 'New Appointment']) }}</button>
-
+                  </div>
                 </div>
 
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -90,7 +103,7 @@
                                                 </form>
                                             </div>
                                             <br><br>
-                                        @elseif($Reservation->Status == 5 )
+                                        @elseif($Reservation->Status == 2 )
                                             <div id="dailogs3">
 
                                                 <form method="POST" action="{{ route('Coming') }}">
@@ -113,27 +126,31 @@
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'لم يحضر', 'en' => 'Did not Arrived']) }}</button>
                                                 </form>
                                             </div>
-                                        @elseif($Reservation->Status == 2)
-                                            <div style="margin:auto">
+                                        @elseif($Reservation->Status == 4)
+                                          
                                                 <form method="POST" action="{{ route('Complete') }}">
                                                     @csrf
+                                                    <div class="row">
+                                                        <div class="col-md-9">
                                                     <input type="number" value="{{ $Reservation->id }}" name="id"
                                                         readonly hidden required />
                                                     <button type="submit" class="btn btn-success">
                                                         {{ __('ReservationDashboard.Status, :lang', ['ar' => 'انهاء الجلسة', 'en' => 'Completed']) }}</button>
-                                                </form>
-                                            </div>
-                                        @elseif($Reservation->Status == 4 || $Reservation->Status == 3 )
-                                            <div style="margin:auto">
-
-                                                <input type="number" value="{{ $Reservation->id }}" name="id" readonly
+                                                    </div>
+                                                    </div>
+                                                    </form>
+                                        @elseif($Reservation->Status == 5 )
+                                        <div class="row">
+                                            <div class="col-md-9"> 
+                                        <input type="number" value="{{ $Reservation->id }}" name="id" readonly
                                                     hidden required />
                                                 <button type="submit" data-toggle="modal"
                                                     data-target="#CheckDate{{ $Reservation->id }}"
                                                     class="btn btn-info">
-                                                    {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد ', 'en' => 'New Appointment']) }}</button>
+                                                    {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد ', 'en' => 'New Appointment']) }}
+                                                </button>
                                             </div>
-
+                                                </div>
                                         @endif
 
 
@@ -144,7 +161,7 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header text-center">
-                                                        <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
                                                         </h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -166,40 +183,47 @@
                                                                     min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
                                                             </div>
-                                                            <p>عدد المواعيد : <span style="color: yellowgreen"
+                                                         
+                                                            <p>{{ __('ReservationDashboard.numberofappointments') }} : <span style="color: yellowgreen"
                                                                     class="allApp" id="allApp"></span></p>
-                                                            <p>عدد المواعيدالموافق عليها : <span style="color:  green"
+                                                            
+                                                            <p>{{ __('ReservationDashboard.Numberofappointmentsapproved') }} : <span style="color:  green"
                                                                     class="AllappApproved" id="AllappApproved"></span> </p>
-                                                            <p>الطاقة الاستعابية : <span style="color: red"
+                                                            <p>{{ __('ReservationDashboard.Capacity') }} : <span style="color: red"
                                                                     class="sets" id="sets"></span></p>
-                                                            <p>اقرب موعد : <span style="color: rgb(7, 90, 25)"
+                                                                  
+                                                            <p>{{ __('ReservationDashboard.earliestdate') }} : <span style="color: rgb(7, 90, 25)"
                                                                     class="NearDate" id="NearDate"></span></p>
-
-                                                            <button type="submit"> التاكد من المساحة : </button>
+                                                               
+                                                                    <div class="row">
+                                                                        <div class="col-md-6" style="margin-left: 25%">
+                                                            <button type="submit" style="width: 100%;"> {{ __('ReservationDashboard.Checkspace') }} : </button>
+                                                        </div>
+                                                    </div>
                                                         </form>
 
-                                                        <button type="submit" data-toggle="modal"
-                                                            data-target="#exampleModal{{ $Reservation->id }}"
-                                                            class="btn btn-info">
-                                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد ', 'en' => 'New Appointment']) }}</button>
 
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal">اغلاق</button>
-
+                                                    <div class="modal-footer" style="width: 100%">
+                                                    
+                                                            <div class="col-md-12" >
+                                                        <button type="submit" data-toggle="modal" style="width: 100%"
+                                                            data-target="#exampleModal{{ $Reservation->id }}"
+                                                            class="btn btn-info">
+                                                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد ', 'en' => 'New Appointment']) }}
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
+                                        </div>
                                         <!-- Submit the App-->
                                         <div class="modal fade" id="exampleModal{{ $Reservation->id }}" tabindex="-1"
                                             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header text-center">
-                                                        <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                                                        <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
                                                         </h5>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -287,9 +311,7 @@
                                                         </form>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-danger"
-                                                            data-dismiss="modal">اغلاق</button>
-
+                                                     
                                                     </div>
                                                 </div>
                                             </div>
@@ -351,7 +373,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header text-center">
-                            <h5 class="modal-title w-100" id="exampleModalLabel">حجز موعد
+                            <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -363,7 +385,7 @@
                                 <div class="form-group row">
                                     <input type="text" name="type" readonly hidden required value="1">
                                     <input id="idnational" type="text" name="NID" class="form-control"
-                                        placeholder="رقم الهوية" required>
+                                        placeholder="{{ __('ReservationDashboard.NID') }}" required>
                                 </div>
                                 <div class="form-group row">
 
@@ -429,7 +451,7 @@
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
+                      
 
                         </div>
                     </div>

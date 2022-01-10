@@ -22,6 +22,11 @@ return [
     'Today' => 'مواعيد اليوم',
     'Past' => 'المواعيد السابقة',
     'search, :lang' =>  ':ar',
-    '' => '',
-    '' => '',
+    'numberofappointments' => 'عدد المواعيد',
+    'Numberofappointmentsapproved' => 'عدد الموافق عليها',
+    'Capacity' => 'الطاقة الاستيعابية',
+    'Checkspace' => 'التاكد من المساحة',
+    'earliestdate' => 'اقرب موعد',
+    'search' => 'بحث',
+
 ];

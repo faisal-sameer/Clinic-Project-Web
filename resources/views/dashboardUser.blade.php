@@ -75,17 +75,15 @@
                                                         </button>
 
                                                     </div>
-                                                @elseif($reservation->Status == 6)
-
-                                                    <div id="dailogs">
+                                                @elseif($reservation->Status == 7)
 
 
-                                                        <button type="submit" data-toggle="modal"
+
+                                                        <button type="submit" data-toggle="modal" style="width:margin-left:90%"
                                                             data-target="#exampleModalNeedToApproved{{ $reservation->id }}"
                                                             class="btn btn-info"> {{ __('UserDashboard.ApprovedApp') }}
                                                         </button>
 
-                                                    </div>
                                                 @endif
 
 
@@ -167,7 +165,7 @@
 
                                                                 <label id="idnational">
                                                                     {{ __('UserDashboard.AppDate') }}</label> <br>
-                                                                <input id="idnational" type="datet"
+                                                                <input id="idnational" type="date"
                                                                     value="{{ $reservation->Date }}" name="Appointment"
                                                                     min="2021-06-01" max="2030-07-30">
 
@@ -251,20 +249,19 @@
                                                             <input type="text" name="id" readonly required hidden
                                                                 value="{{ $reservation->id }}">
                                                             <div class="form-group justify-content-center">
-                                                                <p> الموعد : {{ $reservation->Date }}</p><br>
-                                                                <p>الخدمة : {{ $reservation->service['Name_ar'] }} </p>
-                                                            </div>
-                                                            <div class='form-inline justify-content-center'>
-
-                                                                <input class="btn btn-danger" type="submit"
-                                                                    id="New{{ $reservation->id }}" value="رفض" />
-
-                                                                <br>
-                                                                <button type='submit' style='margin:15px'
-                                                                    class='btn btn-success'>تاكيد
+                                                                <p>{{ __('UserDashboard.date') }} : {{ $reservation->Date }}</p><br>  </div>                                            </div>
+                                                            <div class='row '>
+                                                                      <div class="col-md-6">  
+                                                                <input class="btn btn-danger" type="submit" style="float: right;"
+                                                                    id="delete{{ $reservation->id }}" value="{{ __('UserDashboard.Reject') }}" />
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                <button type='submit' style="float: left" 
+                                                                    class='btn btn-success'>     {{ __('UserDashboard.ApprovedApp') }}
                                                                 </button>
-
                                                             </div>
+                                                            </div>
+                                                            <br>
                                                         </form>
 
                                                     </div>
@@ -296,17 +293,14 @@
 
 @section('script')
 
-    @if ($all['data'] == 0)
+@if ($all['data'] == 0)
 
-    @else
+@else
+    @foreach ($all['reservations'] as $reservation)
 
-        @foreach ($all['reservations'] as $reservation)
+        <script>
+            document.getElementById("delete{{ $reservation->id }}").addEventListener("click", function() {
 
-            <script>
-                document.getElementById("New{{ $reservation->id }}").addEventListener("click", function() {
-                    alert("AF");
-
-                    var frm = document.getElementById('formTag{{ $reservation->id }}');
 
                     frm.action = '{{ route('PatientRejected') }}';
                 });

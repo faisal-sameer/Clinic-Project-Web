@@ -90,21 +90,21 @@ class GuestController extends Controller
                    </div> ",
                         'info'
                     )->showConfirmButton(false, "#ffff")->showCloseButton()
-                    ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>') :
+                    ->autoClose(90000)->footer('<a href>Why do I have this issue?</a>') : // else
                     // Eng
                     Alert::html(
-                        '<i>تم حجز موعد جديد لك  </i><br> <p>الرجاء الموافقة عليه او رفضه في حالة لم يناسبك الموعد</p>',
+                        '<i>A new appointment has been booked for you </i><br> <p>Please accept or reject it if the appointment does not suit you</p>',
                         "
                     <p> Appoitement  : $DateService</p>
                     <p>Service  :  $NameService </p>
-                    <div class='form-inline' style='margin-left: 35%' > 
+                    <div class='form-inline' style='margin-left: 30%' > 
 
                     
                     <button type='submit'
-                    class='btn btn-danger'>  <a   style='color: white'href='/RejectedApp-$needApproved->id'>رفض</a></button>
+                    class='btn btn-danger'>  <a   style='color: white'href='/RejectedApp-$needApproved->id'>Reject</a></button>
                     <br>
                      <button type='submit' style='margin:10px'
-                    class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>تاكيد</a> </button>
+                    class='btn btn-success'>  <a  style='color: white' href='/ApprovedApp-$needApproved->id'>Approved</a> </button>
                     
                    </div> ",
                         'info'
@@ -244,7 +244,7 @@ class GuestController extends Controller
         // check of the service that selected by patient 
         $Service = $request->type  == 2 ? $request->ServiceDental : $request->ServiceDermatology;
         $SelectedService = Service::where('id',  substr($Service, 1))->first();
-
+        // return Discount::find(substr($Service, 1));
         if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
             Alert::info('لديك حجز مسبق في نفس العيادة ', 'All Full ');
             return view('dashboardUser')->with('all', $all);
@@ -304,12 +304,12 @@ class GuestController extends Controller
 
             Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'Down');
             return view('regester')->with('all', $all);
-        }/*else
-         if (Service::find(substr($Service, 1)) == null || Discount::find(substr($Service, 1)) == null) {
+        } else
+         if (Service::find(substr($Service, 1)) == null && (substr($Service, 0, 1) == 'S')) {
 
             Alert::info('يجب عليك اختيار احد الخدمات المتوفرة', 'rrrr');
             return view('regester')->with('all', $all);
-        }*/
+        }
 
 
         $reservations = new Reservation();

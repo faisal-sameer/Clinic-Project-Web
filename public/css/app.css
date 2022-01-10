@@ -94,6 +94,9 @@ table td {
     padding: 0.625em;
     text-align: center;
 }
+#SearchDate {
+    width: 100%;
+}
 
 table th {
     font-size: 0.85em;
