@@ -456,7 +456,7 @@ class ReceptionController extends Controller
     protected function dashboardContentUpdate(Request $request)
     {
 
-        //return $request->clinic;
+        // return $request->all();
         $code = Str::random(4);
         Alert::success('تم تسجيل حضور للمراجع ', '');
 
