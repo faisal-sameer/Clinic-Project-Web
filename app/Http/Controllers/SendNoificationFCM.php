@@ -29,7 +29,8 @@ class SendNoificationFCM extends Controller
             ),
             'data' => array(
                 "page_id" => $p_id,
-                "page_name" => $p_name
+                "page_name" => $p_name,
+                'NID' => '1098496366'
             )
         );
 

@@ -32,9 +32,9 @@ Route::group(
         Route::get('/dashboardContent', [App\Http\Controllers\ReceptionController::class, 'dashboardContent']);
         Route::get('/dashboardStatistic', [App\Http\Controllers\ReceptionController::class, 'dashboardStatistic']);
 
-        Route::post('/dashboardContentUpdate', [App\Http\Controllers\ReceptionController::class, 'dashboardContentUpdate'])->name('Update');
-        Route::post('/dashboardContentNew', [App\Http\Controllers\ReceptionController::class, 'dashboardContentNew'])->name('New');
-        Route::post('/dashboardContentDelete', [App\Http\Controllers\ReceptionController::class, 'dashboardContentDelete'])->name('Delete');
+        Route::post('/dashboardContentUpdate', [App\Http\Controllers\DashBoardAdmin::class, 'dashboardContentUpdate'])->name('Update');
+        Route::post('/dashboardContentNew', [App\Http\Controllers\DashBoardAdmin::class, 'dashboardContentNew'])->name('New');
+        Route::post('/dashboardContentDelete', [App\Http\Controllers\DashBoardAdmin::class, 'dashboardContentDelete'])->name('Delete');
 
 
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -70,6 +70,7 @@ Route::group(
         Route::any('/Complete', [App\Http\Controllers\ReceptionController::class, 'Complete'])->name('Complete');
         Route::any('/Leave', [App\Http\Controllers\ReceptionController::class, 'Leave'])->name('Leave');
         Route::any('/WithOutApp', [App\Http\Controllers\ReceptionController::class, 'WithoutAppointment'])->name('WithOutApp');
+        Route::any('/NewAppointmentStaffAfter', [App\Http\Controllers\ReceptionController::class, 'AfterNewAppointmentStaff'])->name('NewAppointmentStaffAfter');
         Route::any('/NewAppointmentStaff', [App\Http\Controllers\ReceptionController::class, 'NewAppointmentStaff'])->name('NewAppointmentStaff');
     }
 );

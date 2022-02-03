@@ -244,23 +244,27 @@ class GuestController extends Controller
         // check of the service that selected by patient 
         $Service = $request->type  == 2 ? $request->ServiceDental : $request->ServiceDermatology;
         $SelectedService = Service::where('id',  substr($Service, 1))->first();
-        // return Discount::find(substr($Service, 1));
-        if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
-            Alert::info('لديك حجز مسبق في نفس العيادة ', 'All Full ');
-            return view('dashboardUser')->with('all', $all);
-        } else if ($oldDental == 0 && $oldDermatology > 0 &&  $request->type == 1) { //  Case 3 patient have app in جلدية  but can get new app for اسنان 
-            if ($SelectedService->clinic_id == 1) {
-                Alert::info('لديك حجز مسبق في نفس العيادة ', 'Der Full ');
+        if (substr($Service, 0, 1) == 'S') {
+            if ($oldDental > 0 &&  $oldDermatology > 0) { // Case 4  patient have app in all clinic
+                Alert::info('لديك حجز مسبق في نفس العيادة ', 'All Full ');
                 return view('dashboardUser')->with('all', $all);
+            } else if ($oldDental == 0 && $oldDermatology > 0 &&  $request->type == 1) { //  Case 3 patient have app in جلدية  but can get new app for اسنان 
+                if ($SelectedService->clinic_id == 1) {
+                    Alert::info('لديك حجز مسبق في نفس العيادة ', 'عيادة الجلدية');
+                    return view('dashboardUser')->with('all', $all);
+                }
+            } else if ($oldDental > 0 && $oldDermatology == 0 && $request->type == 2) {
+                if ($SelectedService->clinic_id == 2) {
+                    Alert::info('لديك حجز مسبق في نفس العيادة ', 'عيادة الاسنان');
+                    return view('dashboardUser')->with('all', $all);
+                }
             }
-        } else if ($oldDental > 0 && $oldDermatology == 0 && $request->type == 2) {
-            if ($SelectedService->clinic_id == 2) {
-                Alert::info('لديك حجز مسبق في نفس العيادة ', 'Dental  Full ');
-                return view('dashboardUser')->with('all', $all);
-            }
-        } else if (substr($Service, 0, 1) == 'D') {
+        }
+        if (substr($Service, 0, 1) == 'D') {
+
             $oldDiscount = Reservation::where(['NID' => $request->NID, 'discount_id' => substr($Service, 1),  'Status' => 1])->count();
-            if ($oldDiscount > 1) {
+
+            if ($oldDiscount > 0) {
                 Alert::info('لديك حجز مسبوق لهذا العرض  ', 'بعد انتهاء الموعد يمكنك حجزه من جديد');
                 return view('dashboardUser')->with('all', $all);
             }

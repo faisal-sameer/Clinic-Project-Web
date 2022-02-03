@@ -32,32 +32,38 @@
                     <div class="row">
                         <div class="col-md-4">
 
-                        <input type="text" id="myInput2" onkeyup="myFunction()"
-                            placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
-                            title="Type in a name">
+                            <input type="text" id="myInput2" onkeyup="myFunction2()"
+                                placeholder="{{ __('ReservationDashboard.search, :lang', ['ar' => '....البحث بالهوية الوطنية', 'en' => 'Search By National ID.....']) }}"
+                                title="Type in a name">
                         </div>
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-4">
-                        <p>{{ __('ReservationDashboard.numberofappointments') }} : <span style="color: yellowgreen" class="allApp"
-                                id="allApp">{{ $all['AllAppointment'] }}</span></p>
+                                    <p>{{ __('ReservationDashboard.numberofappointments') }} : <span
+                                            style="color: yellowgreen" class="allApp"
+                                            id="allApp">{{ $all['AllAppointment'] }}</span></p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>{{ __('ReservationDashboard.Numberofappointmentsapproved') }} : <span
+                                            style="color:  green" class="AllappApproved"
+                                            id="AllappApproved">{{ $all['AllApprovedAppointment'] }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p>{{ __('ReservationDashboard.Capacity') }} : <span style="color: red"
+                                            class="sets" id="sets">{{ $all['sets'] }}</span></p>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                        <p>{{ __('ReservationDashboard.Numberofappointmentsapproved') }} : <span style="color:  green" class="AllappApproved"
-                                id="AllappApproved">{{ $all['AllApprovedAppointment'] }}</span>
-                            </p>
-                        </div>
-                        <div class="col-md-4">
-                        <p>{{ __('ReservationDashboard.Capacity') }} : <span style="color: red" class="sets"
-                                id="sets">{{ $all['sets'] }}</span></p>
-                            </div>
-                        </div>
+
                         </div>
                         <div class="col-md-2">
 
-                        <button type="submit" data-toggle="modal" data-target="#ChangeDate" class="btn btn-secondary">
-                            {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تغير التاريخ ', 'en' => 'Change Date']) }}</button>
-                        </div>                    
+                            <button type="submit" data-toggle="modal" data-target="#ChangeDate" class="btn btn-secondary">
+                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'تغير التاريخ ', 'en' => 'Change Date']) }}</button>
+                            <button type="submit" data-toggle="modal" data-target="#NewApp" class="btn btn-light">
+                                {{ __('ReservationDashboard.Status, :lang', ['ar' => 'حجز موعد', 'en' => 'New Appointment']) }}</button>
+
+                        </div>
                     </div>
 
                     <div class="table-wrapper-scroll-y my-custom-scrollbar">
@@ -109,21 +115,21 @@
                                         <td colspan="1" id="texttab">
                                             @if ($Reservation->Status == 1)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار الموافقة', 'en' => 'Waiting for Approve']) }}
-                                            @elseif($Reservation->Status == 2 )
+                                            @elseif($Reservation->Status == 2)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة ', 'en' => 'Approved']) }}
-                                            @elseif($Reservation->Status == 3 )
+                                            @elseif($Reservation->Status == 3)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'مرفوض', 'en' => 'Rejected ']) }}
-                                            @elseif($Reservation->Status == 4 )
+                                            @elseif($Reservation->Status == 4)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'في العيادة', 'en' => 'Arraive']) }}
-                                            @elseif($Reservation->Status == 5 )
+                                            @elseif($Reservation->Status == 5)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'انتهت الجلسة ', 'en' => 'Completed  ']) }}
-                                            @elseif($Reservation->Status == 6 )
+                                            @elseif($Reservation->Status == 6)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'لم يحظر ', 'en' => 'Did not come ']) }}
-                                            @elseif($Reservation->Status == 7 )
+                                            @elseif($Reservation->Status == 7)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'في انتظار موافقتك  ', 'en' => 'Need your Approval']) }}
-                                            @elseif($Reservation->Status == 8 )
+                                            @elseif($Reservation->Status == 8)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'تمت الموافقة على الموعد', 'en' => 'Appointment accpeted  ']) }}
-                                            @elseif($Reservation->Status == 9 )
+                                            @elseif($Reservation->Status == 9)
                                                 {{ __('UserDashboard.Status, :lang', ['ar' => 'تم رفض الموعد من قبل المراجع', 'en' => 'Appointment Rejected from Patient ']) }}
 
                                             @endif
@@ -158,7 +164,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header text-center">
-                              
+
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -179,25 +185,116 @@
                                         {{ __('ReservationDashboard.search') }} </button>
                                 </div>
                             </div>
+                        </div>
                     </div>
-                </div>
 
-            @else
+                @else
 
-                <div class="form-group row">
-                    <label id="idnational">
-                        {{ __('AppReservation.Date') }}</label> <br>
+                    <div class="form-group row">
+                        <label id="idnational">
+                            {{ __('AppReservation.Date') }}</label> <br>
 
-                    <input id="idnationalOld" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="AppointmentCheck"
-                        min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
+                        <input id="idnationalOld" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="AppointmentCheck"
+                            min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
 
-                </div>
-                <button id="SearchDate" class="btn btn-info" type="submit">{{ __('ReservationDashboard.search') }}  </button>
+                    </div>
+                    <button id="SearchDate" class="btn btn-info" type="submit">{{ __('ReservationDashboard.search') }}
+                    </button>
             @endif
 
         </div>
+        <!--New App-->
+        <div class="modal fade" id="NewApp" tabindex="-1" role="dialog" aria-labelledby="NewAppLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h5 class="modal-title w-100" id="exampleModalLabel">{{ __('UserDashboard.NewApp') }}
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('NewAppointmentStaff') }}">
+                            @csrf
+                            <div class="form-group row">
+                                <input type="text" name="type" readonly hidden required value="1">
+                                <input id="idnational" type="text" name="NID" class="form-control"
+                                    placeholder="{{ __('ReservationDashboard.NID') }}" maxlength="10" minlength="10"
+                                    required>
+                            </div>
+                            <div class="form-group row">
 
+                                <input id="idnational" type="text" name="Name" maxlength="30" minlength="3"
+                                    class="form-control" placeholder="{{ __('AppReservation.name') }}" required>
+                            </div>
+                            <div class="form-group row">
+                                <label id="idnational">
+                                    {{ __('AppReservation.Date') }}</label> <br>
+
+                                <input id="idnationalNew" value="<?php echo Date('Y-m-d', time()); ?>" type="date" name="Appointment"
+                                    min="<?php echo Date('Y-m-d', time()); ?>" max="2030-07-30">
+
+                            </div>
+
+
+                            <!-- Dermatology -->
+                            <div class="form-group row">
+                                <select class="form-select" id="idnational" name="Service"
+                                    aria-label="Default select example">
+                                    <option id="option" selected disabled>
+                                        {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'عروض', 'en' => 'Discount']) }}
+                                    </option>
+                                    @foreach ($all['discount'] as $discount)
+                                        <option id="option" value="D{{ $discount->id }}">
+                                            {{ $discount->title_ar }}</option>
+                                    @endforeach
+
+                                    <option id="option" disabled>
+                                        {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'خدمات الاسنان', 'en' => 'Dental']) }}
+                                    </option>
+                                    @foreach ($all['dental'] as $dental)
+                                        <option id="option" value="S{{ $dental->id }}">
+                                            {{ $dental->Name_ar }}</option>
+                                    @endforeach
+                                    <option id="option" disabled>
+                                        {{ __('AppReservation.titleSelect, :Lang', ['ar' => 'خدمات الجلدية', 'en' => 'Dermatology']) }}
+                                    </option>
+                                    @foreach ($all['dermatology'] as $dermatology)
+                                        <option id="option" value="S{{ $dermatology->id }}">
+                                            {{ $dermatology->Name_ar }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                            <div class="form-group row">
+
+                                <input id="idnational" maxlength="12" minlength="10" type="text" name="Phone"
+                                    class="form-control" placeholder="{{ __('AppReservation.phone') }}  " required>
+                            </div>
+                            <br>
+                            <div class="form-group row mb-0">
+
+                                <button type="submit" class="btn btn-outline-info" id="idnational">
+                                    {{ __('AppReservation.submit') }}
+
+                                </button>
+
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 @endsection
 
