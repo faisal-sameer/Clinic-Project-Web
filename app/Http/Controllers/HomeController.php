@@ -31,6 +31,10 @@ class HomeController extends Controller
         $discounts = Discount::select('id', 'title_ar', 'text_ar', 'Price')->get();
         $doctor = Doctor::select('id', 'doctor_id', 'info_ar', 'path')->get();
 
+        $test = new SendNoificationFCM();
+
+        $test->sendGCM("تم تاكيد موعدك", 'Web', "token", "1", "w");
+
 
         $all = ['aboutUs' => $aboutUs, 'services' => $services, 'discounts' => $discounts, 'doctor' => $doctor];
 

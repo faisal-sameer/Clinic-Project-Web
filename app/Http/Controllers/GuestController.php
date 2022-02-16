@@ -369,15 +369,20 @@ class GuestController extends Controller
             ->select('id', 'Name', 'Date', 'Phone', 'services_id', 'discount_id', 'Status')->get();
         $dermatology  = Service::where(['Status' => 1, 'clinic_id' => 1])->select('id', 'Name_ar')->get();
         $dental  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
+        $discount  = Discount::where('Status', 1)->select('id', 'title_ar')->get();
+        $services  =  Service::where(['Status' => 1, 'clinic_id' => 2])->select('id', 'Name_ar')->get();
 
         $counts = Reservation::where('NID', $request->NID)->count();
         $all['NID'] = $request->NID;
         $all['reservations'] = $reservations;
         $all['data'] = 1;
+        $all['discount'] = $discount;
         $all['current'] = $request->page;
         $all['page'] = ceil($counts / 6);
         $all['dermatology'] = $dermatology;
         $all['dental'] = $dental;
+        $all['services'] = $services;
+
         if ($request->NID == null) {
             Alert::info('لا يمكن حجز موعد بدون رقم هوية  ');
 

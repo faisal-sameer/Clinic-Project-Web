@@ -82,7 +82,6 @@
                                 <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['discount'] as $discount)
-
                                 <div class="select-box__value">
                                     <input class="select-box__input" type="radio" id="{{ $discount->id }}" value="4"
                                         name="discount" />
@@ -116,7 +115,6 @@
                                 <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['service'] as $service)
-
                                 <div class="select-box__value">
                                     <input class="select-box__input" type="radio" id="{{ $service->id }}" value="4"
                                         name="service" />
@@ -152,7 +150,6 @@
                                 <p class="select-box__input-text">{{ __('dashboardContent.Chose') }}</p>
                             </div>
                             @foreach ($content['doctor'] as $doctor)
-
                                 <div class="select-box__value">
                                     <input class="select-box__input" type="radio" id="{{ $doctor->id }}" value="4"
                                         name="doctor" />
@@ -247,10 +244,8 @@
                                     aria-label="Default select example">
                                     <option selected disabled>Discount</option>
                                     @foreach ($content['clinics'] as $clinic)
-
                                         <option value="{{ $clinic->id }}">{{ $clinic->text_ar }}
                                         </option>
-
                                     @endforeach
 
 

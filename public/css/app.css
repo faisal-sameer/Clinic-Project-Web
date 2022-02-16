@@ -353,6 +353,11 @@ a.float:hover + div.label-container {
 /*تصميم الجوال
 */
 @media only screen and (max-width: 970px) {
+    #mess {
+        justify-content: space-between;
+        display: flex;
+        padding-top: 70%;
+    }
     #scroool {
         height: 90%;
     }

@@ -92,7 +92,7 @@ class GuestController extends Controller
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ رقم الهوية او الاقامة"]);
         } else if ($request->Name == null) {
 
-            return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ اسم للحجز "]);
+            return respo  nse()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ اسم للحجز "]);
         } else if ($request->Phone == null) {
 
             return response()->json(['status' => 'error', 'data' =>  "خطاء لم يتم ملئ رقم الجوال  "]);
@@ -107,6 +107,7 @@ class GuestController extends Controller
             // Check if patient have app in same clinic or not 
             $oldDental = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
                 $q->where('clinic_id', 2);
+                 
             })->count();
             $oldDermatology = Reservation::where(['NID' => $request->NID, 'Status' => 1])->whereHas('service', function ($q) {
                 $q->where('clinic_id', 1);

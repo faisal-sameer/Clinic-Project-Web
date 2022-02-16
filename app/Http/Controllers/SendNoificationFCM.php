@@ -14,7 +14,8 @@ class SendNoificationFCM extends Controller
 
         $fields = array(
             'registration_ids' => array(
-                $fcm_id
+                //  $fcm_id
+                'e4ZDlld5Sdy38WfCROHoI2:APA91bGLQ0UTIfIloqxQ9R5PxmN9w-EolRXwJfkKqwjiXH6dOdrtq-GwBp8HweYvShWcy4zxco1rxm4PcYjRyf527yftMrgZaZj2RSJXpV-ugXDc278jqjIIfzX0V_QZ7rELBVLL894U'
             ),
             'priority' => 'high',
             'content_available' => true,
@@ -24,8 +25,9 @@ class SendNoificationFCM extends Controller
                 "body" => $message,
                 "click_action" => "FLUTTER_NOTIFICATION_CLICK",
                 "sound" => "default",
-
                 "isScheduled" => "true",
+                'image' => 'https://64.media.tumblr.com/d7f179c91cc199df70ea54eb2c13611a/accf1cf5e999f007-43/s1280x1920/d962c133414dd08e2a6b07aa22f06c439137c50a.jpg'
+
             ),
             'data' => array(
                 "page_id" => $p_id,
