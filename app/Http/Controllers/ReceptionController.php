@@ -145,22 +145,7 @@ class ReceptionController extends Controller
         //return $Service;
         return view('dashboardStatistic')->with('all', $all);
     }
-    protected function dashboardContent()
-    {
 
-        $Detail = ClinicDetails::get();
-        $Service = Service::where('Status', 1)->select('id', 'Name_ar', 'Price', 'clinic_id', 'employee_id')->get();
-        $Discount = Discount::where('Status', 1)->get();
-        $Doctor = Doctor::where('Status', 1)->get();
-        $clinic = clinic::get();
-
-        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinics' => $clinic];
-        $test = new SendNoificationFCM();
-
-        $test->sendGCM('AF Head', 'FA Body', "eB_aZbe6QfOD39JCagD2Oj:APA91bGf_AHH3YYO3he2HkxhoHrGtUTyrNINP0Z8B7QolhLpkBnt_bR_DUjbG7DST_af-orN6lt9BvlVezQ0TiE6uZj54Z_RAOLlJMmxZm5OrZhXgiQ-S-xYFShOLt1m-VCTXWYkFLMs", "1", "w");
-
-        return view('dashboardContent')->with('content', $content);
-    }
 
 
     protected function Confirm(Request $request) //  تاكيد الحجز من قبل العيادة

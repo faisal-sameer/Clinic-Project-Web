@@ -19,6 +19,7 @@ return [
     'fullName' => 'الاسم الكامل',
     'email' => 'الايميل',
     'aboutDoctor' => 'نبذة عن الطبيب ...',
+    'ServiceName' => 'اسم الخدمة ....',
 
 
 

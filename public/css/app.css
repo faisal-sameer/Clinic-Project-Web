@@ -8,11 +8,14 @@
     direction: unset;
     text-align: right;
 }
-#managertextarea {
-    width: 60%;
+#idnationalClinic {
+    text-align-last: center;
+    width: 40%;
+    margin: auto;
+    text-align: right;
 }
 #doctor-update-content {
-    margin-left: 60%;
+    direction: rtl;
     justify-content: space-between;
 }
 #option {
@@ -21,12 +24,12 @@
 }
 #DisTitle {
     text-align: right;
-    width: 20%;
+    /* width: 20%;*/
     height: 5%;
 }
 #DisPrice {
     text-align: right;
-    width: 20%;
+    /* width: 20%;*/
     height: 5%;
 }
 #email-content {
@@ -167,6 +170,9 @@ button {
 .textAF {
     width: 60%;
     border-radius: 30px;
+}
+#UpdateinfoServie {
+    direction: rtl;
 }
 #managertextarea1 {
     border-radius: 30px;

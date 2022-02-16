@@ -212,55 +212,82 @@
 
                     <div id="UpdateinfoDiscount" class="row">
                         <!--تحديث معلومات العروض-->
+
+
+
                         <div id="doctor-update-content">
-                            <input type="date" id="DisFrom" style="background-color: aqua" name="DisFrom">
-                            <input type="date" id="DisTo" name="DisTo">
+                            <div class="form-row">
+                                <div class="form-group col-md-6 ">
 
-                            <textarea placeholder="{{ __('dashboardContent.title') }}"
-                                class="shadow-drop-2-center textAF" name="DisTitle" id="DisTitle" cols="1"
-                                rows="1"></textarea>
+                                    <textarea placeholder="{{ __('dashboardContent.title') }}"
+                                        class="form-control textAF" name="DisTitle" id="DisTitle" rows="3"></textarea>
+                                </div>
+                                <div class="form-group col-md-2 ">
+                                    <textarea placeholder="{{ __('dashboardContent.price') }} "
+                                        class="form-control textAF" name="DisPrice" id="DisPrice" rows="3"></textarea>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <input type="date" id="DisFrom" class="form-control" style="background-color: aqua"
+                                        name="DisFrom">
+                                </div>
+                                <div class="form-group col-md-2">
+
+                                    <input type="date" class="form-control" id="DisTo" name="DisTo">
+                                </div>
 
 
-                            <textarea placeholder="{{ __('dashboardContent.price') }} "
-                                class="shadow-drop-2-center textAF" name="DisPrice" id="DisPrice" cols="1"
-                                rows="1"></textarea>
+                            </div>
+
+                            <div class="form-group">
+
+                                <textarea placeholder=" {{ __('dashboardContent.DiscountDescription') }} "
+                                    class="form-control textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
+
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <button id="updateBDiscount" type="submit" class="btn btn-info"></button>
+
+                            </div>
                         </div>
 
-                        <textarea style="margin-left:1%;text-align: right ;height: 30%;"
-                            placeholder=" {{ __('dashboardContent.DiscountDescription') }} "
-                            class="shadow-drop-2-center textAF" id="DisText" name="DisText" cols="100" rows="5"></textarea>
 
 
-                        <button id="updateBDiscount" type="submit" class="btn btn-info"></button>
+
+
 
                     </div>
 
                     <div id="UpdateinfoServie">
                         <!--تحديث معلومات الخدمات-->
-                        <div class="row">
-                            <div class="form-group row">
+                        <div class="form-group ">
 
-                                <select class="form-select" id="idnational" name="clinic"
-                                    aria-label="Default select example">
-                                    <option selected disabled>Discount</option>
-                                    @foreach ($content['clinics'] as $clinic)
-                                        <option value="{{ $clinic->id }}">{{ $clinic->text_ar }}
-                                        </option>
-                                    @endforeach
+                            <select class="form-control" id="idnationalClinic" name="clinic"
+                                aria-label="Default select example">
+                                <option selected disabled>Discount</option>
+                                @foreach ($content['clinics'] as $clinic)
+                                    <option value="{{ $clinic->id }}">{{ $clinic->text_ar }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-row justify-content-around ">
 
-
-
-                                </select>
-
-
+                            <div class="form-group col-md-4">
+                                <input placeholder=" {{ __('dashboardContent.ServiceName') }}"
+                                    class="form-control textAF" name="name" id="serviceName" />
                             </div>
-                            <textarea style="margin-left:5%;text-align: right ;height: 30%;"
-                                placeholder=" {{ __('dashboardContent.aboutService') }}" class="shadow-drop-2-center"
-                                name="name" id="managertextarea" cols="100" rows="5"></textarea>
-                            <textarea placeholder="{{ __('dashboardContent.price') }}" class="shadow-drop-2-center"
-                                style="text-align: right ;width: 20% ;margin-left: 5% ;height: 5%" name="price"
-                                id="managertextarea1" cols="1" rows="1"></textarea>
 
+                            <div class="form-group col-md-4">
+                                <input placeholder="{{ __('dashboardContent.price') }}" class="form-control textAF"
+                                    name="price" id="servicePrice" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder=" {{ __('dashboardContent.aboutService') }}"
+                                class="form-control textAF" name="info" id="serviceInfo"></textarea>
                         </div>
                         <br><br>
 
@@ -299,10 +326,8 @@
             </div>
         </div>
     </div>
-
 @endsection
 @section('script')
-
     <script>
         document.getElementById("updateBAbout").addEventListener("click", function() {
             //  document.getElementById("typeText").innerText = 3;
@@ -493,7 +518,11 @@
         }
 
         function myFunctionSubDiscount($id) { //العروض
-            var contents = @json($content);
+            var contents = @json($content['discount']);
+            var result = contents.find(({
+                id
+            }) => id === $id);
+            console.log(result);
             document.getElementById("welcome").setAttribute('style', 'height: 300%; !important;');
 
             document.getElementById("typeText").innerText = 1;
@@ -505,11 +534,11 @@
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
 
 
-            document.getElementById("DisTitle").innerText = contents.discount[$id - 1].title_ar;
-            document.getElementById("DisText").innerText = contents.discount[$id - 1].text_ar;
-            document.getElementById("DisPrice").innerText = contents.discount[$id - 1].Price;
-            document.getElementById("DisFrom").innerText = contents.discount[$id - 1].from;
-            document.getElementById("DisTo").innerText = contents.discount[$id - 1].to;
+            document.getElementById("DisTitle").innerText = result.title_ar;
+            document.getElementById("DisText").innerText = result.text_ar;
+            document.getElementById("DisPrice").innerText = result.Price;
+            document.getElementById("DisFrom").value = result.from;
+            document.getElementById("DisTo").value = result.to;
 
             document.getElementById("id").innerText = $id;
             document.getElementById("typeText").innerText = 1;
@@ -557,9 +586,9 @@
             document.getElementById("UpdateinfoServie").style.display = "block"; //hide
             document.getElementById("UpdateinfoDoctor").style.display = "none"; //hide
 
-            document.getElementById("managertextarea").innerText = result.Name_ar;
-            document
-                .getElementById("managertextarea1").innerText = result.Price;
+            document.getElementById("serviceName").value = result.Name_ar;
+            document.getElementById("servicePrice").value = result.Price;
+            document.getElementById("serviceInfo").value = result.info_ar;
             //document.getElementById("updateB").style.display = "block"; //hide
 
         }
@@ -605,5 +634,4 @@
 
         }
     </script>
-
 @endsection

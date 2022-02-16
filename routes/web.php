@@ -29,7 +29,7 @@ Route::group(
 
         Auth::routes();
 
-        Route::get('/dashboardContent', [App\Http\Controllers\ReceptionController::class, 'dashboardContent']);
+        Route::get('/dashboardContent', [App\Http\Controllers\DashBoardAdmin::class, 'dashboardContent']);
         Route::get('/dashboardStatistic', [App\Http\Controllers\ReceptionController::class, 'dashboardStatistic']);
 
         Route::post('/dashboardContentUpdate', [App\Http\Controllers\DashBoardAdmin::class, 'dashboardContentUpdate'])->name('Update');

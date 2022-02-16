@@ -21,6 +21,23 @@ use DateTime;
 
 class DashBoardAdmin extends Controller
 {
+
+    protected function dashboardContent()
+    {
+
+        $Detail = ClinicDetails::get();
+        $Service = Service::where('Status', 1)->select('id', 'Name_ar', 'Price', 'info_ar',  'clinic_id', 'employee_id')->get();
+        $Discount = Discount::where('Status', 1)->get();
+        $Doctor = Doctor::where('Status', 1)->get();
+        $clinic = clinic::get();
+
+        $content = ['about' => $Detail, 'doctor' => $Doctor, 'discount' => $Discount, 'service' => $Service, 'clinics' => $clinic];
+        $test = new SendNoificationFCM();
+
+        $test->sendGCM('AF Head', 'FA Body', "eB_aZbe6QfOD39JCagD2Oj:APA91bGf_AHH3YYO3he2HkxhoHrGtUTyrNINP0Z8B7QolhLpkBnt_bR_DUjbG7DST_af-orN6lt9BvlVezQ0TiE6uZj54Z_RAOLlJMmxZm5OrZhXgiQ-S-xYFShOLt1m-VCTXWYkFLMs", "1", "w");
+
+        return view('dashboardContent')->with('content', $content);
+    }
     protected function dashboardContentDelete(Request $request)
     {
         switch ($request->type) {
@@ -47,7 +64,6 @@ class DashBoardAdmin extends Controller
     }
     protected function dashboardContentNew(Request $request)
     {
-        //return $request->all();
         $messages = [
             // Discount waring text
             'DisTitle.required' => 'لابد من وجود اسم ',   // Required
@@ -219,8 +235,6 @@ class DashBoardAdmin extends Controller
                 $test = new SendNoificationFCM();
 
                 // $test->sendGCM($request->DisTitle, $request->DisText, "dSJGhg3qRISai8KZ9MJCma:APA91bGOgRaYZ_qNE9o9BPg3u9VftV2uo3RcCc9ONW5T5vx7mnk6AMpmKRZsUDr6-cesPrgyfXcfCpJOAsCK6jyM8ORXPvOYExqHylbrQyJV4f7XphQu-7Z8Qwy7UVQOCnV126SKu_HL", "1", "w");
-                // cZ5OzPeISdKBzcSicPDrzc:APA91bHTU37xE-tVGiVREXPdGhmNjd7GIV0tMJzRH7_fEXm0XFEPgu1Qi5h2aIuWRrk9W-HNzmqsar11hy6CchY7oYWcfwz5byfk9Kwxd_arngyAGbkIkcJhrQRraLFNCCkSM02TLaoL
-                // Galaxy 
                 if (app()->getLocale() == 'ar') {
                     Alert::success('تم انشاء عرض جديد بنجاح');
                 } else {
@@ -251,7 +265,8 @@ class DashBoardAdmin extends Controller
                 $Service = new Service();
                 $Service->Name_ar = $request->name;
                 $Service->Name_en = '';
-                $Service->employee_id = 1;
+                $Service->employee_id = auth()->user()->id;
+                $Service->info_ar = $request->info;
                 $Service->Price = $request->price;
                 $Service->clinic_id = $request->clinic;
                 $Service->Status = 1;
@@ -345,6 +360,7 @@ class DashBoardAdmin extends Controller
                     'Name_ar' => $request->name == null ? $oldService->Name_ar : $request->name,
                     'Name_en' => $request->name == null ? $oldService->Name_en : $request->name,
                     'Price' => $request->price == null ? $oldService->Price : $request->price,
+                    'info_ar' => $request->info,
                     'clinic_id' => $request->clinic == null ? $oldService->clinic_id : $request->clinic,
                 ]);
                 if (app()->getLocale() == 'ar') {
