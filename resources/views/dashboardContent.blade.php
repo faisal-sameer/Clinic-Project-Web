@@ -299,29 +299,33 @@
                         <!--تحديث معلومات الاطباء-->
                         <div class="form-row justify-content-around ">
 
-                            <div class="form-group col-md-4">
-                                <input placeholder="{{ __('auth.fullName') }}" type="password"
+                            <div class="form-group col-md-3">
+                                <input placeholder="{{ __('dashboardContent.fullName') }}" type="text"
                                     class="form-control textAF" name="DoctorName" id="DoctorName">
                             </div>
-                            <div class="form-group col-md-4">
-                                <input placeholder="{{ __('auth.Password') }}" type="password"
+                            <div class="form-group col-md-3">
+                                <input placeholder="{{ __('dashboardContent.email') }}" type="email"
                                     class="form-control textAF" name="email" id="email-content">
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <input placeholder="{{ __('auth.Password') }}" type="password"
                                     class="form-control textAF" name="DoctorPassword" id="DoctorPassword">
                             </div>
                         </div>
+                        <div class="form-group">
 
-                        <textarea style="margin-left:5%;text-align: right ;height: 30%;"
-                            placeholder="{{ __('dashboardContent.aboutDoctor') }} " class="shadow-drop-2-center textAF"
-                            name="DoctorInfo" id="DoctorInfo" cols="100" rows="5"></textarea>
-                        <div id="filerow" style="margin-left:40%; " class="row">
-                            <input type="file" class="foo" name="DoctorImg" id="fileInput"
-                                onchange="readURL(this);">
-                            <img id="blahDoctor" style="height: 25%; width: 25%" src="#" alt="your image" />
+                            <textarea placeholder="{{ __('dashboardContent.aboutDoctor') }} "
+                                class="form-control textAF" name="DoctorInfo" id="DoctorInfo"></textarea>
                         </div>
+                        <div class="form-group">
 
+                            <div id="filerow" class="row">
+                                <input type="file" class="foo" name="DoctorImg" id="fileInput"
+                                    onchange="readURL(this);">
+                                <img id="blahDoctor" style="height: 25%; width: 25% ; margin: auto" src="#"
+                                    alt="your image" />
+                            </div>
+                        </div>
                         <button id="updateBDoctor" type="submit" class="btn btn-info">تحديث</button>
 
                     </div>
@@ -619,6 +623,11 @@
         }
 
         function myFunctionSubdoctor($id) { //الاطباء
+            var contents = @json($content['doctor']);
+            var result = contents.find(({
+                id
+            }) => id === $id);
+            console.log(result.user.name);
             document.getElementById("formEditServices").style.display = "block"; //hide
             document.getElementById("UpdateinfoAbout").style.display = "none"; //hide
             document.getElementById("UpdateinfoDiscount").style.display = "none"; //hide
@@ -631,10 +640,10 @@
 
             document.getElementById("id").innerText = $id;
             document.getElementById("typeText").innerText = 3;
-            document.getElementById("DoctorName").innerText = contents.doctor[$id - 1].user.name;
-            document.getElementById("email-content").innerText = contents.doctor[$id - 1].user.email;
-            document.getElementById("DoctorInfo").innerText = contents.doctor[$id - 1].info_ar;
-            document.getElementById('blahDoctor').src = "../" + contents.doctor[$id - 1].path;
+            document.getElementById("DoctorName").value = result.user['name'];
+            document.getElementById("email-content").value = result.user['email'];
+            document.getElementById("DoctorInfo").value = result.info_ar;
+            document.getElementById('blahDoctor').src = "../" + result.path;
 
         }
     </script>

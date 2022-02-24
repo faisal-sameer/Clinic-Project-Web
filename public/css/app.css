@@ -32,15 +32,16 @@
     /* width: 20%;*/
     height: 5%;
 }
+#UpdateinfoDoctor {
+    direction: rtl;
+}
 #email-content {
     text-align: right;
-    width: 20%;
-    height: 5%;
+    /* width: 20%;
+    height: 5%;*/
 }
 #DoctorName {
     text-align: right;
-    width: 20%;
-    height: 5%;
 }
 
 .my-custom-scrollbar {
