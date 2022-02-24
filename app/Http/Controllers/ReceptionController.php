@@ -124,14 +124,14 @@ class ReceptionController extends Controller
             foreach ($app as   $item) {
 
                 $time = \Carbon\Carbon::parse($item->new_date)->format('F');
-                $Months[] = ['label' => $time, 'y' => $item->total];
+                $Months[] = ['label' => $time, 'y' =>  $item->total];
             }
         }
         if ($services->count() == null) {
             $Service = "Nulls";
         } else {
             foreach ($services as $item) {
-                $Service[] = ['label' => $item->service->Name_ar, 'y' => $item->total];
+                $Service[] = ['label' => $item->service->Name_ar, 'y' => (int) $item->total];
             }
         }
         if ($discount->count() == null) {

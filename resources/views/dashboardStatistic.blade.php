@@ -82,5 +82,4 @@
             myFunctionNew(Discounts);
         });
     </script>
-
 @endsection
